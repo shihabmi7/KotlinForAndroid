@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">KotlinToday</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_data_field">DataFieldActivity</string>
+    <string name="title_activity_data_type">DataTypeActivity</string>
+</resources>
