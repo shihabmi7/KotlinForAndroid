@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/fab_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".DataTypeActivity"
     tools:showIn="@layout/activity_data_type">
@@ -13,16 +14,38 @@
         android:id="@+id/edit_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:hint="Type your name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:layout_width="0dp" android:id="@+id/button_show"
+        android:id="@+id/button_show"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="show"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_name" />
+
+
+    <EditText
+        android:id="@+id/edit_odd_even"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Type An Integer"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_show" />
+
+    <Button
+        android:id="@+id/button_check_condition"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Check Odd or Even"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_odd_even" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
