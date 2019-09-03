@@ -3,6 +3,7 @@ package com.shihab.kotlintoday
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.shihab.kotlintoday.utility.AppUtils
 import kotlinx.android.synthetic.main.activity_data_type.*
 import kotlinx.android.synthetic.main.content_data_type.*
 
@@ -48,12 +49,20 @@ class DataTypeActivity : AppCompatActivity() {
 
         button_add.setOnClickListener {
 
-            tx_result.setText(
-                add(
-                    edit_first_number.text.toString().toInt(),
-                    edit_second_number.text.toString().toInt()
-                ).toString()
-            )
+            if(!edit_first_number.text.isEmpty()){
+                tx_result.setText(
+                    add(
+                        edit_first_number.text.toString().toInt(),
+                        edit_second_number.text.toString().toInt()
+                    ).toString()
+                )
+            }else {
+
+
+                Toast.makeText(applicationContext, "Give value" , Toast.LENGTH_LONG).show()
+            }
+
+            AppUtils.hideKeyboard(this)
         }
 
 
@@ -65,6 +74,8 @@ class DataTypeActivity : AppCompatActivity() {
                     edit_second_number.text.toString().toInt()
                 ).toString()
             )
+            AppUtils.hideKeyboard(this)
+
         }
 
         button_multiply.setOnClickListener {
@@ -75,6 +86,8 @@ class DataTypeActivity : AppCompatActivity() {
                     edit_second_number.text.toString().toInt()
                 ).toString()
             )
+            AppUtils.hideKeyboard(this)
+
         }
 
         button_divide.setOnClickListener {
@@ -85,6 +98,9 @@ class DataTypeActivity : AppCompatActivity() {
                     edit_second_number.text.toString().toFloat()
                 ).toString()
             )
+
+            AppUtils.hideKeyboard(this)
+
         }
 
         button_clear.setOnClickListener {
@@ -92,6 +108,8 @@ class DataTypeActivity : AppCompatActivity() {
             edit_first_number.setText("")
             edit_second_number.setText("")
             tx_result.setText("")
+
+
         }
 
 
