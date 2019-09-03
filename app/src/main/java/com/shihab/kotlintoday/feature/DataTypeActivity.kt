@@ -1,8 +1,9 @@
-package com.shihab.kotlintoday
+package com.shihab.kotlintoday.feature
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.utility.AppUtils
 import kotlinx.android.synthetic.main.activity_data_type.*
 import kotlinx.android.synthetic.main.content_data_type.*

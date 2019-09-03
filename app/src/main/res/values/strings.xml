@@ -4,4 +4,5 @@
     <string name="title_activity_data_field">DataFieldActivity</string>
     <string name="title_activity_data_type">DataTypeActivity</string>
     <string name="title_activity_conditional">ConditionalActivity</string>
+    <string name="title_activity_condition">ConditionActivity</string>
 </resources>

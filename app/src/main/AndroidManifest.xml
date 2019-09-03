@@ -3,6 +3,7 @@
     package="com.shihab.kotlintoday">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,11 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ConditionalActivity"
-            android:label="@string/title_activity_conditional"
+            android:name=".feature.ConditionActivity"
+            android:label="@string/title_activity_condition"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".DataTypeActivity"
+            android:name=".feature.ConditionalActivity"
+            android:label="@string/title_activity_conditional"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".feature.DataTypeActivity"
             android:label="@string/title_activity_data_type"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -25,9 +30,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".feature.HomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

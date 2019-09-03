@@ -1,8 +1,9 @@
-package com.shihab.kotlintoday
+package com.shihab.kotlintoday.feature
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import com.shihab.kotlintoday.R
 
 import kotlinx.android.synthetic.main.activity_conditional.*
 
