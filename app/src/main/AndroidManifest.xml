@@ -12,9 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".feature.FirstActivity"
+            android:label="@string/title_activity_first"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".feature.NextActivity"
+            android:label="@string/title_activity_next"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".feature.ConditionActivity"
             android:label="@string/title_activity_condition"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.ConditionalActivity"
             android:label="@string/title_activity_conditional"
@@ -23,11 +38,7 @@
             android:name=".feature.DataTypeActivity"
             android:label="@string/title_activity_data_type"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".feature.HomeActivity"
