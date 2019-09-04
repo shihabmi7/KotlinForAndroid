@@ -7,4 +7,7 @@
     <string name="title_activity_condition">ConditionActivity</string>
     <string name="title_activity_next">NextActivity</string>
     <string name="title_activity_first">FirstActivity</string>
+    <string name="title_activity_convert_java_class">ConvertJavaClass</string>
+    <string name="title_activity_loop">LoopActivity</string>
+    <string name="show_loop_task">Show Loop Task</string>
 </resources>
