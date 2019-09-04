@@ -1,6 +1,7 @@
 package com.shihab.kotlintoday.feature
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.shihab.kotlintoday.R
@@ -8,7 +9,7 @@ import com.shihab.kotlintoday.utility.AppUtils
 import kotlinx.android.synthetic.main.activity_data_type.*
 import kotlinx.android.synthetic.main.content_data_type.*
 
-class DataTypeActivity : AppCompatActivity() {
+class DataTypeWithCalculatorActivity : AppCompatActivity() {
 
     var age = 30
     val year: Int = 2000 // It can change ()
@@ -22,6 +23,8 @@ class DataTypeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_data_type)
         setSupportActionBar(toolbar)
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         button_show.setOnClickListener {
             edit_odd_even.setText("")
             Toast.makeText(
@@ -29,6 +32,7 @@ class DataTypeActivity : AppCompatActivity() {
                 greetings + " " + edit_name.text.toString(),
                 Toast.LENGTH_LONG
             ).show()
+
 
         }
 
@@ -50,17 +54,17 @@ class DataTypeActivity : AppCompatActivity() {
 
         button_add.setOnClickListener {
 
-            if(!edit_first_number.text.isEmpty()){
+            if (!edit_first_number.text.isEmpty()) {
                 tx_result.setText(
                     add(
                         edit_first_number.text.toString().toInt(),
                         edit_second_number.text.toString().toInt()
                     ).toString()
                 )
-            }else {
+            } else {
 
 
-                Toast.makeText(applicationContext, "Give value" , Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Give value", Toast.LENGTH_LONG).show()
             }
 
             AppUtils.hideKeyboard(this)
@@ -141,5 +145,13 @@ class DataTypeActivity : AppCompatActivity() {
             return a / b
         } else
             return 0f
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        if (item!!.itemId == android.R.id.home) {
+            onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

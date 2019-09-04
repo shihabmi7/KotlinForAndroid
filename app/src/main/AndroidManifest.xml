@@ -15,11 +15,7 @@
             android:name=".feature.LoopActivity"
             android:label="@string/title_activity_loop"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
@@ -41,13 +37,21 @@
             android:label="@string/title_activity_conditional"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.DataTypeActivity"
+            android:name=".feature.DataTypeWithCalculatorActivity"
             android:label="@string/title_activity_data_type"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.HomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>
