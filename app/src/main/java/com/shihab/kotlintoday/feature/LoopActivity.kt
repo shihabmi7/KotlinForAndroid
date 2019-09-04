@@ -21,15 +21,22 @@ class LoopActivity : AppCompatActivity() {
 
         btn_loop.setOnClickListener {
 
-            var value = ""
+            var valueOfText = ""
             for (index in items.indices) {
                 Log.d("For Loop", "Index $index and value: ${items[index]}")
 
-                value += "\n" + "Index $index and value: ${items[index]}"
-
+                valueOfText += "\n" + "Index $index and value: ${items[index]}"
             }
 
-            tx_result_loop.text = value
+
+            valueOfText += "\n This is another version of For Loop"
+
+            for ((index, value) in country.withIndex()) {
+
+                valueOfText += "\nindex : $index = $value"
+            }
+
+            tx_result_loop.text = valueOfText
 
         }
 
