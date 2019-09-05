@@ -36,8 +36,16 @@ class LoopActivity : AppCompatActivity() {
                 valueOfText += "\nindex : $index = $value"
             }
 
-            tx_result_loop.text = valueOfText
 
+            valueOfText += "\n This is Range version of For Loop"
+
+            for (i in 1..10 step 2) { //1 until  10 10 excluded
+
+                valueOfText += "\nindex : $i"
+
+            }
+
+            tx_result_loop.text = valueOfText
         }
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
