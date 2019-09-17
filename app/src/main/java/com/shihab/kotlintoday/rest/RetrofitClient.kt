@@ -18,7 +18,7 @@ object RetrofitClient {
                         addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
             }
-            return instancevalue
+            return instance!!
         }
 
 }

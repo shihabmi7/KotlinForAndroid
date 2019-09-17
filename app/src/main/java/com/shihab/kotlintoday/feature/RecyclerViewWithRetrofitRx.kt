@@ -29,18 +29,23 @@ class RecyclerViewWithRetrofitRx : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         recycler_retro_data.layoutManager = LinearLayoutManager(this)
+        recycler_retro_data.setHasFixedSize(true)
 
         val retrofit = RetrofitClient.instancevalue
         myApi = retrofit.create(IMyAPI::class.java)
-        recycler_retro_data.setHasFixedSize(true)
+
+        compositeDisposable = CompositeDisposable()
         fetchData()
     }
 
     private fun fetchData() {
 
-        compositeDisposable.add(myApi.post.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe{
+        compositeDisposable.add(myApi.post.subscribeOn(Schedulers.io()).
+            observeOn(AndroidSchedulers.mainThread()).subscribe{
 
-            post -> displayPost(post)
+            post ->
+
+            displayPost(post)
 
         })
     }
