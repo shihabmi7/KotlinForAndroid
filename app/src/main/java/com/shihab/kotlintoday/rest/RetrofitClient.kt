@@ -1,4 +1,4 @@
-package com.shihab.kotlintoday.feature
+package com.shihab.kotlintoday.rest
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
