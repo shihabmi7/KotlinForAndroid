@@ -15,8 +15,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
     ActivityNameAdapter.OnButtonClickListener {
 
 
-    var activiites = listOf(FirstActivity::class.java, DataTypeWithCalculatorActivity::class.java, LoopActivity::class.java, RecyclerViewWithRetrofitRx::class.java)
-    var activiites_name = listOf("Activity Switchting",  "DataTypeWithCalculatorActivity", "Looping Activity", "RecyclerViewWithRetrofitRx")
+    var activiites = listOf(FirstActivity::class.java, DataTypeWithCalculatorActivity::class.java, LoopActivity::class.java, RecyclerViewWithRetrofitRx::class.java,ImplicitIntentActivity::class.java)
+    var activiites_name = listOf("Activity Switchting",  "DataTypeWithCalculatorActivity", "Looping Activity", "RecyclerViewWithRetrofitRx","Implicit Intent ")
 
     override fun onButtonClick(position: Int) {
 
