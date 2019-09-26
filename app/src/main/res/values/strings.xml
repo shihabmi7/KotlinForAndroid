@@ -11,4 +11,5 @@
     <string name="title_activity_loop">LoopActivity</string>
     <string name="show_loop_task">Show Loop Task</string>
     <string name="title_activity_recycler_view_with_retrofit_rx">RecyclerViewWithRetrofitRx</string>
+    <string name="title_activity_implicit_intent">ImplicitIntentActivity</string>
 </resources>

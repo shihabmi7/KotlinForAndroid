@@ -10,21 +10,25 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".feature.ImplicitIntentActivity"
+            android:label="@string/title_activity_implicit_intent"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".feature.RecyclerViewWithRetrofitRx"
             android:label="@string/title_activity_recycler_view_with_retrofit_rx"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.LoopActivity"
             android:label="@string/title_activity_loop"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.FirstActivity"
             android:label="@string/title_activity_first"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.NextActivity"
             android:label="@string/title_activity_next"
