@@ -12,4 +12,8 @@
     <string name="show_loop_task">Show Loop Task</string>
     <string name="title_activity_recycler_view_with_retrofit_rx">RecyclerViewWithRetrofitRx</string>
     <string name="title_activity_implicit_intent">ImplicitIntentActivity</string>
+    <string name="title_activity_log_in_mvvm">LogInActivityMVVM</string>
+    <string name="email_id">Email Id</string>
+    <string name="password">Password</string>
+    <string name="login">Log In</string>
 </resources>

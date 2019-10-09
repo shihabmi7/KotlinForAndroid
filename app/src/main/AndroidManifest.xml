@@ -14,9 +14,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".feature.LogInActivityMVVM"
+            android:label="@string/title_activity_log_in_mvvm"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".feature.ImplicitIntentActivity"
             android:label="@string/title_activity_implicit_intent"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.RecyclerViewWithRetrofitRx"
             android:label="@string/title_activity_recycler_view_with_retrofit_rx"
