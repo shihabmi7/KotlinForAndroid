@@ -17,9 +17,16 @@ class LogInViewModel : ViewModel() {
 
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
 
+            listener?.onFailure(API_LOG_IN, "EMAIL IS EMPTY AND PASS IS NOT RIGHT")
             return
+        }else{
+
+
+            val lologInResponse = UserRepository().userLogIn(email!!, password!!)
+             listener?.onSuccess(API_LOG_IN,lologInResponse)
+
         }
-        listener?.onSuccess(API_LOG_IN, "on Success")
+
     }
 
 }
