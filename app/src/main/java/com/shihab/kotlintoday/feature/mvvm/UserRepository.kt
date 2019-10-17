@@ -18,6 +18,8 @@ class UserRepository {
         IMyAPI().userLogin(email, pass).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
 
+                loginResponse.value = t.message
+
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
