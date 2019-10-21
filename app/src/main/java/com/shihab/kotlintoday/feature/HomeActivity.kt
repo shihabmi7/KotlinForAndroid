@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
+import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
 
@@ -21,14 +22,15 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         LoopActivity::class.java,
         RecyclerViewWithRetrofitRx::class.java,
         ImplicitIntentActivity::class.java,
-        LogInActivityMVVM::class.java
+        LogInActivityMVVM::class.java,
+        CoroutineActivity::class.java
     )
     var activiites_name = listOf(
         "Activity Switchting",
         "DataTypeWithCalculatorActivity",
         "Looping Activity",
         "RecyclerViewWithRetrofitRx",
-        "Implicit Intent ", "MVVM"
+        "Implicit Intent ", "MVVM", "Co-routine"
     )
 
     override fun onButtonClick(position: Int) {

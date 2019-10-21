@@ -65,5 +65,9 @@ dependencies {
     // optional - RxJava support for Room
     implementation "androidx.room:room-rxjava2:$room_version"
 
+    def co_rouritines = "1.2.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$co_rouritines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$co_rouritines"
+
 
 }

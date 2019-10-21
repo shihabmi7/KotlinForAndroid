@@ -16,4 +16,5 @@
     <string name="email_id">Email Id</string>
     <string name="password">Password</string>
     <string name="login">Log In</string>
+    <string name="title_activity_coroutine">CoroutineActivity</string>
 </resources>
