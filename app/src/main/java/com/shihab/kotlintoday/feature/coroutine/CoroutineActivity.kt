@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CoroutineActivity : AppCompatActivity() {
 
@@ -52,10 +53,17 @@ class CoroutineActivity : AppCompatActivity() {
         textView.text = newText
     }
 
-    suspend fun  setTextOnMainThread(message: String){
+    suspend fun setTextOnMainThread(message: String) {
         CoroutineScope(Main).launch {
             setNewText(message)
         }
+
+
+        // or you can use
+
+        /* withContext(Main) {
+            setNewText(message)
+        }*/
     }
 
     suspend fun getResult1FromAPI(): String {
