@@ -19,6 +19,7 @@ class CoroutineActivity : AppCompatActivity() {
     //
 
     private val RESULT_1 = "RESULT #1"
+    private val RESULT_2 = "RESULT #2"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +43,13 @@ class CoroutineActivity : AppCompatActivity() {
         val result = getResult1FromAPI()
         println("debug:" + result)
         // textView.setText(result) /** It will bring crash on device*/
-
         setTextOnMainThread(result)
 
+        val result2 = getResult2FromAPI()
+        setTextOnMainThread(result2)
+
     }
+
 
     fun setNewText(message: String) {
 
@@ -73,6 +77,17 @@ class CoroutineActivity : AppCompatActivity() {
         delay(1000) // only pause to this co routine
 
         return RESULT_1
+        //Thread.sleep(1000) // this will pause thread and all co routines in side the thread
+
+    }
+
+    suspend fun getResult2FromAPI(): String {
+
+        logThread("getResult2FromAPI")
+
+        delay(2000) // only pause to this co routine
+
+        return RESULT_2
         //Thread.sleep(1000) // this will pause thread and all co routines in side the thread
 
     }
