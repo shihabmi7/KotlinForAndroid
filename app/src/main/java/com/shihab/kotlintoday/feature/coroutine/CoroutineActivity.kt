@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.shihab.kotlintoday.R
 import kotlinx.android.synthetic.main.activity_coroutine.*
 import kotlinx.android.synthetic.main.content_coroutine.*
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlin.system.measureTimeMillis
 
 class CoroutineActivity : AppCompatActivity() {
 
@@ -33,10 +31,41 @@ class CoroutineActivity : AppCompatActivity() {
             CoroutineScope(IO).launch {
 
                 fakeAPIRequest()
+
             }
 
         }
+
+        button_async.setOnClickListener {
+
+            fakeAPIRequestWithAsync()
+        }
     }
+
+    private fun fakeAPIRequestWithAsync() {
+
+        CoroutineScope(IO).launch {
+
+            var executionTime = measureTimeMillis {
+
+                var result_one: Deferred<String> = async {
+                    println("debug: launching job1: ${Thread.currentThread().name}")
+                    getResult1FromAPI()
+                }
+
+                var result_two: Deferred<String> = async {
+                    println("debug: launching job2: ${Thread.currentThread().name}")
+                    getResult1FromAPI()
+                }
+
+                setAsyncTextOnMainThread("Got ${result_one.await()} + ${result_two.await()}")
+
+            }
+            println("debug: total time elapsed: ${executionTime}")
+        }
+
+    }
+
 
     private suspend fun fakeAPIRequest() {
 
@@ -57,9 +86,29 @@ class CoroutineActivity : AppCompatActivity() {
         textView.text = newText
     }
 
-    suspend fun setTextOnMainThread(message: String) {
+    fun setAsyncText(message: String) {
+
+        val newText = textView_asysnc.text.toString() + "\n$message"
+        textView_asysnc.text = newText
+    }
+
+    fun setTextOnMainThread(message: String) {
         CoroutineScope(Main).launch {
             setNewText(message)
+        }
+
+
+        // or you can use
+
+        /* withContext(Main) {
+            setNewText(message)
+        }*/
+    }
+
+
+    fun setAsyncTextOnMainThread(message: String) {
+        CoroutineScope(Main).launch {
+            setAsyncText(message)
         }
 
 
