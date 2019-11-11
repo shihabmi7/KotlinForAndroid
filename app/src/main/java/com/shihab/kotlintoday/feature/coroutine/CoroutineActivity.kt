@@ -19,6 +19,9 @@ class CoroutineActivity : AppCompatActivity() {
     private val RESULT_1 = "RESULT #1"
     private val RESULT_2 = "RESULT #2"
 
+    val TIMEOUT = 1900L
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coroutine)
@@ -40,8 +43,47 @@ class CoroutineActivity : AppCompatActivity() {
 
             fakeAPIRequestWithAsync()
         }
+
+
+        button_time_out.setOnClickListener {
+
+            CoroutineScope(IO).launch {
+
+                apiwithTimeOut()
+            }
+        }
+    }
+    private suspend fun apiwithTimeOut(){
+
+        withContext(IO){
+
+            val job =  withTimeoutOrNull(TIMEOUT) {
+
+                val resultOne = getResult1FromAPI()
+                println("debug: result 1 : ${resultOne}")
+
+                val resultTwo = getResult2FromAPI()
+                println("debug: result 2: ${resultTwo}")
+
+
+            }
+
+            if (job == null){
+
+                val cancelMessage = " Cancelling job... Job took longer than $TIMEOUT ms"
+                println("debug: ${cancelMessage}")
+                setTimeoutTextview(cancelMessage)
+            }
+        }
+
     }
 
+    fun setTimeoutTextview(message: String){
+
+        CoroutineScope(Main).launch{
+            textView_timeout.setText(message)
+        }
+    }
     private fun fakeAPIRequestWithAsync() {
 
         CoroutineScope(IO).launch {
