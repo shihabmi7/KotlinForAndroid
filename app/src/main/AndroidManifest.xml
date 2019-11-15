@@ -14,9 +14,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".feature.ClassActivity"
+            android:label="@string/title_activity_class"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".feature.coroutine.CoroutineActivity"
             android:label="@string/title_activity_coroutine"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.LogInActivityMVVM"
             android:label="@string/title_activity_log_in_mvvm"
