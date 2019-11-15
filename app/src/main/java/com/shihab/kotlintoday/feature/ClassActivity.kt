@@ -4,11 +4,17 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import com.shihab.kotlintoday.R
+import com.shihab.kotlintoday.feature.`interface`.IPersonInfo
 
 import kotlinx.android.synthetic.main.activity_class.*
 import kotlinx.android.synthetic.main.content_class.*
 
-class ClassActivity : AppCompatActivity() {
+class ClassActivity : AppCompatActivity(), IPersonInfo {
+    override fun giveFullName(person: Person) :String{
+        print("full info called")
+
+        return  person.fullName()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +34,10 @@ class ClassActivity : AppCompatActivity() {
 
         //textview.text = person._firstnName + person.secondName +person.nickname
 
-        textview.text = person. fullName()
+//        textview.text = person. fullName()
+        textview.text = giveFullName(Person())
+
+
     }
 
 }
