@@ -70,4 +70,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$co_rouritines"
 
 
+    implementation 'com.afollestad.material-dialogs:core:3.1.1'
+
+
+
 }

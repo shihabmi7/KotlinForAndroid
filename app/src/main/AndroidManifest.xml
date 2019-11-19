@@ -14,9 +14,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".feature.MaterialDialogActivity"
+            android:label="@string/title_activity_material_dialog"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".feature.ClassActivity"
             android:label="@string/title_activity_class"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.coroutine.CoroutineActivity"
             android:label="@string/title_activity_coroutine"

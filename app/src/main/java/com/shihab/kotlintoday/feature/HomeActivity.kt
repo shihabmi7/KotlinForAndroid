@@ -23,6 +23,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         ClassActivity::class.java,
         RecyclerViewWithRetrofitRx::class.java,
         ImplicitIntentActivity::class.java,
+        MaterialDialogActivity::class.java,
         LogInActivityMVVM::class.java,
         CoroutineActivity::class.java
     )
@@ -32,7 +33,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Looping Activity",
         "Class In Kotlin",
         "RecyclerViewWithRetrofitRx",
-        "Implicit Intent ", "MVVM", "Co-routine"
+        "Implicit Intent ", "Material Dialog","MVVM", "Co-routine"
     )
 
     override fun onButtonClick(position: Int) {
