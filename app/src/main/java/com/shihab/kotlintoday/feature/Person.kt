@@ -1,6 +1,9 @@
 package com.shihab.kotlintoday.feature
 
-class Person(val _firstnName: String = "shihab", val secondName: String = "uddin") {
+import com.shihab.kotlintoday.feature.`interface`.IPersonInfo
+import com.shihab.kotlintoday.feature.`interface`.ISessionProvider
+
+open class Person(val _firstnName: String = "shihab", val secondName: String = "uddin") : IPersonInfo,ISessionProvider{
 
 
     /**  we can define value here
@@ -22,7 +25,7 @@ class Person(val _firstnName: String = "shihab", val secondName: String = "uddin
         println("init 1 $_firstnName $secondName")
     }
 
-    constructor() : this("Shihab", "Uddin") {
+       constructor() : this("Shihab", "Uddin") {
 
         /** if constructor is not defined this secondary constructor called.*/
         println("secondary constructor $_firstnName $secondName")
@@ -40,6 +43,13 @@ class Person(val _firstnName: String = "shihab", val secondName: String = "uddin
         val nicknames = nickname ?: " no nickname"
 
         return _firstnName + secondName + nicknames
+    }
+
+    override val providerInfo: String
+        get() = "Provider Info : Implemented"
+
+    override fun sessionProvider() {
+        println("sessionProvider")
     }
 
 

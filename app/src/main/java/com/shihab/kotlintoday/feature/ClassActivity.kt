@@ -1,20 +1,14 @@
 package com.shihab.kotlintoday.feature
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.shihab.kotlintoday.R
-import com.shihab.kotlintoday.feature.`interface`.IPersonInfo
-
 import kotlinx.android.synthetic.main.activity_class.*
 import kotlinx.android.synthetic.main.content_class.*
 
-class ClassActivity : AppCompatActivity(), IPersonInfo {
-    override fun giveFullName(person: Person) :String{
-        print("full info called")
+open class ClassActivity : AppCompatActivity() {
 
-        return  person.fullName()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,15 +21,17 @@ class ClassActivity : AppCompatActivity(), IPersonInfo {
         }
 
 
+        /**  Persion class has interface implementation*/
+
         var person = Person()
 
-         // it calles setter everytime
-         person.nickname = " tube light"
+        // it calles setter everytime
+        person.nickname = " tube light"
 
         //textview.text = person._firstnName + person.secondName +person.nickname
 
-//        textview.text = person. fullName()
-        textview.text = giveFullName(Person())
+        // textview.text = person. fullName()
+        textview.text = person.giveFullName(person)
 
 
     }
