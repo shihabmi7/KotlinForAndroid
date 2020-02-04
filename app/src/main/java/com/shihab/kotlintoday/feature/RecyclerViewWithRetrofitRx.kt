@@ -1,26 +1,18 @@
 package com.shihab.kotlintoday.feature
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.LinearLayout
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.adapter.PostAdapter
 import com.shihab.kotlintoday.model.Post
-import com.shihab.kotlintoday.model.Task
 import com.shihab.kotlintoday.rest.IMyAPI
 import com.shihab.kotlintoday.rest.RetrofitClient
-import com.shihab.kotlintoday.utility.DataSource
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.Scheduler
+import com.shihab.kotlintoday.utility.showErrorMessage
+import com.shihab.kotlintoday.utility.showSuccessMessage
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-
 import kotlinx.android.synthetic.main.activity_recycler_view_with_retrofit_rx.*
 import kotlinx.android.synthetic.main.content_recycler_view_with_retrofit_rx.*
 
@@ -45,7 +37,7 @@ class RecyclerViewWithRetrofitRx : AppCompatActivity() {
         compositeDisposable = CompositeDisposable()
         fetchData()
 
-        rxTest()
+        //rxTest()
     }
 
     private fun fetchData() {
@@ -62,10 +54,11 @@ class RecyclerViewWithRetrofitRx : AppCompatActivity() {
     private fun displayPost(post: List<Post>?) {
 
         recycler_retro_data.adapter = PostAdapter(this, post!!)
+        showSuccessMessage(this, "Success")
 
     }
 
-    private fun rxTest() {
+    /*private fun rxTest() {
 
         var taskObservable =
             Observable.fromIterable(DataSource.getTaskList()).subscribeOn(Schedulers.io())
@@ -89,5 +82,5 @@ class RecyclerViewWithRetrofitRx : AppCompatActivity() {
             }
 
         })
-    }
+    }*/
 }
