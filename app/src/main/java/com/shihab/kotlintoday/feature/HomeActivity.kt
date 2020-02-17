@@ -25,7 +25,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         ImplicitIntentActivity::class.java,
         MaterialDialogActivity::class.java,
         LogInActivityMVVM::class.java,
-        CoroutineActivity::class.java
+        CoroutineActivity::class.java,
+        ImageViewActivity::class.java
     )
     var activiites_name = listOf(
         "Activity Switchting",
@@ -33,7 +34,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Looping Activity",
         "Class In Kotlin",
         "RecyclerViewWithRetrofitRx",
-        "Implicit Intent ", "Material Dialog","MVVM", "Co-routine"
+        "Implicit Intent ", "Material Dialog","MVVM", "Co-routine","Imageview Extension Function"
     )
 
     override fun onButtonClick(position: Int) {
