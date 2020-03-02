@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
+import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
 
@@ -26,7 +27,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         MaterialDialogActivity::class.java,
         LogInActivityMVVM::class.java,
         CoroutineActivity::class.java,
-        ImageViewActivity::class.java
+        ImageViewActivity::class.java,
+        DynamicDeliveryActivity::class.java
     )
     var activiites_name = listOf(
         "Activity Switchting",
@@ -34,7 +36,12 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Looping Activity",
         "Class In Kotlin",
         "RecyclerViewWithRetrofitRx",
-        "Implicit Intent ", "Material Dialog","MVVM", "Co-routine","Imageview Extension Function"
+        "Implicit Intent ",
+        "Material Dialog",
+        "MVVM",
+        "Co-routine",
+        "Imageview Extension Function",
+        "Dynamic Delivery: Feature One"
     )
 
     override fun onButtonClick(position: Int) {

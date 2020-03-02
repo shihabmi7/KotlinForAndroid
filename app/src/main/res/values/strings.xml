@@ -1,24 +1,24 @@
 <resources>
     <string name="app_name">KotlinToday</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_data_field">DataFieldActivity</string>
-    <string name="title_activity_data_type">DataTypeActivity</string>
-    <string name="title_activity_conditional">ConditionalActivity</string>
-    <string name="title_activity_condition">ConditionActivity</string>
-    <string name="title_activity_next">NextActivity</string>
-    <string name="title_activity_first">FirstActivity</string>
-    <string name="title_activity_convert_java_class">ConvertJavaClass</string>
-    <string name="title_activity_loop">LoopActivity</string>
+    <string name="title_activity_data_field">DataField </string>
+    <string name="title_activity_data_type">DataType </string>
+    <string name="title_activity_conditional">Conditional </string>
+    <string name="title_activity_condition">Condition </string>
+    <string name="title_activity_next">Next Activity</string>
+    <string name="title_activity_first">First Activity</string>
+    <string name="title_activity_convert_java_class">Convert Java Class</string>
+    <string name="title_activity_loop">Looping </string>
     <string name="show_loop_task">Show Loop Task</string>
-    <string name="title_activity_recycler_view_with_retrofit_rx">RecyclerViewWithRetrofitRx</string>
-    <string name="title_activity_implicit_intent">ImplicitIntentActivity</string>
-    <string name="title_activity_log_in_mvvm">LogInActivityMVVM</string>
+    <string name="title_activity_recycler_view_with_retrofit_rx">RecyclerView With Retrofit Rx</string>
+    <string name="title_activity_implicit_intent">Implicit Intent</string>
+    <string name="title_activity_log_in_mvvm">LogIn with MVVM</string>
     <string name="email_id">Email Id</string>
     <string name="password">Password</string>
     <string name="login">Log In</string>
-    <string name="title_activity_coroutine">CoroutineActivity</string>
+    <string name="title_activity_coroutine">Co-routine</string>
     <string name="title_activity_class">ClassActivity</string>
-    <string name="title_activity_material_dialog">MaterialDialogActivity</string>
+    <string name="title_activity_material_dialog">Material Dialog </string>
 
     <string name="text_error">Error</string>
     <string name="text_success">Success</string>
@@ -26,5 +26,15 @@
     <string name="text_cancel">Cancel</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="text_yes">yes</string>
-    <string name="title_activity_imagview">ImagviewActivity</string>
+    <string name="title_activity_imagview">Imagview</string>
+    <string name="title_feature_one">Feature One</string>
+    <string name="title_activity_dynamic_delivery">Dynamic Delivery</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

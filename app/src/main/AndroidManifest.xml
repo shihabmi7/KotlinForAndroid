@@ -7,6 +7,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".utility.KotlinToday"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -14,8 +15,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".feature.dynamic_delivery.DynamicDeliveryActivity"
+            android:label="@string/title_activity_dynamic_delivery"
+            android:parentActivityName=".feature.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
             android:name=".feature.ImageViewActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.MaterialDialogActivity"
             android:label="@string/title_activity_material_dialog"
