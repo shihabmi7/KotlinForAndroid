@@ -16,7 +16,6 @@ interface IMyAPI {
     @get:GET("posts")
     val post: Observable<List<Post>>
 
-
     @GET("posts")
     fun getPosts(): Observable<List<Post>>
 
@@ -28,7 +27,6 @@ interface IMyAPI {
     ): Call<ResponseBody>
 
     companion object {
-
         var BASE_URL = "https://api.simplifiedcoding.in/course-apis/mvvm/"
         operator fun invoke(): IMyAPI {
             return Retrofit.Builder().baseUrl(BASE_URL)
