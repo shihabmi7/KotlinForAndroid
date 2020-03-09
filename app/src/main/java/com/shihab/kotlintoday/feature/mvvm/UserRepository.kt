@@ -25,7 +25,6 @@ class UserRepository {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
 
                 if (response.isSuccessful){
-
                     loginResponse.value = response.body()?.string()
                 }  else{
                     loginResponse.value = response.body()?.string()

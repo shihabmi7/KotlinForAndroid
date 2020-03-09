@@ -29,7 +29,6 @@ class LogInActivityMVVM : AppCompatActivity(), NetworkListener {
 
         viewmodel.listener = this
 
-        //        setSupportActionBar(toolbar)
 
     }
 
