@@ -16,9 +16,9 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:parentActivityName=".feature.HomeActivity"
             android:name=".feature.viewBinding.ViewBindingActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:parentActivityName=".feature.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.dynamic_delivery.DynamicDeliveryActivity"
             android:label="@string/title_activity_dynamic_delivery"
