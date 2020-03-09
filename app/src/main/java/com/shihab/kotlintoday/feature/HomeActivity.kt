@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
 import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
+import com.shihab.kotlintoday.feature.viewBinding.ViewBindingActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
 
@@ -28,7 +29,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         LogInActivityMVVM::class.java,
         CoroutineActivity::class.java,
         ImageViewActivity::class.java,
-        DynamicDeliveryActivity::class.java
+        DynamicDeliveryActivity::class.java,
+        ViewBindingActivity::class.java
     )
     var activiites_name = listOf(
         "Activity Switchting",
@@ -41,7 +43,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "MVVM",
         "Co-routine",
         "Imageview Extension Function",
-        "Dynamic Delivery: Feature One"
+        "Dynamic Delivery: Feature One",
+        "View Binding java"
     )
 
     override fun onButtonClick(position: Int) {

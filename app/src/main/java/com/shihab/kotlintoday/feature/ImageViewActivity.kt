@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_imagview.*
 class ImageViewActivity : AppCompatActivity() {
 
     lateinit var bind: ActivityImagviewBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = DataBindingUtil.setContentView(this, R.layout.activity_imagview)

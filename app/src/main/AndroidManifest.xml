@@ -6,21 +6,24 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
         android:name=".utility.KotlinToday"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:parentActivityName=".feature.HomeActivity"
+            android:name=".feature.viewBinding.ViewBindingActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".feature.dynamic_delivery.DynamicDeliveryActivity"
             android:label="@string/title_activity_dynamic_delivery"
             android:parentActivityName=".feature.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.ImageViewActivity"
             android:theme="@style/AppTheme.NoActionBar" />
