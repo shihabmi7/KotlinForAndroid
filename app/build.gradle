@@ -11,8 +11,9 @@ android {
         applicationId "com.shihab.kotlintoday"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 4
-        versionName "1.0.4"
+        versionCode 5
+        versionName "1.0.5"
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -67,6 +68,7 @@ android {
     viewBinding{
         enabled = true
     }
+
 }
 
 dependencies {
@@ -91,6 +93,9 @@ dependencies {
     def lifecycle_version = "2.1.0"
     def room_version = "2.2.0"
     def co_rouritines = "1.2.1"
+    def multidex_version = "2.0.1"
+
+    implementation "androidx.multidex:multidex:$multidex_version"
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"

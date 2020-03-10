@@ -10,17 +10,25 @@ import com.shihab.kotlintoday.feature.mvvm.model.Note
 @Database(entities = [Note::class], version = 1)
 abstract class NoteDatabase : RoomDatabase() {
 
-    abstract var instance: NoteDatabase
-
     abstract fun noteDao(): NoteDao
 
-    fun getInstance(context: Context): NoteDatabase {
+    companion object {
 
-        instance =
-            Room.databaseBuilder(context.applicationContext, NoteDatabase::class.java, "note_db")
-                .build()
+        fun getInstance(context: Context): NoteDatabase {
+            val instance: NoteDatabase
 
-        return instance
+            instance =
+                Room.databaseBuilder(
+                    context.applicationContext,
+                    NoteDatabase::class.java,
+                    "note_db"
+                )
+                    .build()
+
+            return instance
+        }
+
     }
 
+    //https://www.youtube.com/watch?v=0cg09tlAAQ0&list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118&index=3
 }
