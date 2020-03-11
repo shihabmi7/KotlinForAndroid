@@ -16,6 +16,7 @@ object RetrofitClient {
                 instance = Retrofit.Builder().baseUrl("https://jsonplaceholder.typicode.com/")
                     .addConverterFactory(GsonConverterFactory.create()).
                         addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+
                     .build()
             }
             return instance!!

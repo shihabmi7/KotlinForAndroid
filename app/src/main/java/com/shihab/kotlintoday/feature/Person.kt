@@ -1,7 +1,7 @@
 package com.shihab.kotlintoday.feature
 
-import com.shihab.kotlintoday.feature.`interface`.IPersonInfo
-import com.shihab.kotlintoday.feature.`interface`.ISessionProvider
+import com.shihab.kotlintoday.feature.iface.IPersonInfo
+import com.shihab.kotlintoday.feature.iface.ISessionProvider
 
 open class Person(val _firstnName: String = "shihab", val secondName: String = "uddin") : IPersonInfo,ISessionProvider{
 

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
 import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
+import com.shihab.kotlintoday.feature.mvvm.ui.NoteActivity
 import com.shihab.kotlintoday.feature.viewBinding.ViewBindingActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
@@ -26,7 +27,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         RecyclerViewWithRetrofitRx::class.java,
         ImplicitIntentActivity::class.java,
         MaterialDialogActivity::class.java,
-        LogInActivityMVVM::class.java,
+        NoteActivity::class.java,
         CoroutineActivity::class.java,
         ImageViewActivity::class.java,
         DynamicDeliveryActivity::class.java,

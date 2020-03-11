@@ -1,6 +1,5 @@
 package com.shihab.kotlintoday.feature.mvvm.model
 
-import android.accounts.AuthenticatorDescription
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

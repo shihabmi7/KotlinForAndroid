@@ -1,14 +1,21 @@
 package com.shihab.kotlintoday.feature.mvvm.viewmodel
 
 import android.app.Application
+import android.content.Context
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.shihab.kotlintoday.feature.mvvm.model.Note
 import com.shihab.kotlintoday.feature.mvvm.repository.NoteRepository
 
-class NoteViewModel(application: Application): ViewModel() {
+class NoteViewModel(context: Context) : ViewModel() {
 
-    private var repository: NoteRepository = NoteRepository(application)
+    lateinit var repository: NoteRepository
+
+    init {
+        repository = NoteRepository(context)
+    }
+
 
     fun insert(note: Note) {
         repository.insert(note)

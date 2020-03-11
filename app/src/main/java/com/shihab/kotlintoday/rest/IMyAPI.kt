@@ -27,10 +27,12 @@ interface IMyAPI {
     ): Call<ResponseBody>
 
     companion object {
-        var BASE_URL = "https://api.simplifiedcoding.in/course-apis/mvvm/"
+        var BASE_URL = "base_url"
+
         operator fun invoke(): IMyAPI {
             return Retrofit.Builder().baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+
                 .build().create(IMyAPI::class.java)
         }
     }
