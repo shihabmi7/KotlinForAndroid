@@ -15,10 +15,13 @@ class ParcelableActivity : AppCompatActivity() {
         val binding = ActivityParcelableBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // first ensure a person object with data
         val person = Person("Shihab Uddin", 30, "shihab.mi7@gmai.com")
+
         binding.buttonSend.setOnClickListener {
 
             val intent = Intent(this, ReceiveParcelableAcitivty::class.java)
+            //then put an parcelable extra to intent
             intent.putExtra(PERSON, person)
             startActivity(intent)
 
