@@ -11,6 +11,7 @@ import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
 import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
 import com.shihab.kotlintoday.feature.mvvm.ui.NoteActivity
+import com.shihab.kotlintoday.feature.parcelable.ParcelableActivity
 import com.shihab.kotlintoday.feature.viewBinding.ViewBindingActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
@@ -31,7 +32,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         CoroutineActivity::class.java,
         ImageViewActivity::class.java,
         DynamicDeliveryActivity::class.java,
-        ViewBindingActivity::class.java
+        ViewBindingActivity::class.java,
+        ParcelableActivity::class.java
     )
     var activiites_name = listOf(
         "Activity Switchting",
@@ -45,7 +47,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Co-routine",
         "Imageview Extension Function",
         "Dynamic Delivery: Feature One",
-        "View Binding java"
+        "View Binding java","Parcelable Activity"
     )
 
     override fun onButtonClick(position: Int) {
@@ -57,11 +59,6 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
     override fun onClick(v: View?) {
 
     }
-
-    /*Class classes[] = [ firstActivity.class, DetailActivity.class];
-    Intent i = new Intent(this, classes[position]);
-    startActivity(i);
-    */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
