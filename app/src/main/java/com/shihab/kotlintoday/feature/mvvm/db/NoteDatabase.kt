@@ -20,14 +20,19 @@ abstract class NoteDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): NoteDatabase {
 
-            return instance ?: Room.databaseBuilder(
-                context, NoteDatabase::class.java, "note_db"
-            ).addCallback(roomCallback).build()
+            if (instance == null) {
+
+                instance = Room.databaseBuilder(
+                    context, NoteDatabase::class.java, "note_db"
+                ).addCallback(roomCallback).build()
+
+            }
+            return instance as NoteDatabase
         }
 
         private val roomCallback = object : RoomDatabase.Callback() {
 
-            override fun onCreate(db: SupportSQLiteDatabase) {
+            override fun onOpen(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
 
                 instance?.let { PopulateDbAsyncTask(it).execute() }
@@ -41,11 +46,11 @@ abstract class NoteDatabase : RoomDatabase() {
         AsyncTask<Void?, Void?, Void?>() {
 
         override fun doInBackground(vararg voids: Void?): Void? {
-            db.noteDao().insertNote(Note("Title 1", "Description 1", 1))
-            db.noteDao().insertNote(Note("Title 2", "Description 2", 2))
-            db.noteDao().insertNote(Note("Title 3", "Description 3", 3))
+            db.noteDao().insertNote(Note(1, "Wake Up", "wake up early and pray...", 1))
+            db.noteDao().insertNote(Note(2, "Meeting with Tech Team", "Important about upcoming sprint", 2))
+            db.noteDao().insertNote(Note(3, "Make an Mvvm Demo", "with kotlin and rx java", 3))
             return null
-    }
+        }
     }
 
     //https://www.youtube.com/watch?v=0cg09tlAAQ0&list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118&index=3
