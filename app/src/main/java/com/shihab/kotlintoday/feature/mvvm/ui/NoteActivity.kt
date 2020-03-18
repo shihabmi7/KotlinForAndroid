@@ -1,5 +1,6 @@
 package com.shihab.kotlintoday.feature.mvvm.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -25,11 +26,11 @@ class NoteActivity : AppCompatActivity() {
         val binding: ActivityNoteBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_note)
 
-        val factory =
-            ViewModelFactory(
+        viewModel = ViewModelProviders.of(
+            this, ViewModelFactory(
                 NoteViewModel(this)
             )
-        viewModel = ViewModelProviders.of(this, factory).get(NoteViewModel::class.java)
+        ).get(NoteViewModel::class.java)
 
         binding.viewModel = viewModel
 
@@ -39,7 +40,5 @@ class NoteActivity : AppCompatActivity() {
             binding.recyclerNotes.setHasFixedSize(true)
             binding.recyclerNotes.adapter = adapter
         })
-
-
     }
 }

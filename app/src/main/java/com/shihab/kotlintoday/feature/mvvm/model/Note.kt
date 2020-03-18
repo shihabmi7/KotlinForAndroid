@@ -5,11 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "note_table")
 class Note(
-    @PrimaryKey(autoGenerate = true) var id: Int = 0,
-    val title: String,
-    val description: String,
-    val priority: Int
-) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
 
-
-}
+    var title: String,
+    var description: String,
+    var priority: String
+)

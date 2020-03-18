@@ -32,7 +32,7 @@ abstract class NoteDatabase : RoomDatabase() {
 
         private val roomCallback = object : RoomDatabase.Callback() {
 
-            override fun onOpen(db: SupportSQLiteDatabase) {
+            override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
 
                 instance?.let { PopulateDbAsyncTask(it).execute() }
@@ -46,9 +46,16 @@ abstract class NoteDatabase : RoomDatabase() {
         AsyncTask<Void?, Void?, Void?>() {
 
         override fun doInBackground(vararg voids: Void?): Void? {
-            db.noteDao().insertNote(Note(1, "Wake Up", "wake up early and pray...", 1))
-            db.noteDao().insertNote(Note(2, "Meeting with Tech Team", "Important about upcoming sprint", 2))
-            db.noteDao().insertNote(Note(3, "Make an Mvvm Demo", "with kotlin and rx java", 3))
+            db.noteDao().insertNote(Note(1, "Wake Up", "wake up early and pray...", "1"))
+            db.noteDao().insertNote(
+                Note(
+                    2,
+                    "Meeting with Tech Team",
+                    "Important about upcoming sprint",
+                    "2"
+                )
+            )
+            db.noteDao().insertNote(Note(3, "Make an Mvvm Demo", "with kotlin and rx java", "3"))
             return null
         }
     }

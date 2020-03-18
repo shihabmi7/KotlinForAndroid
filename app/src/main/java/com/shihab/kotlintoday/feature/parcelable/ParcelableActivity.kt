@@ -16,7 +16,7 @@ class ParcelableActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // first ensure a person object with data
-        val person = Person("Shihab Uddin", 30, "shihab.mi7@gmai.com")
+        val person = Person("Shihab Uddin", 30, "shihab.mi7@gmail.com")
 
         binding.buttonSend.setOnClickListener {
 
