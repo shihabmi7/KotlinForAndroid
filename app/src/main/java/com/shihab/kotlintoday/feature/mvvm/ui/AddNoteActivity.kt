@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.databinding.ActivityAddNoteBinding
@@ -35,6 +37,11 @@ class AddNoteActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this, factory).get(NoteViewModel::class.java)
         binding.viewModel = viewModel
 
+        viewModel.message.observe(this, Observer {
+            if (it.isNotEmpty())
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -49,6 +56,5 @@ class AddNoteActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 
 }

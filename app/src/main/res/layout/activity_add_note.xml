@@ -6,13 +6,8 @@
     <data>
 
         <variable
-            name="note"
-            type="com.shihab.kotlintoday.feature.mvvm.model.Note" />
-
-        <variable
             name="viewModel"
             type="com.shihab.kotlintoday.feature.mvvm.viewmodel.NoteViewModel" />
-
 
     </data>
 
@@ -21,12 +16,12 @@
         android:layout_height="match_parent"
         tools:context=".feature.mvvm.ui.AddNoteActivity">
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/il_title"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
+            android:hint="enter note title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -34,7 +29,6 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="enter note title"
                 android:text="@={viewModel.note.title}" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -77,13 +71,15 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
-        <!--<com.google.android.material.button.MaterialButton
+        <Button
+            android:id="@+id/button_save_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button_save_note"
             android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{()-> viewModel.saveNote()}"
             android:text="Save"
-            app:layout_constraintTop_toBottomOf="@+id/il_priority" />-->
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/il_priority" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
