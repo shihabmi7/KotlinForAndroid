@@ -8,7 +8,6 @@ import com.shihab.kotlintoday.adapter.PostAdapter
 import com.shihab.kotlintoday.model.Post
 import com.shihab.kotlintoday.rest.IMyAPI
 import com.shihab.kotlintoday.rest.RetrofitClient
-import com.shihab.kotlintoday.utility.showErrorMessage
 import com.shihab.kotlintoday.utility.showSuccessMessage
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -19,9 +18,9 @@ import kotlinx.android.synthetic.main.content_recycler_view_with_retrofit_rx.*
 class RecyclerViewWithRetrofitRx : AppCompatActivity() {
 
     internal lateinit var myApi: IMyAPI
-    internal lateinit var compositeDisposable: CompositeDisposable
+    private lateinit var compositeDisposable: CompositeDisposable
 
-    var TAG: String? = null
+    var TAG: String = "RecyclerWithRetrofitRx"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,25 +30,10 @@ class RecyclerViewWithRetrofitRx : AppCompatActivity() {
         recycler_retro_data.layoutManager = LinearLayoutManager(this)
         recycler_retro_data.setHasFixedSize(true)
 
-        val retrofit = RetrofitClient.instancevalue
-        myApi = retrofit.create(IMyAPI::class.java)
-
         compositeDisposable = CompositeDisposable()
         fetchData()
-
-        //rxTest()
     }
 
-    private fun fetchData() {
-
-        compositeDisposable.add(myApi.post.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
-
-                post ->
-
-            displayPost(post)
-
-        })
-    }
 
     private fun displayPost(post: List<Post>?) {
 
@@ -58,12 +42,37 @@ class RecyclerViewWithRetrofitRx : AppCompatActivity() {
 
     }
 
+    /*    private fun fetchData() {
+
+        val retrofit = RetrofitClient.instancevalue
+        myApi = retrofit.create(IMyAPI::class.java)
+
+        compositeDisposable.add(myApi.post.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
+
+                post ->
+
+            displayPost(post)
+
+        })
+    }*/
+
+    private fun fetchData() {
+
+        compositeDisposable.add(RetrofitClient.getAPIInterface().getPost.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()).subscribe {
+
+                    post ->
+
+                displayPost(post)
+
+            })
+    }
+
     /*private fun rxTest() {
 
         var taskObservable =
             Observable.fromIterable(DataSource.getTaskList()).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).filter {
-
 
                 }
 

@@ -7,19 +7,25 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
 
     private var instance: Retrofit? = null
+    private var iMyAPI: IMyAPI? = null
 
-    val instancevalue: Retrofit
+    private val instancevalue: Retrofit
         get() {
 
             if (instance == null) {
-
                 instance = Retrofit.Builder().baseUrl("https://jsonplaceholder.typicode.com/")
-                    .addConverterFactory(GsonConverterFactory.create()).
-                        addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
             }
             return instance!!
         }
+
+    fun getAPIInterface(): IMyAPI {
+        if (iMyAPI == null) {
+            iMyAPI = instancevalue.create(IMyAPI::class.java)
+        }
+        return iMyAPI!!
+    }
 
 }

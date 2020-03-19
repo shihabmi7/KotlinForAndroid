@@ -14,7 +14,7 @@ import retrofit2.http.POST
 
 interface IMyAPI {
     @get:GET("posts")
-    val post: Observable<List<Post>>
+    val getPost: Observable<List<Post>>
 
     @GET("posts")
     fun getPosts(): Observable<List<Post>>
@@ -25,15 +25,4 @@ interface IMyAPI {
         @Field("email") email: String,
         @Field("password") pass: String
     ): Call<ResponseBody>
-
-    companion object {
-        var BASE_URL = "base_url"
-
-        operator fun invoke(): IMyAPI {
-            return Retrofit.Builder().baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-
-                .build().create(IMyAPI::class.java)
-        }
-    }
 }
