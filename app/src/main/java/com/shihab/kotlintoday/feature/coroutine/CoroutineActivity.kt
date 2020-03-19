@@ -27,6 +27,8 @@ class CoroutineActivity : AppCompatActivity() {
         setContentView(R.layout.activity_coroutine)
         setSupportActionBar(toolbar)
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
 
         button.setOnClickListener {
 

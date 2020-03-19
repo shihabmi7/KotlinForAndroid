@@ -15,7 +15,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_recycler_view_with_retrofit_rx.*
 import kotlinx.android.synthetic.main.content_recycler_view_with_retrofit_rx.*
 
-class RecyclerViewWithRetrofitRx : AppCompatActivity() {
+class RecyclerViewWithRetromfitRx : AppCompatActivity() {
 
     internal lateinit var myApi: IMyAPI
     private lateinit var compositeDisposable: CompositeDisposable
@@ -32,8 +32,9 @@ class RecyclerViewWithRetrofitRx : AppCompatActivity() {
 
         compositeDisposable = CompositeDisposable()
         fetchData()
-    }
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    }
 
     private fun displayPost(post: List<Post>?) {
 
@@ -42,26 +43,10 @@ class RecyclerViewWithRetrofitRx : AppCompatActivity() {
 
     }
 
-    /*    private fun fetchData() {
-
-        val retrofit = RetrofitClient.instancevalue
-        myApi = retrofit.create(IMyAPI::class.java)
-
-        compositeDisposable.add(myApi.post.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
-
-                post ->
-
-            displayPost(post)
-
-        })
-    }*/
-
     private fun fetchData() {
 
         compositeDisposable.add(RetrofitClient.getAPIInterface().getPost.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe {
-
-                    post ->
+            .observeOn(AndroidSchedulers.mainThread()).subscribe { post ->
 
                 displayPost(post)
 
