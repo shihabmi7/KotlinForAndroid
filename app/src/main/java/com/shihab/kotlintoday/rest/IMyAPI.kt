@@ -11,13 +11,9 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-
 interface IMyAPI {
     @get:GET("posts")
     val getPost: Observable<List<Post>>
-
-    @GET("posts")
-    fun getPosts(): Observable<List<Post>>
 
     @FormUrlEncoded
     @POST("login")
