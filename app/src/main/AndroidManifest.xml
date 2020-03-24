@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".feature.dialog_fragment.DialogFragmentWithNavigationAcivity"
+            android:name=".feature.dialog_fragment.DialogFragmentWithNavigationActivity"
             android:label="@string/title_activity_dialog_fragment_acivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".feature.mvvm.ui.AddNoteActivity" />

@@ -7,7 +7,7 @@ import com.shihab.kotlintoday.R
 
 import kotlinx.android.synthetic.main.activity_dialog_fragment_acivity.*
 
-class DialogFragmentWithNavigationAcivity : AppCompatActivity() {
+class DialogFragmentWithNavigationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

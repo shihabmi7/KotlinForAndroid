@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
-import com.shihab.kotlintoday.feature.dialog_fragment.DialogFragmentWithNavigationAcivity
+import com.shihab.kotlintoday.feature.dialog_fragment.DialogFragmentWithNavigationActivity
 import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
 import com.shihab.kotlintoday.feature.mvvm.ui.NoteActivity
 import com.shihab.kotlintoday.feature.parcelable.ParcelableActivity
@@ -35,7 +35,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         DynamicDeliveryActivity::class.java,
         ViewBindingActivity::class.java,
         ParcelableActivity::class.java,
-        DialogFragmentWithNavigationAcivity::class.java
+        DialogFragmentWithNavigationActivity::class.java
     )
 
 
