@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph3"
     app:startDestination="@id/First2Fragment">
 
     <fragment
@@ -10,7 +9,6 @@
         android:name="com.shihab.kotlintoday.feature.dialog_fragment.FirstToDialogFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first_to_dialog">
-
         <action
             android:id="@+id/action_FirstFragment_to_DialogFragment"
             app:destination="@id/dialogFragment" />
@@ -23,7 +21,7 @@
         tools:layout="@layout/fragment_sample_dialog">
 
         <action
-            android:id="@+id/action_DialogFragment_to_FirstFragment"
+            android:id="@+id/action_DialogToFragment_to_First2Fragment"
             app:destination="@id/First2Fragment" />
     </fragment>
 </navigation>

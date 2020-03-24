@@ -1,12 +1,17 @@
 package com.shihab.kotlintoday.feature.dialog_fragment
 
+import android.app.Activity
+import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.shihab.kotlintoday.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -19,10 +24,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SampleDialogFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SampleDialogFragment : DialogFragment() {
+class SampleDialogFragment : DialogFragment(), View.OnClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var mNavController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,18 +38,25 @@ class SampleDialogFragment : DialogFragment() {
         }
     }
 
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            onWarningAlertDialog(activity!!, "Alert", "Do you want to close this application ?")
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_sample_dialog, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //        dialog?.setTitle("This is Dialog Fragment")
-        activity?.setTitle("This is Dialog Fragment")
+        activity?.title = "This is Dialog Fragment"
+
+        mNavController = Navigation.findNavController(view)
+        activity?.onBackPressedDispatcher?.addCallback(this, onBackPressedCallback)
     }
 
     companion object {
@@ -64,5 +77,34 @@ class SampleDialogFragment : DialogFragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun onWarningAlertDialog(value: Activity, title: String, message: String) {
+
+        val dialogBuilder = AlertDialog.Builder(value)
+        dialogBuilder.setMessage(/*""*/message)
+            .setCancelable(false)
+            .setTitle(title)
+            .setPositiveButton("Proceed", DialogInterface.OnClickListener { dialog, id ->
+
+                //activity?.supportFragmentManager?.popBackStack()
+                mNavController?.navigateUp()
+
+            })
+            .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, id ->
+                dialog.cancel()
+            })
+
+        // create dialog box
+        val alert = dialogBuilder.create()
+        // set title for alert dialog box
+        alert.setTitle("AlertDialogExample")
+        // show alert dialog
+        alert.show()
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+        }
     }
 }
