@@ -40,6 +40,12 @@ class SampleDialogFragment : DialogFragment() {
         return inflater.inflate(R.layout.fragment_sample_dialog, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //        dialog?.setTitle("This is Dialog Fragment")
+        activity?.setTitle("This is Dialog Fragment")
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of

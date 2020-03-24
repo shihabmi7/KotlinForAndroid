@@ -24,13 +24,13 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="8sp"
+        android:text="The fare for your selected Ticket has changed"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        tools:text="The fare for your selected flight has changed" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/tv_content"
@@ -40,14 +40,14 @@
         android:fontFamily="sans-serif"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="6sp"
+        android:text="The Ticket fare for your selected Ticket has changed (as per Ticket line policy). The updated price is available now. To avail the ticket at the new price, please tap on the ‘Continue’ button and proceed with your payment. You can also check other available flight options."
         android:textColor="#000000"
         android:textSize="14sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_main_head"
-        tools:layout_editor_absoluteX="4dp"
-        tools:text="The airfare for your selected flight has changed (as per airline policy). The updated price is available now. To avail the ticket at the new price, please tap on the ‘Continue’ button and proceed with your payment. You can also check other available flight options." />
+        tools:layout_editor_absoluteX="4dp" />
 
     <View
         android:id="@+id/view_top"
@@ -66,12 +66,12 @@
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif"
         android:lineSpacingExtra="6sp"
+        android:text="Previous Ticket fare"
         android:textColor="#000000"
         android:textSize="14sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_top"
-        tools:text="Previous Airfare" />
+        app:layout_constraintTop_toBottomOf="@+id/view_top" />
 
 
     <TextView
@@ -82,12 +82,12 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="end"
         android:lineSpacingExtra="4sp"
+        android:text="BDT 76,522"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_top"
-        tools:text="BDT 76,522" />
+        app:layout_constraintTop_toBottomOf="@+id/view_top" />
 
     <View
         android:id="@+id/view_middle"
@@ -105,12 +105,12 @@
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif"
         android:lineSpacingExtra="6sp"
+        android:text="Updated Ticket fare"
         android:textColor="#000000"
         android:textSize="14sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_middle"
-        tools:text="Updated Airfare" />
+        app:layout_constraintTop_toBottomOf="@+id/view_middle" />
 
     <TextView
         android:id="@+id/tv_update_price"
@@ -121,12 +121,12 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="end"
         android:lineSpacingExtra="4sp"
+        android:text="BDT 80,522"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_middle"
-        tools:text="BDT 80,522" />
+        app:layout_constraintTop_toBottomOf="@+id/view_middle" />
 
     <View
         android:id="@+id/view_end"
@@ -146,13 +146,13 @@
         android:fontFamily="sans-serif"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="6sp"
+        android:text="Check another Ticket"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view_end"
-        tools:text="Check another Flight" />
+        app:layout_constraintTop_toBottomOf="@id/view_end" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -161,10 +161,10 @@
         android:fontFamily="sans-serif"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="6sp"
+        android:text="Continue"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_another_flight"
-        tools:text="Continue" />
+        app:layout_constraintTop_toBottomOf="@id/tv_another_flight" />
 </androidx.constraintlayout.widget.ConstraintLayout>

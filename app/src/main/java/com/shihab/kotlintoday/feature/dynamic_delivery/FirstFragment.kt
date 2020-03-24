@@ -26,16 +26,8 @@ import kotlin.math.roundToInt
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class FirstFragment : Fragment(R.layout.fragment_first) {
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -118,7 +110,8 @@ class FirstFragment : Fragment() {
                         SplitInstallSessionStatus.DOWNLOADING -> {
 
                             val percentage =
-                                (state.bytesDownloaded() / state.totalBytesToDownload().toFloat() * 100).roundToInt()
+                                (state.bytesDownloaded() / state.totalBytesToDownload()
+                                    .toFloat() * 100).roundToInt()
                             LogMe.d("", "Downloading $percentage%")
 
                         }

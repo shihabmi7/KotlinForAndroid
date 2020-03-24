@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph3"
+    app:startDestination="@id/First2Fragment">
+
+    <fragment
+        android:id="@+id/First2Fragment"
+        android:name="com.shihab.kotlintoday.feature.dialog_fragment.FirstToDialogFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first_to_dialog">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_DialogFragment"
+            app:destination="@id/dialogFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dialogFragment"
+        android:name="com.shihab.kotlintoday.feature.dialog_fragment.SampleDialogFragment"
+        android:label="@string/title_dialog_fragment"
+        tools:layout="@layout/fragment_sample_dialog">
+
+        <action
+            android:id="@+id/action_DialogFragment_to_FirstFragment"
+            app:destination="@id/First2Fragment" />
+    </fragment>
+</navigation>

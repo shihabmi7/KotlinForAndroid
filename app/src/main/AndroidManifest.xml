@@ -14,7 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".feature.mvvm.ui.AddNoteActivity"></activity>
+        <activity
+            android:name=".feature.dialog_fragment.DialogFragmentWithNavigationAcivity"
+            android:label="@string/title_activity_dialog_fragment_acivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".feature.mvvm.ui.AddNoteActivity" />
         <activity android:name=".feature.parcelable.ReceiveParcelableAcitivty" />
         <activity android:name=".feature.parcelable.ParcelableActivity" />
         <activity android:name=".feature.mvvm.ui.NoteActivity" />
@@ -30,37 +34,32 @@
         <activity
             android:name=".feature.ImageViewActivity"
             android:parentActivityName=".feature.HomeActivity"
-
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.MaterialDialogActivity"
             android:label="@string/title_activity_material_dialog"
             android:parentActivityName=".feature.HomeActivity"
-
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.ClassActivity"
             android:label="@string/title_activity_class"
             android:parentActivityName=".feature.HomeActivity"
-
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.coroutine.CoroutineActivity"
             android:label="@string/title_activity_coroutine"
             android:parentActivityName=".feature.HomeActivity"
-
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.ImplicitIntentActivity"
             android:label="@string/title_activity_implicit_intent"
             android:parentActivityName=".feature.HomeActivity"
-
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.RecyclerViewWithRetromfitRx"
             android:label="@string/title_activity_recycler_view_with_retrofit_rx"
             android:parentActivityName=".feature.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.LoopActivity"
             android:label="@string/title_activity_loop"
@@ -81,13 +80,11 @@
             android:label="@string/title_activity_condition"
             android:parentActivityName=".feature.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".feature.DataTypeWithCalculatorActivity"
             android:label="@string/title_activity_data_type"
             android:parentActivityName=".feature.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".feature.HomeActivity"
             android:label="@string/app_name"
