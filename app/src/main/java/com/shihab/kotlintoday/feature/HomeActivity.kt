@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
+import com.shihab.kotlintoday.feature.coordinate_layout.CoordinateLayoutActivity
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
 import com.shihab.kotlintoday.feature.dialog_fragment.DialogFragmentWithNavigationActivity
 import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
@@ -35,7 +36,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         DynamicDeliveryActivity::class.java,
         ViewBindingActivity::class.java,
         ParcelableActivity::class.java,
-        DialogFragmentWithNavigationActivity::class.java
+        DialogFragmentWithNavigationActivity::class.java,
+        CoordinateLayoutActivity::class.java
     )
 
 
@@ -52,6 +54,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Imageview Extension Function",
         "Dynamic Delivery: Feature One",
         "View Binding java", "Parcelable Activity", "Dialog Fragment With Navigation Graph"
+        , "Co-ordinate Layout"
     )
 
     override fun onButtonClick(position: Int) {
