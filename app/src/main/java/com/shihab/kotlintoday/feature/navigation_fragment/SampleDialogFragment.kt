@@ -1,4 +1,4 @@
-package com.shihab.kotlintoday.feature.dialog_fragment
+package com.shihab.kotlintoday.feature.navigation_fragment
 
 import android.app.Activity
 import android.content.DialogInterface
@@ -40,7 +40,9 @@ class SampleDialogFragment : DialogFragment(), View.OnClickListener {
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            onWarningAlertDialog(activity!!, "Alert", "Do you want to close this application ?")
+            // onWarningAlertDialog(activity!!, "Alert", "Do you want to close this application ?")
+            mNavController?.navigateUp()
+
         }
     }
 

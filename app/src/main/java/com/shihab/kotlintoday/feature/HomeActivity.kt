@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.feature.coordinate_layout.CoordinateLayoutActivity
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
-import com.shihab.kotlintoday.feature.dialog_fragment.DialogFragmentWithNavigationActivity
+import com.shihab.kotlintoday.feature.navigation_fragment.DialogFragmentWithNavigationActivity
 import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
 import com.shihab.kotlintoday.feature.mvvm.ui.NoteActivity
 import com.shihab.kotlintoday.feature.parcelable.ParcelableActivity

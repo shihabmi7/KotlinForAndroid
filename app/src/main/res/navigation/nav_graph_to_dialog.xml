@@ -6,22 +6,31 @@
 
     <fragment
         android:id="@+id/First2Fragment"
-        android:name="com.shihab.kotlintoday.feature.dialog_fragment.FirstToDialogFragment"
+        android:name="com.shihab.kotlintoday.feature.navigation_fragment.FirstToDialogFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first_to_dialog">
         <action
             android:id="@+id/action_FirstFragment_to_DialogFragment"
-            app:destination="@id/dialogFragment" />
+            app:destination="@id/dialogFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
     </fragment>
 
     <fragment
         android:id="@+id/dialogFragment"
-        android:name="com.shihab.kotlintoday.feature.dialog_fragment.SampleDialogFragment"
+        android:name="com.shihab.kotlintoday.feature.navigation_fragment.SampleDialogFragment"
         android:label="@string/title_dialog_fragment"
         tools:layout="@layout/fragment_sample_dialog">
 
         <action
             android:id="@+id/action_DialogToFragment_to_First2Fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
             app:destination="@id/First2Fragment" />
     </fragment>
 </navigation>

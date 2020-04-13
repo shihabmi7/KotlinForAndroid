@@ -1,4 +1,4 @@
-package com.shihab.kotlintoday.feature.dialog_fragment
+package com.shihab.kotlintoday.feature.navigation_fragment
 
 import android.os.Bundle
 import android.view.View
