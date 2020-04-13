@@ -8,6 +8,7 @@ import com.shihab.kotlintoday.adapter.PostAdapter
 import com.shihab.kotlintoday.model.Post
 import com.shihab.kotlintoday.rest.IMyAPI
 import com.shihab.kotlintoday.rest.RetrofitClient
+import com.shihab.kotlintoday.utility.setDivider
 import com.shihab.kotlintoday.utility.showSuccessMessage
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -37,7 +38,7 @@ class RecyclerViewWithRetromfitRx : AppCompatActivity() {
     }
 
     private fun displayPost(post: List<Post>?) {
-
+        recycler_retro_data.setDivider(R.drawable.recycler_view_divider)
         recycler_retro_data.adapter = PostAdapter(this, post!!)
         showSuccessMessage(this, "Success")
 
