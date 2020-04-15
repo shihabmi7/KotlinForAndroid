@@ -1,7 +1,6 @@
 package com.shihab.kotlintoday.rest
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.shihab.kotlintoday.utility.LogMe
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -41,10 +40,13 @@ object RetrofitClient {
     }
 
     private fun httpLoggingInterceptor(): HttpLoggingInterceptor {
-        val httpLoggingInterceptor =
-            HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { message ->
-                LogMe.d("Retrofit", "log: http log: $message")
-            })
+//        val httpLoggingInterceptor =
+//            HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { message ->
+//                LogMe.d("Retrofit", "log: http log: $message")
+//            })
+
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return httpLoggingInterceptor
     }

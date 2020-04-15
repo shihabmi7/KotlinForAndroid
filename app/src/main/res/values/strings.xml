@@ -45,4 +45,5 @@
     <string name="title_activity_dialog_fragment_acivity">Dialog Fragment With Navigation Graph</string>
     <string name="title_dialog_fragment">Dialog Fragment</string>
     <string name="title_activity_coordinate_layout">CoordinateLayoutActivity</string>
+    <string name="title_activity_crash_analytics">CrashAnalyticsActivity</string>
 </resources>

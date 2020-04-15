@@ -10,9 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.feature.coordinate_layout.CoordinateLayoutActivity
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
-import com.shihab.kotlintoday.feature.navigation_fragment.DialogFragmentWithNavigationActivity
+import com.shihab.kotlintoday.feature.crashanalytics.CrashAnalyticsActivity
 import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
 import com.shihab.kotlintoday.feature.mvvm.ui.NoteActivity
+import com.shihab.kotlintoday.feature.navigation_fragment.DialogFragmentWithNavigationActivity
 import com.shihab.kotlintoday.feature.parcelable.ParcelableActivity
 import com.shihab.kotlintoday.feature.viewBinding.ViewBindingActivity
 import kotlinx.android.synthetic.main.activity_home.*
@@ -37,7 +38,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         ViewBindingActivity::class.java,
         ParcelableActivity::class.java,
         DialogFragmentWithNavigationActivity::class.java,
-        CoordinateLayoutActivity::class.java
+        CoordinateLayoutActivity::class.java,
+        CrashAnalyticsActivity::class.java
     )
 
 
@@ -54,7 +56,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Imageview Extension Function",
         "Dynamic Delivery: Feature One",
         "View Binding java", "Parcelable Activity", "Dialog Fragment With Navigation Graph"
-        , "Co-ordinate Layout"
+        , "Co-ordinate Layout", "Crash Analytics"
     )
 
     override fun onButtonClick(position: Int) {
