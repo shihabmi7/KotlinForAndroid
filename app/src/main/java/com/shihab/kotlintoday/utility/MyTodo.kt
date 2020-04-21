@@ -1,12 +1,14 @@
 package com.shihab.kotlintoday.utility
 
+// todo animation with widget
 // mvvm swipe delete animation, edit notes
-// Dagger with MVVB
+// Dagger with MVVM
 // Pagging
 // type script
 // circular testing
 // testing..Unit test
 // mockito.
+// listadapter https://www.youtube.com/watch?v=xPPMygGxiEo
 
 
 // Recycler

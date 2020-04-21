@@ -14,11 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".feature.tableview.TableViewActivity"></activity>
         <activity
             android:name=".feature.crashanalytics.CrashAnalyticsActivity"
             android:label="@string/title_activity_crash_analytics"
             android:parentActivityName=".feature.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.coordinate_layout.CoordinateLayoutActivity"
             android:label="@string/title_activity_coordinate_layout"

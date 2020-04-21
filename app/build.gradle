@@ -146,4 +146,5 @@ dependencies {
     // Add the Firebase Crashlytics dependency.
     implementation "com.crashlytics.sdk.android:crashlytics:$crash_analytics"
 
+    implementation 'com.evrencoskun.library:tableview:0.8.9.2'
 }
