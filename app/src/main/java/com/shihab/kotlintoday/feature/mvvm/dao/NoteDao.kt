@@ -1,6 +1,5 @@
 package com.shihab.kotlintoday.feature.mvvm.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.shihab.kotlintoday.feature.mvvm.model.Note
 
@@ -21,6 +20,6 @@ interface NoteDao {
 
 
     @Query("SELECT * FROM note_table ORDER BY priority desc")
-    fun getAllNotes(): LiveData<List<Note>>
+    fun getAllNotes(): List<Note>
 
 }

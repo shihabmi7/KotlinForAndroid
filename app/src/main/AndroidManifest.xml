@@ -27,10 +27,14 @@
             android:name=".feature.navigation_fragment.DialogFragmentWithNavigationActivity"
             android:label="@string/title_activity_dialog_fragment_acivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".feature.mvvm.ui.AddNoteActivity" />
+        <activity
+            android:name=".feature.mvvm.ui.AddNoteActivity"
+            android:parentActivityName=".feature.mvvm.ui.NoteActivity" />
         <activity android:name=".feature.parcelable.ReceiveParcelableAcitivty" />
         <activity android:name=".feature.parcelable.ParcelableActivity" />
-        <activity android:name=".feature.mvvm.ui.NoteActivity" />
+        <activity
+            android:name=".feature.mvvm.ui.NoteActivity"
+            android:parentActivityName=".feature.HomeActivity" />
         <activity
             android:name=".feature.viewBinding.ViewBindingActivity"
             android:parentActivityName=".feature.HomeActivity"

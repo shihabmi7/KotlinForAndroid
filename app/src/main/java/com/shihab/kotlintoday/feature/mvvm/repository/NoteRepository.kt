@@ -2,7 +2,6 @@ package com.shihab.kotlintoday.feature.mvvm.repository
 
 import android.content.Context
 import android.os.AsyncTask
-import androidx.lifecycle.LiveData
 import com.shihab.kotlintoday.feature.mvvm.dao.NoteDao
 import com.shihab.kotlintoday.feature.mvvm.db.NoteDatabase
 import com.shihab.kotlintoday.feature.mvvm.model.Note
@@ -18,7 +17,8 @@ class NoteRepository(context: Context) {
     }
 
     fun insert(note: Note) {
-        InsertNoteAsync(noteDao).execute(note)
+        //InsertNoteAsync(noteDao).execute(note)
+        noteDao.insertNote(note)
     }
 
     fun update(note: Note) {
@@ -33,7 +33,7 @@ class NoteRepository(context: Context) {
         DeleteAllNoteAsync(noteDao).execute()
     }
 
-    fun getAllNotes(): LiveData<List<Note>> {
+    fun getAllNotes(): List<Note> {
         return noteDao.getAllNotes()
     }
 
@@ -41,7 +41,7 @@ class NoteRepository(context: Context) {
 
         override fun doInBackground(vararg params: Note?): Void? {
             LogMe.i("note", "" + params[0]!!)
-            noteDao.insertNote(params[0]!!)
+            //noteDao.insertNote(params[0]!!)
             return null
         }
     }
