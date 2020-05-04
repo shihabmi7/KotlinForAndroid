@@ -40,8 +40,8 @@ class SampleDialogFragment : DialogFragment(), View.OnClickListener {
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            // onWarningAlertDialog(activity!!, "Alert", "Do you want to close this application ?")
-            mNavController?.navigateUp()
+            onWarningAlertDialog(activity!!, "Alert", "Do you want to close this application ?")
+            //mNavController?.navigateUp()
 
         }
     }
