@@ -16,6 +16,7 @@ import com.shihab.kotlintoday.feature.mvvm.ui.NoteActivity
 import com.shihab.kotlintoday.feature.navigation_fragment.DialogFragmentWithNavigationActivity
 import com.shihab.kotlintoday.feature.parcelable.ParcelableActivity
 import com.shihab.kotlintoday.feature.viewBinding.ViewBindingActivity
+import com.shihab.kotlintoday.feature.workmanager.WorkManagerActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
 
@@ -39,7 +40,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         ParcelableActivity::class.java,
         DialogFragmentWithNavigationActivity::class.java,
         CoordinateLayoutActivity::class.java,
-        CrashAnalyticsActivity::class.java
+        CrashAnalyticsActivity::class.java,
+        WorkManagerActivity::class.java
     )
 
 
@@ -56,7 +58,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Imageview Extension Function",
         "Dynamic Delivery: Feature One",
         "View Binding java", "Parcelable Activity", "Dialog Fragment With Navigation Graph"
-        , "Co-ordinate Layout", "Crash Analytics"
+        , "Co-ordinate Layout", "Crash Analytics", "Work Manager"
     )
 
     override fun onButtonClick(position: Int) {

@@ -88,6 +88,7 @@ dependencies {
     def material = "1.1.0"
     def analytics = "17.3.0"
     def crash_analytics = "2.10.1"
+    def work_version = "2.3.4"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -120,7 +121,6 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
@@ -146,4 +146,8 @@ dependencies {
     // Add the Firebase Crashlytics dependency.
     implementation "com.crashlytics.sdk.android:crashlytics:$crash_analytics"
 
+    // (Java only)
+    implementation "androidx.work:work-runtime:$work_version"
+    // Kotlin + coroutines
+    implementation "androidx.work:work-runtime-ktx:$work_version"
 }
