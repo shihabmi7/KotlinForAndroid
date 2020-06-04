@@ -68,6 +68,9 @@ android {
         enabled = true
     }
 
+    /*defaultConfig{
+        vectorDrawables.useSupportLibrary = true
+    }*/
 
 // To inline the bytecode built with JVM target 1.8 into
 // bytecode that is being built with JVM target 1.6. (e.g. navArgs)
@@ -76,6 +79,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
 
     def lifecycle_version = "2.1.0"
     def room_version = "2.2.0"

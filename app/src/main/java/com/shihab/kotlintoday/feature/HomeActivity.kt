@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
+import com.shihab.kotlintoday.feature.bottom_sheet.BottomSheetActivity
 import com.shihab.kotlintoday.feature.coordinate_layout.CoordinateLayoutActivity
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
 import com.shihab.kotlintoday.feature.crashanalytics.CrashAnalyticsActivity
@@ -41,9 +42,9 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         DialogFragmentWithNavigationActivity::class.java,
         CoordinateLayoutActivity::class.java,
         CrashAnalyticsActivity::class.java,
-        WorkManagerActivity::class.java
+        WorkManagerActivity::class.java,
+        BottomSheetActivity::class.java
     )
-
 
     var activiites_name = listOf(
         "Activity Switchting",
@@ -58,7 +59,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Imageview Extension Function",
         "Dynamic Delivery: Feature One",
         "View Binding java", "Parcelable Activity", "Dialog Fragment With Navigation Graph"
-        , "Co-ordinate Layout", "Crash Analytics", "Work Manager"
+        , "Co-ordinate Layout", "Crash Analytics", "Work Manager", "Bottom Sheet"
     )
 
     override fun onButtonClick(position: Int) {

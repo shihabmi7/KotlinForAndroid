@@ -15,10 +15,16 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".feature.bottom_sheet.BottomSheetActivity"
+            android:parentActivityName=".feature.HomeActivity"
+            android:label="@string/title_bottom_sheet_activity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
             android:name=".feature.workmanager.WorkManagerActivity"
             android:label="@string/title_activity_work_manager"
             android:parentActivityName=".feature.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.crashanalytics.CrashAnalyticsActivity"
             android:label="@string/title_activity_crash_analytics"

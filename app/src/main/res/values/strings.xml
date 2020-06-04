@@ -47,4 +47,5 @@
     <string name="title_activity_coordinate_layout">CoordinateLayoutActivity</string>
     <string name="title_activity_crash_analytics">CrashAnalyticsActivity</string>
     <string name="title_activity_work_manager">WorkManagerActivity</string>
+    <string name="title_bottom_sheet_activity">Bottom Sheet</string>
 </resources>
