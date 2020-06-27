@@ -15,10 +15,14 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:parentActivityName=".feature.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".feature.custom_spinner.CustomSpinnerActivity"/>
+        <activity
             android:name=".feature.workmanager.WorkManagerActivity"
             android:label="@string/title_activity_work_manager"
             android:parentActivityName=".feature.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.crashanalytics.CrashAnalyticsActivity"
             android:label="@string/title_activity_crash_analytics"

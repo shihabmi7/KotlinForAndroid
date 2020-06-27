@@ -11,6 +11,7 @@ import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.feature.coordinate_layout.CoordinateLayoutActivity
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
 import com.shihab.kotlintoday.feature.crashanalytics.CrashAnalyticsActivity
+import com.shihab.kotlintoday.feature.custom_spinner.CustomSpinnerActivity
 import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
 import com.shihab.kotlintoday.feature.mvvm.ui.NoteActivity
 import com.shihab.kotlintoday.feature.navigation_fragment.DialogFragmentWithNavigationActivity
@@ -29,6 +30,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         DataTypeWithCalculatorActivity::class.java,
         LoopActivity::class.java,
         ClassActivity::class.java,
+        CustomSpinnerActivity::class.java,
         RecyclerViewWithRetromfitRx::class.java,
         ImplicitIntentActivity::class.java,
         MaterialDialogActivity::class.java,
@@ -50,6 +52,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "DataTypeWithCalculatorActivity",
         "Looping Activity",
         "Class In Kotlin",
+        "Custom Spinner",
         "RecyclerViewWithRetrofitRx",
         "Implicit Intent ",
         "Material Dialog",
