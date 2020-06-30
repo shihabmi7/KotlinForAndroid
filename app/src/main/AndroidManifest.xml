@@ -14,10 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".feature.spannable_text.SpanTextActivity"
+            android:parentActivityName=".feature.HomeActivity"/>
         <activity
+            android:name=".feature.custom_spinner.CustomSpinnerActivity"
             android:parentActivityName=".feature.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:name=".feature.custom_spinner.CustomSpinnerActivity"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.workmanager.WorkManagerActivity"
             android:label="@string/title_activity_work_manager"

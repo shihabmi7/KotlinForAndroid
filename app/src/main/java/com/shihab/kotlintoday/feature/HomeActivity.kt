@@ -16,6 +16,7 @@ import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
 import com.shihab.kotlintoday.feature.mvvm.ui.NoteActivity
 import com.shihab.kotlintoday.feature.navigation_fragment.DialogFragmentWithNavigationActivity
 import com.shihab.kotlintoday.feature.parcelable.ParcelableActivity
+import com.shihab.kotlintoday.feature.spannable_text.SpanTextActivity
 import com.shihab.kotlintoday.feature.viewBinding.ViewBindingActivity
 import com.shihab.kotlintoday.feature.workmanager.WorkManagerActivity
 import kotlinx.android.synthetic.main.activity_home.*
@@ -23,7 +24,6 @@ import kotlinx.android.synthetic.main.content_home.*
 
 class HomeActivity : AppCompatActivity(), View.OnClickListener,
     ActivityNameAdapter.OnButtonClickListener {
-
 
     var activiites = listOf(
         FirstActivity::class.java,
@@ -37,15 +37,16 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         NoteActivity::class.java,
         CoroutineActivity::class.java,
         ImageViewActivity::class.java,
+
         DynamicDeliveryActivity::class.java,
         ViewBindingActivity::class.java,
         ParcelableActivity::class.java,
         DialogFragmentWithNavigationActivity::class.java,
         CoordinateLayoutActivity::class.java,
         CrashAnalyticsActivity::class.java,
-        WorkManagerActivity::class.java
+        WorkManagerActivity::class.java,
+        SpanTextActivity::class.java
     )
-
 
     var activiites_name = listOf(
         "Activity Switchting",
@@ -61,7 +62,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Imageview Extension Function",
         "Dynamic Delivery: Feature One",
         "View Binding java", "Parcelable Activity", "Dialog Fragment With Navigation Graph"
-        , "Co-ordinate Layout", "Crash Analytics", "Work Manager"
+        , "Co-ordinate Layout", "Crash Analytics", "Work Manager", "Spannable Text"
     )
 
     override fun onButtonClick(position: Int) {
