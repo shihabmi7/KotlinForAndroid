@@ -8,8 +8,7 @@ import com.shihab.kotlintoday.feature.mvvm.model.Note
 import com.shihab.kotlintoday.rest.RetrofitClient
 import com.shihab.kotlintoday.utility.Connectivity
 import com.shihab.kotlintoday.utility.LogMe
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.*
 
 class NoteRepository(val context: Context) {
 
@@ -24,25 +23,36 @@ class NoteRepository(val context: Context) {
 
         var noteList = mutableListOf<Note>()
 
-        coroutineScope {
-            if (Connectivity.isConnected(context)) {
-                // async works as parallel
-                /*val noteListFromServer = async { RetrofitClient.getAPIInterface().getNotes() }.await()
-                val noteListFromDatabase = async { noteDao.getAllNotes() }.await()
-                noteList.addAll(noteListFromDatabase)
-                noteList.addAll(noteListFromServer)*/
+        /** This try catch can handle Network issues*/
+        try {
+            coroutineScope {
+                if (Connectivity.isConnected(context)) {
+                    /** > async works as parallel */
+                    val notesFromServer =
+                        async { RetrofitClient.getAPIInterface().getNotes() }.await()
+                    val notesFromDatabase = async { noteDao.getAllNotes() }.await()
+                    noteList.addAll(notesFromDatabase)
+                    noteList.addAll(notesFromServer)
 
-                // if we want to work like series
-                val noteListFromDatabase = noteDao.getAllNotes()
-                val noteListFromServer =  RetrofitClient.getAPIInterface().getNotes()
-                noteList.addAll(noteListFromDatabase)
-                noteList.addAll(noteListFromServer)
+                    /** > if we want to work like series or syncronous task
+                    val noteListFromDatabase = noteDao.getAllNotes()
+                    val noteListFromServer =  RetrofitClient.getAPIInterface().getNotes()
+                    noteList.addAll(noteListFromDatabase)
+                    noteList.addAll(noteListFromServer) */
 
-            } else {
-                val noteListFromDatabase = async { noteDao.getAllNotes() }.await()
-                noteList.addAll(noteListFromDatabase)
+                } else {
+                    /** > With context is another type of async
+                     ** > Use to return the result of a single task */
+
+                    val noteListFromDatabase =
+                        withContext(Dispatchers.IO) { noteDao.getAllNotes() }
+                    noteList.addAll(noteListFromDatabase)
+                }
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
+
 
         return noteList
     }
