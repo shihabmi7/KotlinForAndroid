@@ -89,6 +89,10 @@ dependencies {
     def analytics = "17.3.0"
     def crash_analytics = "2.10.1"
     def work_version = "2.3.4"
+    def jUnit = "4.12"
+    def espresso = "3.2.0"
+    def test_runner = "1.2.0"
+    def material_dialog = "3.1.1"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -115,12 +119,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.1'
 
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
@@ -129,10 +127,13 @@ dependencies {
     // optional - RxJava support for Room
     implementation "androidx.room:room-rxjava2:$room_version"
 
+    // coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$co_rouritines"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$co_rouritines"
 
-    implementation 'com.afollestad.material-dialogs:core:3.1.1'
+    // material design
+    implementation "com.google.android.material:material:$material"
+    implementation "com.afollestad.material-dialogs:core:$material_dialog"
 
     //todo : should add for dynamic module delivery
     implementation "com.google.android.play:core:$play_core"
@@ -142,12 +143,17 @@ dependencies {
     implementation "com.facebook.stetho:stetho-okhttp3:$stetho"
     implementation 'io.michaelrocks:libphonenumber-android:8.12.0'
 
-    implementation "com.google.firebase:firebase-analytics:$analytics"
     // Add the Firebase Crashlytics dependency.
+    implementation "com.google.firebase:firebase-analytics:$analytics"
     implementation "com.crashlytics.sdk.android:crashlytics:$crash_analytics"
 
     // (Java only)
     implementation "androidx.work:work-runtime:$work_version"
     // Kotlin + coroutines
     implementation "androidx.work:work-runtime-ktx:$work_version"
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation "junit:junit:$jUnit"
+    androidTestImplementation "androidx.test:runner:$test_runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
 }
