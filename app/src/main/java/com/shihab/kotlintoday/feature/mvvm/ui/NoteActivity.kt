@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.databinding.ActivityNoteBinding
 import com.shihab.kotlintoday.feature.mvvm.adapter.NoteAdapter
-import com.shihab.kotlintoday.feature.mvvm.model.Note
 import com.shihab.kotlintoday.feature.mvvm.viewmodel.NoteViewModel
 import com.shihab.kotlintoday.feature.mvvm.viewmodel.ViewModelFactory
 
@@ -32,14 +31,13 @@ class NoteActivity : AppCompatActivity() {
             )
         ).get(NoteViewModel::class.java)
 
-        viewModel.getAllNotes()
-
         binding.viewModel = viewModel
+        binding.recyclerNotes.setHasFixedSize(true)
 
         viewModel.getNotes().observe(this, Observer {
             adapter = NoteAdapter(it)
-            binding.recyclerNotes.setHasFixedSize(true)
             binding.recyclerNotes.adapter = adapter
+            viewModel.isLoading.set(false)
         })
     }
 

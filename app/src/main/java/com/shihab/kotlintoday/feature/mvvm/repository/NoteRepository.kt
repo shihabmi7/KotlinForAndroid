@@ -5,9 +5,13 @@ import android.os.AsyncTask
 import com.shihab.kotlintoday.feature.mvvm.dao.NoteDao
 import com.shihab.kotlintoday.feature.mvvm.db.NoteDatabase
 import com.shihab.kotlintoday.feature.mvvm.model.Note
+import com.shihab.kotlintoday.rest.RetrofitClient
+import com.shihab.kotlintoday.utility.Connectivity
 import com.shihab.kotlintoday.utility.LogMe
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 
-class NoteRepository(context: Context) {
+class NoteRepository(val context: Context) {
 
     var noteDao: NoteDao
 
@@ -16,8 +20,34 @@ class NoteRepository(context: Context) {
         noteDao = nd.noteDao()
     }
 
-    fun insert(note: Note) {
-        //InsertNoteAsync(noteDao).execute(note)
+    suspend fun getAllNotes(): List<Note> {
+
+        var noteList = mutableListOf<Note>()
+
+        coroutineScope {
+            if (Connectivity.isConnected(context)) {
+                // async works as parallel
+                /*val noteListFromServer = async { RetrofitClient.getAPIInterface().getNotes() }.await()
+                val noteListFromDatabase = async { noteDao.getAllNotes() }.await()
+                noteList.addAll(noteListFromDatabase)
+                noteList.addAll(noteListFromServer)*/
+
+                // if we want to work like series
+                val noteListFromDatabase = noteDao.getAllNotes()
+                val noteListFromServer =  RetrofitClient.getAPIInterface().getNotes()
+                noteList.addAll(noteListFromDatabase)
+                noteList.addAll(noteListFromServer)
+
+            } else {
+                val noteListFromDatabase = async { noteDao.getAllNotes() }.await()
+                noteList.addAll(noteListFromDatabase)
+            }
+        }
+
+        return noteList
+    }
+
+    suspend fun insert(note: Note) {
         noteDao.insertNote(note)
     }
 
@@ -31,10 +61,6 @@ class NoteRepository(context: Context) {
 
     fun deleteAllNotes() {
         DeleteAllNoteAsync(noteDao).execute()
-    }
-
-    fun getAllNotes(): List<Note> {
-        return noteDao.getAllNotes()
     }
 
     class InsertNoteAsync(val noteDao: NoteDao) : AsyncTask<Note?, Void, Void>() {
@@ -69,5 +95,4 @@ class NoteRepository(context: Context) {
             return null
         }
     }
-
 }
