@@ -23,4 +23,7 @@ interface IMyAPI {
 
     @GET("https://9cd57f79-7273-4069-8c74-d648a82453d9.mock.pstmn.io/getNotes")
     suspend fun getNotes(): List<Note>
+
+    @GET("https://9cd57f79-7273-4069-8c74-d648a82453d9.mock.pstmn.io/getNotes")
+    fun getNotesRaw(): List<Note>
 }

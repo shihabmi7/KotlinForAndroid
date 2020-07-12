@@ -22,7 +22,7 @@ class NoteViewModel(val context: Context) : ViewModel() {
     var isLoading = ObservableBoolean()
 
     init {
-        getAllNotes()
+       // getAllNotes()
     }
 
     fun saveNote() {

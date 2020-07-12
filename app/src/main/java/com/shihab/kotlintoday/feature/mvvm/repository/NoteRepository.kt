@@ -23,22 +23,43 @@ class NoteRepository(val context: Context) {
 
         var noteList = mutableListOf<Note>()
 
-        /** This try catch can handle Network issues*/
+        /** This try catch can handle Network issues inside coroutine*/
         try {
             coroutineScope {
                 if (Connectivity.isConnected(context)) {
-                    /** > async works as parallel */
+                    //> async works as parallel
+
+                    LogMe.i("NoteRepo", "async-> notesFromServer started")
                     val notesFromServer =
                         async { RetrofitClient.getAPIInterface().getNotes() }.await()
-                    val notesFromDatabase = async { noteDao.getAllNotes() }.await()
-                    noteList.addAll(notesFromDatabase)
-                    noteList.addAll(notesFromServer)
 
-                    /** > if we want to work like series or syncronous task
+                    LogMe.i("NoteRepo", "async-> notesFromDatabase started")
+                    val notesFromDatabase = async { noteDao.getAllNotes() }.await()
+
+                    val multipleCoroutine = listOf(
+                        async { RetrofitClient.getAPIInterface().getNotes() },
+                        async { noteDao.getAllNotes() }
+                    )
+
+                    multipleCoroutine.awaitAll()
+
+                    noteList.addAll(notesFromServer)
+                    LogMe.i("NoteRepo", "Notes From Server Added")
+
+                    noteList.addAll(notesFromDatabase)
+                    LogMe.i("NoteRepo", "Notes From Database Added")
+
+                    /* > if we want to work like series or syncronous task
+                    LogMe.i("NoteRepo", "syncronous -> notes From Database started")
                     val noteListFromDatabase = noteDao.getAllNotes()
-                    val noteListFromServer =  RetrofitClient.getAPIInterface().getNotes()
+
+                    LogMe.i("NoteRepo", "syncronous -> notes From Server started")
+                    val noteListFromServer = RetrofitClient.getAPIInterface().getNotes()
+
                     noteList.addAll(noteListFromDatabase)
-                    noteList.addAll(noteListFromServer) */
+                    LogMe.i("NoteRepo", "syncronous > Notes From Database Added")
+                    noteList.addAll(noteListFromServer)
+                    LogMe.i("NoteRepo", "syncronous > Notes From Server Added")*/
 
                 } else {
                     /** > With context is another type of async
