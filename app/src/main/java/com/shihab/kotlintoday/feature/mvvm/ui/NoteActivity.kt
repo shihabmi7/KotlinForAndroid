@@ -143,4 +143,12 @@ class NoteActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private suspend fun doLongRunningTask() {
+        withContext(Dispatchers.Default) {
+            // your code for doing a long running task
+            // Added delay to simulate
+            delay(5000)
+        }
+    }
 }

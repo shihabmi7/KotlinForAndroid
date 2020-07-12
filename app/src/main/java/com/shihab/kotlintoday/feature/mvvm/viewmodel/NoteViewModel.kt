@@ -11,7 +11,9 @@ import com.shihab.kotlintoday.feature.mvvm.model.Note
 import com.shihab.kotlintoday.feature.mvvm.repository.NoteRepository
 import com.shihab.kotlintoday.feature.mvvm.ui.AddNoteActivity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NoteViewModel(val context: Context) : ViewModel() {
 
