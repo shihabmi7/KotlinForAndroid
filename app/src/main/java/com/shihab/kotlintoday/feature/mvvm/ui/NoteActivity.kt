@@ -13,6 +13,7 @@ import com.shihab.kotlintoday.feature.mvvm.viewmodel.NoteViewModel
 import com.shihab.kotlintoday.feature.mvvm.viewmodel.ViewModelFactory
 import com.shihab.kotlintoday.rest.RetrofitClient
 import com.shihab.kotlintoday.utility.LogMe
+import com.shihab.kotlintoday.utility.ShowToast
 import kotlinx.coroutines.*
 
 class NoteActivity : AppCompatActivity() {
@@ -27,6 +28,12 @@ class NoteActivity : AppCompatActivity() {
     var listFromServer: List<Note> = mutableListOf()
     lateinit var noteListFromDB: List<Note>
     lateinit var noteList: List<Note>
+    val globalScope = CoroutineScope(Dispatchers.Main)
+    val ioScope = CoroutineScope(Dispatchers.IO)
+
+    val networkJob = ioScope.launch {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,7 +114,7 @@ class NoteActivity : AppCompatActivity() {
          * Dispatcher.IO > Network & Database
          * Dispatcher.Default > CPU intensive task (GPU rendering)
          * */
-        GlobalScope.launch(Dispatchers.Main) { // launch & Async is the starter of coroutine
+        GlobalScope.launch(Dispatchers.Main + exceptionHandler) { // launch & Async is the starter of coroutine
 
             // launch is fire and forget concept
             // By Default launch use > Dispatcher.Default
@@ -126,7 +133,7 @@ class NoteActivity : AppCompatActivity() {
             listFromServer = async { RetrofitClient.getAPIInterface().getNotes() }.await()
         }
 
-        GlobalScope.async (job + Dispatchers.Main) {
+        GlobalScope.async(job + Dispatchers.Main) {
             // noteListFromDB = db.getDatabase()
             setRecyclerAdapter(listFromServer)
         }
@@ -150,5 +157,9 @@ class NoteActivity : AppCompatActivity() {
             // Added delay to simulate
             delay(5000)
         }
+    }
+
+    private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
+        ShowToast(exception.localizedMessage)
     }
 }
