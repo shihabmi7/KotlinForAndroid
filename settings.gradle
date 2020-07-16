@@ -1,3 +1,4 @@
+include ':FeatureThree'
 include ':feature_two'
 include ':app'
 rootProject.name='KotlinToday'

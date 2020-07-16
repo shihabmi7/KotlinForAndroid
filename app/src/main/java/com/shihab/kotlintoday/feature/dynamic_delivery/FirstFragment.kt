@@ -26,6 +26,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
 
     val moduleNameOne = "feature_one"
     val moduleNameTwo = "feature_two"
+    val moduleNameThree = "FeatureThree"
     var activeSessionId: Int? = null
     var splitInstallManager: SplitInstallManager? = null
     var listener: SplitInstallStateUpdatedListener? = null
@@ -39,11 +40,26 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
         }
 
         button_second.setOnClickListener {
-
+            loadModule()
         }
     }
 
     fun launchActivity() {
+        val packageName = "com.shihab.feature_one"
+        val activityClassName = "$packageName.FeatureOneHome"
+
+        try {
+            val intent = Intent(Intent.ACTION_VIEW).setClassName(
+                BuildConfig.APPLICATION_ID, // BuildConfig of app Module
+                activityClassName
+            )
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(context, "" + e.printStackTrace(), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun launchFeatureTwoActivity() {
         val packageName = "com.shihab.feature_one"
         val activityClassName = "$packageName.FeatureOneHome"
 
@@ -72,7 +88,8 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
                         // request by invoking the following method for each
                         // module you want to install.
                         .addModule(moduleNameOne)
-                        .addModule(moduleNameTwo)
+                        .addModule(moduleNameTwo).
+                            addModule(moduleNameThree)
                         .build()
 
                 // TODO: move listener code and activeSessionId to ViewModel

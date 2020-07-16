@@ -49,7 +49,7 @@ android {
         }
     }
 
-    dynamicFeatures = [":feature_one", ':feature_two']
+    dynamicFeatures = [":feature_one", ':feature_two', ':FeatureThree']
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
