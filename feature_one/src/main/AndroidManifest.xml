@@ -4,8 +4,8 @@
     package="com.shihab.feature_one">
 
     <dist:module
-        dist:instant="false"
         dist:title="@string/title_feature_one">
+
         <dist:delivery>
             <dist:on-demand />
         </dist:delivery>
@@ -14,7 +14,7 @@
     </dist:module>
 
     <application>
-        <activity android:name=".FeatureOneHome">
+        <activity android:name="com.shihab.feature_one.FeatureOneHome">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity" />
@@ -23,5 +23,6 @@
             </intent-filter>
         </activity>
     </application>
+
 
 </manifest>

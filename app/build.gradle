@@ -23,6 +23,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+        }
     }
 
     dataBinding {
@@ -46,7 +49,7 @@ android {
         }
     }
 
-    dynamicFeatures = [":feature_one"]
+    dynamicFeatures = [":feature_one", ':feature_two', ':FeatureThree']
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -67,11 +70,6 @@ android {
     viewBinding {
         enabled = true
     }
-
-
-// To inline the bytecode built with JVM target 1.8 into
-// bytecode that is being built with JVM target 1.6. (e.g. navArgs)
-
 }
 
 dependencies {
@@ -82,7 +80,7 @@ dependencies {
     def co_rouritines = "1.2.1"
     def multidex_version = "2.0.1"
     def stetho = "1.5.1"
-    def play_core = "1.7.1"
+    def play_core = "1.7.3"
     def retrofit = "2.6.2"
     def okHttpVersion = "4.4.0"
     def material = "1.1.0"

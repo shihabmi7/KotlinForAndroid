@@ -1,12 +1,12 @@
 package com.shihab.kotlintoday.utility
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import com.facebook.stetho.Stetho
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 
-class KotlinToday : Application() {
+class KotlinToday : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
@@ -23,6 +23,5 @@ class KotlinToday : Application() {
             return manager
         }
     }
-
 
 }

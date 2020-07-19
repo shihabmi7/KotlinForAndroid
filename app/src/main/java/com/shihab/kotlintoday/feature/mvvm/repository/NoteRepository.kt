@@ -5,9 +5,12 @@ import android.os.AsyncTask
 import com.shihab.kotlintoday.feature.mvvm.dao.NoteDao
 import com.shihab.kotlintoday.feature.mvvm.db.NoteDatabase
 import com.shihab.kotlintoday.feature.mvvm.model.Note
+import com.shihab.kotlintoday.rest.RetrofitClient
+import com.shihab.kotlintoday.utility.Connectivity
 import com.shihab.kotlintoday.utility.LogMe
+import kotlinx.coroutines.*
 
-class NoteRepository(context: Context) {
+class NoteRepository(val context: Context) {
 
     var noteDao: NoteDao
 
@@ -16,8 +19,66 @@ class NoteRepository(context: Context) {
         noteDao = nd.noteDao()
     }
 
-    fun insert(note: Note) {
-        //InsertNoteAsync(noteDao).execute(note)
+    suspend fun getAllNotes(): List<Note> {
+
+        var noteList = mutableListOf<Note>()
+
+        /** This try catch can handle Network issues inside coroutine*/
+        try {
+            coroutineScope {
+                if (Connectivity.isConnected(context)) {
+                    //> async works as parallel
+
+                    LogMe.i("NoteRepo", "async-> notesFromServer started")
+                    val notesFromServer =
+                        async { RetrofitClient.getAPIInterface().getNotes() }.await()
+
+                    LogMe.i("NoteRepo", "async-> notesFromDatabase started")
+                    val notesFromDatabase = async { noteDao.getAllNotes() }.await()
+
+                    val multipleCoroutine = listOf(
+                        async { RetrofitClient.getAPIInterface().getNotes() },
+                        async { noteDao.getAllNotes() }
+                    )
+
+                    multipleCoroutine.awaitAll()
+
+                    noteList.addAll(notesFromServer)
+                    LogMe.i("NoteRepo", "Notes From Server Added")
+
+                    noteList.addAll(notesFromDatabase)
+                    LogMe.i("NoteRepo", "Notes From Database Added")
+
+                    /* > if we want to work like series or syncronous task
+                    LogMe.i("NoteRepo", "syncronous -> notes From Database started")
+                    val noteListFromDatabase = noteDao.getAllNotes()
+
+                    LogMe.i("NoteRepo", "syncronous -> notes From Server started")
+                    val noteListFromServer = RetrofitClient.getAPIInterface().getNotes()
+
+                    noteList.addAll(noteListFromDatabase)
+                    LogMe.i("NoteRepo", "syncronous > Notes From Database Added")
+                    noteList.addAll(noteListFromServer)
+                    LogMe.i("NoteRepo", "syncronous > Notes From Server Added")*/
+
+                } else {
+                    /** > With context is another type of async
+                     ** > Use to return the result of a single task */
+
+                    val noteListFromDatabase =
+                        withContext(Dispatchers.IO) { noteDao.getAllNotes() }
+                    noteList.addAll(noteListFromDatabase)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+
+        return noteList
+    }
+
+    suspend fun insert(note: Note) {
         noteDao.insertNote(note)
     }
 
@@ -31,10 +92,6 @@ class NoteRepository(context: Context) {
 
     fun deleteAllNotes() {
         DeleteAllNoteAsync(noteDao).execute()
-    }
-
-    fun getAllNotes(): List<Note> {
-        return noteDao.getAllNotes()
     }
 
     class InsertNoteAsync(val noteDao: NoteDao) : AsyncTask<Note?, Void, Void>() {
@@ -69,5 +126,4 @@ class NoteRepository(context: Context) {
             return null
         }
     }
-
 }

@@ -27,7 +27,7 @@
     <string name="are_you_sure">Are you sure?</string>
     <string name="text_yes">yes</string>
     <string name="title_activity_imagview">Imagview</string>
-    <string name="title_feature_one">Feature One</string>
+    <string name="title_feature_one">feature_one</string>
     <string name="title_activity_dynamic_delivery">Dynamic Delivery</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -47,4 +47,6 @@
     <string name="title_activity_coordinate_layout">CoordinateLayoutActivity</string>
     <string name="title_activity_crash_analytics">CrashAnalyticsActivity</string>
     <string name="title_activity_work_manager">WorkManagerActivity</string>
+    <string name="title_feature_two">feature_two</string>
+    <string name="title_featurethree">Feature Three</string>
 </resources>

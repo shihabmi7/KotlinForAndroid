@@ -7,7 +7,7 @@ import com.shihab.kotlintoday.feature.mvvm.model.Note
 interface NoteDao {
 
     @Insert
-    fun insertNote(note: Note)
+    suspend fun insertNote(note: Note)
 
     @Update
     fun updateNote(note: Note)
@@ -18,8 +18,7 @@ interface NoteDao {
     @Query("DELETE FROM note_table")
     fun deleteAllNotes()
 
-
     @Query("SELECT * FROM note_table ORDER BY priority desc")
-    fun getAllNotes(): List<Note>
+    suspend fun getAllNotes(): List<Note>
 
 }
