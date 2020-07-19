@@ -47,6 +47,6 @@
     <string name="title_activity_coordinate_layout">CoordinateLayoutActivity</string>
     <string name="title_activity_crash_analytics">CrashAnalyticsActivity</string>
     <string name="title_activity_work_manager">WorkManagerActivity</string>
-    <string name="title_feature_two">Feature Two</string>
+    <string name="title_feature_two">feature_two</string>
     <string name="title_featurethree">Feature Three</string>
 </resources>

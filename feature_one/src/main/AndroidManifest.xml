@@ -3,14 +3,14 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.shihab.feature_one">
 
-    <dist:module dist:title="@string/title_feature_one">
-
-        <dist:fusing dist:include="true" />
+    <dist:module
+        dist:title="@string/title_feature_one">
 
         <dist:delivery>
             <dist:on-demand />
         </dist:delivery>
 
+        <dist:fusing dist:include="true" />
     </dist:module>
 
     <application>
