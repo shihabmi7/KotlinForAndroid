@@ -3,32 +3,56 @@ package com.shihab.kotlintoday.feature.mvvm.viewmodel
 import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
-import androidx.databinding.ObservableField
-import androidx.lifecycle.LiveData
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.shihab.kotlintoday.feature.mvvm.model.Note
 import com.shihab.kotlintoday.feature.mvvm.repository.NoteRepository
 import com.shihab.kotlintoday.feature.mvvm.ui.AddNoteActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NoteViewModel(val context: Context) : ViewModel() {
 
-    var repository: NoteRepository
+    var repository: NoteRepository = NoteRepository(context)
     val note = Note()
+    private var notes = MutableLiveData<List<Note>>()
     val message = MutableLiveData<String>()
+    var isLoading = ObservableBoolean()
 
     init {
-        repository = NoteRepository(context)
-    }
-
-    fun insert(note: Note) {
-        repository.insert(note)
+       // getAllNotes()
     }
 
     fun saveNote() {
-        if (checkValidation(note)) {
-            repository.insert(note)
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                if (checkValidation(note)) {
+                    repository.insert(note)
+                    message.postValue("Successfully Inserted")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
+    }
+
+    fun getAllNotes() {
+        isLoading.set(true)
+        viewModelScope.launch(Dispatchers.IO) {
+            var mutableLiveData = mutableListOf<Note>()
+            mutableLiveData.addAll(repository.getAllNotes())
+            notes.postValue(mutableLiveData)
+        }
+    }
+
+    fun getNotes(): MutableLiveData<List<Note>> = notes
+
+    fun openAddNoteActivity() {
+        context.startActivity(Intent(context, AddNoteActivity::class.java))
     }
 
     private fun checkValidation(note: Note): Boolean {
@@ -63,20 +87,9 @@ class NoteViewModel(val context: Context) : ViewModel() {
 
     fun delete(note: Note) {
         repository.delete(note)
-
     }
 
     fun deleteAllNotes() {
         repository.deleteAllNotes()
-    }
-
-    fun getAllNotes(): LiveData<List<Note>> {
-        return repository.getAllNotes()
-    }
-
-    fun openAddNoteActivity() {
-
-        context.startActivity(Intent(context, AddNoteActivity::class.java))
-
     }
 }

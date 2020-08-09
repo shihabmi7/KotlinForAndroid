@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-kapt"
+apply plugin: "io.fabric"
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
@@ -20,6 +22,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
         }
     }
 
@@ -44,7 +49,7 @@ android {
         }
     }
 
-    dynamicFeatures = [":feature_one"]
+    dynamicFeatures = [":feature_one", ':feature_two', ':FeatureThree']
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -65,11 +70,6 @@ android {
     viewBinding {
         enabled = true
     }
-
-
-// To inline the bytecode built with JVM target 1.8 into
-// bytecode that is being built with JVM target 1.6. (e.g. navArgs)
-
 }
 
 dependencies {
@@ -80,23 +80,30 @@ dependencies {
     def co_rouritines = "1.2.1"
     def multidex_version = "2.0.1"
     def stetho = "1.5.1"
-    def play_core = "1.7.1"
+    def play_core = "1.7.3"
     def retrofit = "2.6.2"
-    def okHttpVersion = "3.11.0"
+    def okHttpVersion = "4.4.0"
     def material = "1.1.0"
-
+    def analytics = "17.3.0"
+    def crash_analytics = "2.10.1"
+    def work_version = "2.3.4"
+    def jUnit = "4.12"
+    def espresso = "3.2.0"
+    def test_runner = "1.2.0"
+    def material_dialog = "3.1.1"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation "com.google.android.material:material:$material"
+    implementation "androidx.multidex:multidex:$multidex_version"
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
     implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation("com.squareup.okhttp3:okhttp:4.4.0")
+    //implementation("com.squareup.okhttp3:okhttp:4.4.0")
 
     implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
@@ -105,20 +112,10 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
     implementation 'androidx.recyclerview:recyclerview:1.1.0-beta03'
 
-
-    implementation "androidx.multidex:multidex:$multidex_version"
-
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.1'
-
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
@@ -128,10 +125,13 @@ dependencies {
     // optional - RxJava support for Room
     implementation "androidx.room:room-rxjava2:$room_version"
 
+    // coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$co_rouritines"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$co_rouritines"
 
-    implementation 'com.afollestad.material-dialogs:core:3.1.1'
+    // material design
+    implementation "com.google.android.material:material:$material"
+    implementation "com.afollestad.material-dialogs:core:$material_dialog"
 
     //todo : should add for dynamic module delivery
     implementation "com.google.android.play:core:$play_core"
@@ -141,4 +141,17 @@ dependencies {
     implementation "com.facebook.stetho:stetho-okhttp3:$stetho"
     implementation 'io.michaelrocks:libphonenumber-android:8.12.0'
 
+    // Add the Firebase Crashlytics dependency.
+    implementation "com.google.firebase:firebase-analytics:$analytics"
+    implementation "com.crashlytics.sdk.android:crashlytics:$crash_analytics"
+
+    // (Java only)
+    implementation "androidx.work:work-runtime:$work_version"
+    // Kotlin + coroutines
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation "junit:junit:$jUnit"
+    androidTestImplementation "androidx.test:runner:$test_runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
 }

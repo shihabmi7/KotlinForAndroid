@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.dialog_fragment.SampleDialogFragment">
+    tools:context=".feature.navigation_fragment.SampleDialogFragment">
 
     <ImageView
         android:id="@+id/imageView"

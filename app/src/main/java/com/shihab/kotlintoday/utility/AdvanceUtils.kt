@@ -3,11 +3,30 @@ package com.shihab.kotlintoday.utility
 import android.app.Activity
 import android.content.Context
 import android.widget.Toast
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.regex.Pattern
+
+fun RecyclerView.setDivider(@DrawableRes drawableRes: Int) {
+    val divider = DividerItemDecoration(
+        this.context,
+        DividerItemDecoration.VERTICAL
+    )
+    val drawable = ContextCompat.getDrawable(
+        this.context,
+        drawableRes
+    )
+    drawable?.let {
+        divider.setDrawable(it)
+        addItemDecoration(divider)
+    }
+}
 
 fun Activity.showErrorMessage(context: Context, message: String) {
 
