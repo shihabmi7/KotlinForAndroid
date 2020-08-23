@@ -4,11 +4,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.shihab.kotlintoday.R
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,6 +20,12 @@ class HomeActivityTest {
 
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(HomeActivity::class.java)
+    private val fetchingIdlingResource = FetchingIdlingResource()
+
+    @Before
+    fun setup() {
+        IdlingRegistry.getInstance().register(fetchingIdlingResource)
+    }
 
     @Test
     fun test_isActivityInView() {
@@ -43,7 +51,7 @@ class HomeActivityTest {
         //activityScenarioRule.scenario.moveToState(Lifecycle.State.CREATED)
 
         /** back button press*/
-        pressBack()
+        //pressBack()
     }
 
 
