@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
+import com.shihab.kotlintoday.feature.apple_sign_in.AppleSignInActivity
 import com.shihab.kotlintoday.feature.coordinate_layout.CoordinateLayoutActivity
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
 import com.shihab.kotlintoday.feature.crashanalytics.CrashAnalyticsActivity
@@ -45,7 +46,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         CoordinateLayoutActivity::class.java,
         CrashAnalyticsActivity::class.java,
         WorkManagerActivity::class.java,
-        SpanTextActivity::class.java
+        SpanTextActivity::class.java,
+        AppleSignInActivity::class.java
     )
 
     var activiites_name = listOf(
@@ -62,7 +64,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Imageview Extension Function",
         "Dynamic Delivery: Feature One",
         "View Binding java", "Parcelable Activity", "Dialog Fragment With Navigation Graph"
-        , "Co-ordinate Layout", "Crash Analytics", "Work Manager", "Spannable Text"
+        , "Co-ordinate Layout", "Crash Analytics", "Work Manager", "Spannable Text", "Apple Sign In"
     )
 
     override fun onButtonClick(position: Int) {
