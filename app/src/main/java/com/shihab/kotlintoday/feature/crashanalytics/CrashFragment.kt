@@ -6,7 +6,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.crashlytics.android.Crashlytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.utility.LogMe
 import kotlinx.android.synthetic.main.fragment_crash_analytics.*
@@ -30,7 +30,7 @@ class CrashFragment : Fragment(R.layout.fragment_crash_analytics) {
         activity?.onBackPressedDispatcher?.addCallback(this, onBackPressedCallback)
 
         button_crash_one.setOnClickListener {
-            Crashlytics().crash()
+            FirebaseCrashlytics.getInstance().log("A Force Error Occured")
         }
 
         button_crash_two.setOnClickListener {
@@ -38,7 +38,7 @@ class CrashFragment : Fragment(R.layout.fragment_crash_analytics) {
             try {
                 LogMe.e("crash:", value)
             } catch (e: Exception) {
-                Crashlytics.log("Null Pointer")
+                FirebaseCrashlytics.getInstance().recordException(e)
             }
         }
 
