@@ -48,7 +48,7 @@ class AddNoteActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item?.itemId == R.id.action_save) {
             binding.viewModel?.saveNote()
         } else if (item?.itemId == android.R.id.home) {

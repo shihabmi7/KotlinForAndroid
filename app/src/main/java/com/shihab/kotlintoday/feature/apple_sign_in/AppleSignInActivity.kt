@@ -108,7 +108,7 @@ class AppleSignInActivity : AppCompatActivity() {
             if (webViewBundle == null) {
                 webView.loadUrl(url)
             } else {
-                webView.restoreState(webViewBundle)
+                webView.restoreState(webViewBundle!!)
             }
         } else {
             val summary = "<html><body><font color='red'>No Internet Connection</font></body></html>"
@@ -122,7 +122,7 @@ class AppleSignInActivity : AppCompatActivity() {
     private fun handleURL(url: String) {
         val uri = Uri.parse(url)
 
-        appleAccessToken = uri.getQueryParameter(APPLE_TOKEN_KEY)
+        appleAccessToken = uri.getQueryParameter(APPLE_TOKEN_KEY)!!
         LogMe.i("appleAccessToken",appleAccessToken)
     }
 
