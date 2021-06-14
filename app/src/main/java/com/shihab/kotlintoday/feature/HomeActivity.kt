@@ -20,6 +20,7 @@ import com.shihab.kotlintoday.feature.parcelable.ParcelableActivity
 import com.shihab.kotlintoday.feature.spannable_text.SpanTextActivity
 import com.shihab.kotlintoday.feature.viewBinding.ViewBindingActivity
 import com.shihab.kotlintoday.feature.workmanager.WorkManagerActivity
+import com.shihab.kotlintoday.feature.motion_layout.MotionLayoutActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
 
@@ -47,6 +48,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         CrashAnalyticsActivity::class.java,
         WorkManagerActivity::class.java,
         SpanTextActivity::class.java,
+        MotionLayoutActivity::class.java,
         AppleSignInActivity::class.java
     )
 
@@ -63,8 +65,10 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Co-routine",
         "Imageview Extension Function",
         "Dynamic Delivery: Feature One",
-        "View Binding java", "Parcelable Activity", "Dialog Fragment With Navigation Graph"
-        , "Co-ordinate Layout", "Crash Analytics", "Work Manager", "Spannable Text", "Apple Sign In"
+        "View Binding java", "Parcelable Activity", "Dialog Fragment With Navigation Graph",
+        "Co-ordinate Layout", "Crash Analytics", "Work Manager", "Spannable Text",
+        "Motion Layout",
+        "Apple Sign In",
     )
 
     override fun onButtonClick(position: Int) {

@@ -14,10 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".feature.motion_layout.MotionLayoutActivity"/>
         <activity
             android:name=".feature.apple_sign_in.AppleSignInActivity"
             android:label="@string/title_activity_apple_sign_in"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.spannable_text.SpanTextActivity"
             android:parentActivityName=".feature.HomeActivity" />
