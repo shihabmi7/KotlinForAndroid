@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.databinding.ActivityNoteBinding
@@ -52,11 +53,11 @@ class NoteActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.recyclerNotes.setHasFixedSize(true)
 
-        /*viewModel.getNotes().observe(this, Observer {
+        viewModel.getNotes().observe(this, {
             adapter = NoteAdapter(it)
             binding.recyclerNotes.adapter = adapter
             viewModel.isLoading.set(false)
-        })*/
+        })
 
         //getNotesCallOnMainThread(binding)
         //getNotesWithoutMVVM()

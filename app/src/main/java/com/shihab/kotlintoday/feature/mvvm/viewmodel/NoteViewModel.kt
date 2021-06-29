@@ -24,7 +24,7 @@ class NoteViewModel(val context: Context) : ViewModel() {
     var isLoading = ObservableBoolean()
 
     init {
-       // getAllNotes()
+        getAllNotes()
     }
 
     fun saveNote() {
@@ -40,7 +40,7 @@ class NoteViewModel(val context: Context) : ViewModel() {
         }
     }
 
-    fun getAllNotes() {
+    private fun getAllNotes() {
         isLoading.set(true)
         viewModelScope.launch(Dispatchers.IO) {
             var mutableLiveData = mutableListOf<Note>()
