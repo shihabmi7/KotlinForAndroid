@@ -1,4 +1,4 @@
-package com.shihab.kotlintoday.feature.crashanalytics
+package com.shihab.kotlintoday.feature.analytics
 
 import android.os.Bundle
 import android.view.View

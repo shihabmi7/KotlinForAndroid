@@ -32,7 +32,7 @@
             android:parentActivityName=".feature.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.crashanalytics.CrashAnalyticsActivity"
+            android:name=".feature.analytics.CrashAnalyticsActivity"
             android:label="@string/title_activity_crash_analytics"
             android:parentActivityName=".feature.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
