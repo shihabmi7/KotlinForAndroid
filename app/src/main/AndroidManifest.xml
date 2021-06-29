@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".feature.motion_layout.MotionLayoutActivity"/>
+        <activity android:name=".feature.user_interaction.UserInteractionActivity"></activity>
+        <activity android:name=".feature.motion_layout.MotionLayoutActivity" />
         <activity
             android:name=".feature.apple_sign_in.AppleSignInActivity"
             android:label="@string/title_activity_apple_sign_in"

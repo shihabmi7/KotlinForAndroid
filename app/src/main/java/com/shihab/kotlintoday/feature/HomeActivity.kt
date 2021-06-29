@@ -19,6 +19,7 @@ import com.shihab.kotlintoday.feature.mvvm.ui.NoteActivity
 import com.shihab.kotlintoday.feature.navigation_fragment.DialogFragmentWithNavigationActivity
 import com.shihab.kotlintoday.feature.parcelable.ParcelableActivity
 import com.shihab.kotlintoday.feature.spannable_text.SpanTextActivity
+import com.shihab.kotlintoday.feature.user_interaction.UserInteractionActivity
 import com.shihab.kotlintoday.feature.viewBinding.ViewBindingActivity
 import com.shihab.kotlintoday.feature.workmanager.WorkManagerActivity
 import com.shihab.kotlintoday.utility.AppUtils.ANALYTICS_KEY
@@ -31,6 +32,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
 
     var activiites = listOf(
         FirstActivity::class.java,
+        UserInteractionActivity::class.java,
         DataTypeWithCalculatorActivity::class.java,
         LoopActivity::class.java,
         ClassActivity::class.java,
@@ -54,8 +56,9 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         AppleSignInActivity::class.java
     )
 
-    var activiites_name = listOf(
+    var activites_name = listOf(
         "Activity Switchting",
+        "User Interaction",
         "DataTypeWithCalculatorActivity",
         "Looping Activity",
         "Class In Kotlin",
@@ -74,7 +77,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
     )
 
     override fun onButtonClick(position: Int) {
-        KotlinToday.getB2BAnalyticsManager(this).trackEvent(ANALYTICS_KEY, getMapData(activiites_name[position]))
+        KotlinToday.getB2BAnalyticsManager(this).trackEvent(ANALYTICS_KEY, getMapData(activites_name[position]))
         val i = Intent(this, activiites[position])
         startActivity(i)
     }
@@ -98,7 +101,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         recycler_content.adapter =
             ActivityNameAdapter(
                 applicationContext,
-                activiites_name,
+                activites_name,
                 this
             )
 
