@@ -104,7 +104,7 @@
         <activity
             android:name=".feature.NextActivity"
             android:label="@string/title_activity_next"
-            android:parentActivityName=".feature.HomeActivity"
+            android:parentActivityName=".feature.FirstActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.ConditionActivity"
