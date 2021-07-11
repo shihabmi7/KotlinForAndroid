@@ -17,6 +17,7 @@ import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
 import com.shihab.kotlintoday.feature.motion_layout.MotionLayoutActivity
 import com.shihab.kotlintoday.feature.mvvm.ui.NoteActivity
 import com.shihab.kotlintoday.feature.navigation_fragment.DialogFragmentWithNavigationActivity
+import com.shihab.kotlintoday.feature.paging.PagingActivity
 import com.shihab.kotlintoday.feature.parcelable.ParcelableActivity
 import com.shihab.kotlintoday.feature.spannable_text.SpanTextActivity
 import com.shihab.kotlintoday.feature.user_interaction.UserInteractionActivity
@@ -43,6 +44,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         NoteActivity::class.java,
         CoroutineActivity::class.java,
         ImageViewActivity::class.java,
+        PagingActivity::class.java,
 
         DynamicDeliveryActivity::class.java,
         ViewBindingActivity::class.java,
@@ -69,6 +71,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "MVVM",
         "Co-routine",
         "Imageview Extension Function",
+        "Paging 3.0 Example",
         "Dynamic Delivery: Feature One",
         "View Binding java", "Parcelable Activity", "Dialog Fragment With Navigation Graph",
         "Co-ordinate Layout", "Crash Analytics", "Work Manager", "Spannable Text",
