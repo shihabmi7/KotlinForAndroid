@@ -21,22 +21,17 @@ abstract class NoteDatabase : RoomDatabase() {
         fun getInstance(context: Context): NoteDatabase {
 
             if (instance == null) {
-
                 instance = Room.databaseBuilder(
                     context, NoteDatabase::class.java, "note_db"
                 ).addCallback(roomCallback).build()
-
             }
-            return instance as NoteDatabase
+            return instance!!
         }
 
         private val roomCallback = object : RoomDatabase.Callback() {
-
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
-
                 instance?.let { PopulateDbAsyncTask(it).execute() }
-
             }
         }
 
@@ -51,7 +46,7 @@ abstract class NoteDatabase : RoomDatabase() {
         }
 
         private fun setPredefinedDB() {
-            /*db.noteDao().insertNote(Note(1, "Wake Up", "wake up early and pray...", "1"))
+           /* db.noteDao().insertNote(Note(1, "Wake Up", "wake up early and pray...", "1"))
             db.noteDao().insertNote(
                 Note(
                     2,
@@ -63,8 +58,4 @@ abstract class NoteDatabase : RoomDatabase() {
             db.noteDao().insertNote(Note(3, "Make an Mvvm Demo", "with kotlin and rx java", "3"))*/
         }
     }
-
-    //https://www.youtube.com/watch?v=0cg09tlAAQ0&list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118&index=3
-    //https://proandroiddev.com/mvvm-with-kotlin-android-architecture-components-dagger-2-retrofit-and-rxandroid-1a4ebb38c699
-
 }

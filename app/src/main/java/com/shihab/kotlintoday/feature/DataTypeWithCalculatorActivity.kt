@@ -147,7 +147,7 @@ class DataTypeWithCalculatorActivity : AppCompatActivity() {
             return 0f
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         if (item!!.itemId == android.R.id.home) {
             onBackPressed()

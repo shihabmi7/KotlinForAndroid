@@ -4,7 +4,6 @@ import com.shihab.kotlintoday.model.Task
 
 class DataSource {
 
-
     companion object {
 
         fun getTaskList(): ArrayList<Task>? {

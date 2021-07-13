@@ -14,18 +14,46 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".feature.paging.PagingActivity"></activity>
+        <activity android:name=".feature.user_interaction.UserInteractionActivity" />
+        <activity android:name=".feature.motion_layout.MotionLayoutActivity" />
+        <activity
+            android:name=".feature.apple_sign_in.AppleSignInActivity"
+            android:label="@string/title_activity_apple_sign_in"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".feature.spannable_text.SpanTextActivity"
+            android:parentActivityName=".feature.HomeActivity" />
+        <activity
+            android:name=".feature.custom_spinner.CustomSpinnerActivity"
+            android:parentActivityName=".feature.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".feature.workmanager.WorkManagerActivity"
+            android:label="@string/title_activity_work_manager"
+            android:parentActivityName=".feature.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".feature.analytics.CrashAnalyticsActivity"
+            android:label="@string/title_activity_crash_analytics"
+            android:parentActivityName=".feature.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.coordinate_layout.CoordinateLayoutActivity"
             android:label="@string/title_activity_coordinate_layout"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.dialog_fragment.DialogFragmentWithNavigationActivity"
+            android:name=".feature.navigation_fragment.DialogFragmentWithNavigationActivity"
             android:label="@string/title_activity_dialog_fragment_acivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".feature.mvvm.ui.AddNoteActivity" />
+        <activity
+            android:name=".feature.mvvm.ui.AddNoteActivity"
+            android:parentActivityName=".feature.mvvm.ui.NoteActivity" />
         <activity android:name=".feature.parcelable.ReceiveParcelableAcitivty" />
         <activity android:name=".feature.parcelable.ParcelableActivity" />
-        <activity android:name=".feature.mvvm.ui.NoteActivity" />
+        <activity
+            android:name=".feature.mvvm.ui.NoteActivity"
+            android:parentActivityName=".feature.HomeActivity" />
         <activity
             android:name=".feature.viewBinding.ViewBindingActivity"
             android:parentActivityName=".feature.HomeActivity"
@@ -77,7 +105,7 @@
         <activity
             android:name=".feature.NextActivity"
             android:label="@string/title_activity_next"
-            android:parentActivityName=".feature.HomeActivity"
+            android:parentActivityName=".feature.FirstActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.ConditionActivity"

@@ -1,15 +1,13 @@
 package com.shihab.kotlintoday.rest
 
+import com.shihab.kotlintoday.feature.mvvm.model.Note
+import com.shihab.kotlintoday.feature.paging.RickAndMortyList
 import com.shihab.kotlintoday.model.Post
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
+import java.util.*
 
 interface IMyAPI {
     @get:GET("posts")
@@ -21,4 +19,13 @@ interface IMyAPI {
         @Field("email") email: String,
         @Field("password") pass: String
     ): Call<ResponseBody>
+
+    @GET("https://9cd57f79-7273-4069-8c74-d648a82453d9.mock.pstmn.io/getNotes")
+    suspend fun getNotes(): List<Note>
+
+    @GET("https://9cd57f79-7273-4069-8c74-d648a82453d9.mock.pstmn.io/getNotes")
+    fun getNotesRaw(): List<Note>
+
+    @GET("https://rickandmortyapi.com/api/character")
+    suspend fun getDataFromAPI(@Query("page") query: Int): RickAndMortyList
 }
