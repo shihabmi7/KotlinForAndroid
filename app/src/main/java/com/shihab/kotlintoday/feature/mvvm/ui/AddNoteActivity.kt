@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -15,8 +16,10 @@ import com.shihab.kotlintoday.feature.mvvm.viewmodel.ViewModelFactory
 
 class AddNoteActivity : AppCompatActivity() {
 
-    lateinit var viewModel: NoteViewModel
+    //lateinit var viewModel: NoteViewModel
     lateinit var binding: ActivityAddNoteBinding
+    val viewModel: NoteViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +32,11 @@ class AddNoteActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val factory =
+        /*val factory =
             ViewModelFactory(
                 NoteViewModel(this)
             )
-        viewModel = ViewModelProviders.of(this, factory).get(NoteViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, factory).get(NoteViewModel::class.java)*/
         binding.viewModel = viewModel
 
         viewModel.message.observe(this, Observer {
@@ -44,7 +47,7 @@ class AddNoteActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_add_note, menu);
+        menuInflater.inflate(R.menu.menu_add_note, menu)
         return true
     }
 

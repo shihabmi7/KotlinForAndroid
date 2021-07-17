@@ -10,14 +10,17 @@ import androidx.lifecycle.viewModelScope
 import com.shihab.kotlintoday.feature.mvvm.model.Note
 import com.shihab.kotlintoday.feature.mvvm.repository.NoteRepository
 import com.shihab.kotlintoday.feature.mvvm.ui.AddNoteActivity
+import com.shihab.kotlintoday.rest.ApiService
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class NoteViewModel(val context: Context) : ViewModel() {
+@HiltViewModel
+class NoteViewModel @Inject constructor(val context: Context, val apiService: ApiService) :
+    ViewModel() {
 
-    var repository: NoteRepository = NoteRepository(context)
+    var repository = NoteRepository(context, apiService)
     val note = Note()
     private var notes = MutableLiveData<List<Note>>()
     val message = MutableLiveData<String>()

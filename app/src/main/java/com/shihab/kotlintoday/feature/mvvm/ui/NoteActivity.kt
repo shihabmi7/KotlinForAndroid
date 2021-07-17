@@ -2,6 +2,7 @@ package com.shihab.kotlintoday.feature.mvvm.ui
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -15,13 +16,16 @@ import com.shihab.kotlintoday.feature.mvvm.viewmodel.ViewModelFactory
 import com.shihab.kotlintoday.rest.RetrofitClient
 import com.shihab.kotlintoday.utility.LogMe
 import com.shihab.kotlintoday.utility.ShowToast
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 
+@AndroidEntryPoint
 class NoteActivity : AppCompatActivity() {
 
     val TAG = NoteActivity::class.java.name
 
-    lateinit var viewModel: NoteViewModel
+    //lateinit var viewModel: NoteViewModel
+    val viewModel: NoteViewModel by viewModels()
     lateinit var adapter: NoteAdapter
     lateinit var binding: ActivityNoteBinding
 
@@ -44,11 +48,11 @@ class NoteActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        viewModel = ViewModelProviders.of(
+        /*viewModel = ViewModelProviders.of(
             this, ViewModelFactory(
                 NoteViewModel(this)
             )
-        ).get(NoteViewModel::class.java)
+        ).get(NoteViewModel::class.java)*/
 
         binding.viewModel = viewModel
         binding.recyclerNotes.setHasFixedSize(true)

@@ -5,12 +5,13 @@ import android.os.AsyncTask
 import com.shihab.kotlintoday.feature.mvvm.dao.NoteDao
 import com.shihab.kotlintoday.feature.mvvm.db.NoteDatabase
 import com.shihab.kotlintoday.feature.mvvm.model.Note
-import com.shihab.kotlintoday.rest.RetrofitClient
+import com.shihab.kotlintoday.rest.ApiService
 import com.shihab.kotlintoday.utility.Connectivity
 import com.shihab.kotlintoday.utility.LogMe
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
-class NoteRepository(val context: Context) {
+class NoteRepository(val context: Context, val apiInterface: ApiService) {
 
     var noteDao: NoteDao
 
@@ -31,13 +32,13 @@ class NoteRepository(val context: Context) {
 
                     LogMe.i("NoteRepo", "async-> notesFromServer started")
                     val notesFromServer =
-                        async { RetrofitClient.getAPIInterface().getNotes() }.await()
+                        async { apiInterface.getNotes() }.await()
 
                     LogMe.i("NoteRepo", "async-> notesFromDatabase started")
                     val notesFromDatabase = async { noteDao.getAllNotes() }.await()
 
                     val multipleCoroutine = listOf(
-                        async { RetrofitClient.getAPIInterface().getNotes() },
+                        async { apiInterface.getNotes() },
                         async { noteDao.getAllNotes() }
                     )
 
