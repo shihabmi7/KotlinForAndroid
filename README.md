@@ -15,14 +15,14 @@ Currently This Features are as follows
 -	Implicit Intent
 -	Material Dialog
 -	MVVM with Dagger: Hilt
--   Jetpack Paging 3.0
+- Jetpack Paging 3.0
 -	Co-routine
 -	Imageview Extension Function
 -	Dynamic Delivery: Feature One
 -	View Binding java
--   Parcelable Implementation
--   Firebase Analytics, Crashlytics, Dynamic delivery
--   Github Action (CI-CD)
--   Todo ( Viewpager 2.0, Jetpack Compose, Kotlin Flow) & More
+- Parcelable Implementation
+- Firebase Analytics, Crashlytics, Dynamic delivery
+- Github Action (CI-CD)
+- Todo ( Viewpager 2.0, Jetpack Compose, Kotlin Flow) & More
 
 Application is available in [Google Play Store](https://play.google.com/store/apps/details?id=com.shihab.kotlintoday).
