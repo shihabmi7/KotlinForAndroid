@@ -9,9 +9,8 @@ import com.shihab.kotlintoday.rest.ApiService
 import com.shihab.kotlintoday.utility.Connectivity
 import com.shihab.kotlintoday.utility.LogMe
 import kotlinx.coroutines.*
-import javax.inject.Inject
 
-class NoteRepository(val context: Context, val apiInterface: ApiService) {
+class NoteRepository(val context: Context, private val apiInterface: ApiService) {
 
     var noteDao: NoteDao
 
@@ -22,7 +21,7 @@ class NoteRepository(val context: Context, val apiInterface: ApiService) {
 
     suspend fun getAllNotes(): List<Note> {
 
-        var noteList = mutableListOf<Note>()
+        val noteList = mutableListOf<Note>()
 
         /** This try catch can handle Network issues inside coroutine*/
         try {

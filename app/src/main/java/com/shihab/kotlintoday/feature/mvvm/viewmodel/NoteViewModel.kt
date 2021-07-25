@@ -1,7 +1,6 @@
 package com.shihab.kotlintoday.feature.mvvm.viewmodel
 
 import android.content.Context
-import android.content.Intent
 import android.text.TextUtils
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shihab.kotlintoday.feature.mvvm.model.Note
 import com.shihab.kotlintoday.feature.mvvm.repository.NoteRepository
-import com.shihab.kotlintoday.feature.mvvm.ui.AddNoteActivity
 import com.shihab.kotlintoday.rest.ApiService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +22,7 @@ class NoteViewModel @Inject constructor(val context: Context, val apiService: Ap
     val note = Note()
     private var notes = MutableLiveData<List<Note>>()
     val message = MutableLiveData<String>()
+    val isAddNotesClicked = MutableLiveData<Boolean>()
     var isLoading = ObservableBoolean()
 
     init {
@@ -46,16 +45,17 @@ class NoteViewModel @Inject constructor(val context: Context, val apiService: Ap
     private fun getAllNotes() {
         isLoading.set(true)
         viewModelScope.launch(Dispatchers.IO) {
-            var mutableLiveData = mutableListOf<Note>()
+            val mutableLiveData = mutableListOf<Note>()
             mutableLiveData.addAll(repository.getAllNotes())
             notes.postValue(mutableLiveData)
+            isLoading.set(false)
         }
     }
 
     fun getNotes(): MutableLiveData<List<Note>> = notes
 
-    fun openAddNoteActivity() {
-        context.startActivity(Intent(context, AddNoteActivity::class.java))
+    fun addNotesClicked() {
+        isAddNotesClicked.value = true
     }
 
     private fun checkValidation(note: Note): Boolean {
