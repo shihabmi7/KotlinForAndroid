@@ -3,6 +3,7 @@ package com.shihab.kotlintoday.feature.module
 import android.app.Application
 import android.content.Context
 import com.shihab.kotlintoday.BuildConfig
+import com.shihab.kotlintoday.feature.mvvm.repository.NoteRepository
 import com.shihab.kotlintoday.rest.ApiService
 import dagger.Module
 import dagger.Provides
@@ -65,4 +66,10 @@ class AppModule {
     @Singleton
     @Provides
     fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideNoteRepository(context: Context, apiService: ApiService): NoteRepository {
+        return NoteRepository(context, apiService)
+    }
 }

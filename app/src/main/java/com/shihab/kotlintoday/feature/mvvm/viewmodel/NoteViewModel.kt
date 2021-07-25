@@ -1,6 +1,5 @@
 package com.shihab.kotlintoday.feature.mvvm.viewmodel
 
-import android.content.Context
 import android.text.TextUtils
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
@@ -8,17 +7,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shihab.kotlintoday.feature.mvvm.model.Note
 import com.shihab.kotlintoday.feature.mvvm.repository.NoteRepository
-import com.shihab.kotlintoday.rest.ApiService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NoteViewModel @Inject constructor(val context: Context, val apiService: ApiService) :
+class NoteViewModel @Inject constructor(private var repository: NoteRepository) :
     ViewModel() {
 
-    var repository = NoteRepository(context, apiService)
     val note = Note()
     private var notes = MutableLiveData<List<Note>>()
     val message = MutableLiveData<String>()
