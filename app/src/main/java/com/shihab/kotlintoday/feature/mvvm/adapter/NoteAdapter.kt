@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.feature.mvvm.model.Note
-import kotlinx.android.synthetic.main.item_adapter.view.*
 import kotlinx.android.synthetic.main.item_note.view.*
+import java.util.*
 
-class NoteAdapter(val notes: List<Note>) : Adapter<NoteAdapter.NoteHolder>() {
+class NoteAdapter() : Adapter<NoteAdapter.NoteHolder>() {
+
+
+    private val notes: MutableList<Note> = ArrayList()
 
     class NoteHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
         var title = itemview.text_view_title
@@ -19,18 +22,19 @@ class NoteAdapter(val notes: List<Note>) : Adapter<NoteAdapter.NoteHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder {
-
         val itemview =
             LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false)
         return NoteHolder(itemview)
     }
 
-    override fun getItemCount(): Int {
-        return notes.size
+    override fun getItemCount() = notes.size
+
+    fun addNotes(list: List<Note>) {
+        notes.addAll(list)
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
-
         val note = notes[position]
         holder.title.text = note.title
         holder.details.text = note.description

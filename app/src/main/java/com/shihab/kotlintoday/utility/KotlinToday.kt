@@ -8,14 +8,16 @@ import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.shihab.kotlintoday.feature.analytics.KotlinTodayAnalyticsManager
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class KotlinToday : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
         manager = SplitInstallManagerFactory.create(this)
         SplitCompat.install(this)
-        Stetho.initializeWithDefaults(this);
+        Stetho.initializeWithDefaults(this)
     }
 
     companion object {

@@ -1,27 +1,26 @@
 package com.shihab.kotlintoday.feature.mvvm.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.databinding.ActivityNoteBinding
 import com.shihab.kotlintoday.feature.mvvm.adapter.NoteAdapter
 import com.shihab.kotlintoday.feature.mvvm.model.Note
 import com.shihab.kotlintoday.feature.mvvm.viewmodel.NoteViewModel
-import com.shihab.kotlintoday.feature.mvvm.viewmodel.ViewModelFactory
 import com.shihab.kotlintoday.rest.RetrofitClient
 import com.shihab.kotlintoday.utility.LogMe
 import com.shihab.kotlintoday.utility.ShowToast
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 
+@AndroidEntryPoint
 class NoteActivity : AppCompatActivity() {
-
     val TAG = NoteActivity::class.java.name
-
-    lateinit var viewModel: NoteViewModel
+    val viewModel: NoteViewModel by viewModels()
     lateinit var adapter: NoteAdapter
     lateinit var binding: ActivityNoteBinding
 
@@ -31,7 +30,6 @@ class NoteActivity : AppCompatActivity() {
     lateinit var noteList: List<Note>
     val globalScope = CoroutineScope(Dispatchers.Main)
     val ioScope = CoroutineScope(Dispatchers.IO)
-
     val networkJob = ioScope.launch {
 
     }
@@ -44,24 +42,21 @@ class NoteActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        viewModel = ViewModelProviders.of(
-            this, ViewModelFactory(
-                NoteViewModel(this)
-            )
-        ).get(NoteViewModel::class.java)
-
         binding.viewModel = viewModel
-        binding.recyclerNotes.setHasFixedSize(true)
+        adapter = NoteAdapter()
+        binding.recyclerNotes.adapter = adapter
 
         viewModel.getNotes().observe(this, {
-            adapter = NoteAdapter(it)
-            binding.recyclerNotes.adapter = adapter
-            viewModel.isLoading.set(false)
+            adapter.addNotes(it)
+        })
+
+        viewModel.isAddNotesClicked.observe(this, {
+            openAddNoteActivity()
         })
 
         //getNotesCallOnMainThread(binding)
         //getNotesWithoutMVVM()
-        handleACoroutineLifecycle()
+        //handleACoroutineLifecycle()
 
     }
 
@@ -78,10 +73,9 @@ class NoteActivity : AppCompatActivity() {
         }
     }
 
-    private fun setRecyclerAdapter(
-        response: List<Note>
-    ) {
-        adapter = NoteAdapter(response)
+    private fun setRecyclerAdapter(response: List<Note>) {
+        adapter = NoteAdapter()
+        adapter.addNotes(response)
         binding.recyclerNotes.adapter = adapter
     }
 
@@ -123,13 +117,14 @@ class NoteActivity : AppCompatActivity() {
 
             viewModel.isLoading.set(true)
             val list = async { getNotesFromServer() }.await()
-            adapter = NoteAdapter(list)
+            adapter = NoteAdapter()
+            adapter.addNotes(list)
             binding.recyclerNotes.adapter = adapter
             viewModel.isLoading.set(false)
         }
     }
 
-    fun handleACoroutineLifecycle() {
+    private fun handleACoroutineLifecycle() {
         job = GlobalScope.launch(Dispatchers.IO) {
             listFromServer = async { RetrofitClient.getAPIInterface().getNotes() }.await()
         }
@@ -140,13 +135,17 @@ class NoteActivity : AppCompatActivity() {
         }
     }
 
+    private fun openAddNoteActivity() {
+        startActivity(Intent(this, AddNoteActivity::class.java))
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        job!!.cancel()
+        //job.cancel()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item?.itemId == android.R.id.home) {
+        if (item.itemId == android.R.id.home) {
             finish()
         }
         return super.onOptionsItemSelected(item)

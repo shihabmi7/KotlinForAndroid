@@ -10,11 +10,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
 
     private var instance: Retrofit? = null
-    private var iMyAPI: IMyAPI? = null
+    private var apiService: ApiService? = null
 
     private val instancevalue: Retrofit
         get() {
-
             if (instance == null) {
                 instance = Retrofit.Builder().baseUrl("https://jsonplaceholder.typicode.com/")
                     .addConverterFactory(GsonConverterFactory.create())
@@ -25,14 +24,14 @@ object RetrofitClient {
             return instance!!
         }
 
-    fun getAPIInterface(): IMyAPI {
-        if (iMyAPI == null) {
-            iMyAPI = instancevalue.create(IMyAPI::class.java)
+    fun getAPIInterface(): ApiService {
+        if (apiService == null) {
+            apiService = instancevalue.create(ApiService::class.java)
         }
-        return iMyAPI!!
+        return apiService!!
     }
 
-    private fun okHttpClient(): OkHttpClient? {
+    private fun okHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor()) // used if network off OR on
             .addNetworkInterceptor(StethoInterceptor())
@@ -40,15 +39,7 @@ object RetrofitClient {
     }
 
     private fun httpLoggingInterceptor(): HttpLoggingInterceptor {
-//        val httpLoggingInterceptor =
-//            HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { message ->
-//                LogMe.d("Retrofit", "log: http log: $message")
-//            })
-
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
-
-        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        return httpLoggingInterceptor
+        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
 }

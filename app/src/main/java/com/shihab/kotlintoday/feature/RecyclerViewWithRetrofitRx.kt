@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.adapter.PostAdapter
 import com.shihab.kotlintoday.model.Post
-import com.shihab.kotlintoday.rest.IMyAPI
+import com.shihab.kotlintoday.rest.ApiService
 import com.shihab.kotlintoday.rest.RetrofitClient
 import com.shihab.kotlintoday.utility.setDivider
 import com.shihab.kotlintoday.utility.showSuccessMessage
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.content_recycler_view_with_retrofit_rx.*
 
 class RecyclerViewWithRetromfitRx : AppCompatActivity() {
 
-    internal lateinit var myApi: IMyAPI
+    internal lateinit var myApi: ApiService
     private lateinit var compositeDisposable: CompositeDisposable
 
     var TAG: String = "RecyclerWithRetrofitRx"

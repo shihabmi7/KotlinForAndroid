@@ -3,9 +3,9 @@ package com.shihab.kotlintoday.feature.paging
 import android.net.Uri
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.shihab.kotlintoday.rest.IMyAPI
+import com.shihab.kotlintoday.rest.ApiService
 
-class CharacterPagingSource(val apiService: IMyAPI): PagingSource<Int, CharacterData>() {
+class CharacterPagingSource(val apiService: ApiService): PagingSource<Int, CharacterData>() {
 
     override fun getRefreshKey(state: PagingState<Int, CharacterData>): Int? {
         return state.anchorPosition
