@@ -2,6 +2,7 @@ package com.shihab.kotlintoday.feature.mvvm.viewmodel
 
 import android.text.TextUtils
 import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,22 +17,20 @@ import javax.inject.Inject
 class NoteViewModel @Inject constructor(private var repository: NoteRepository) :
     ViewModel() {
 
-    val note = Note()
-    private var notes = MutableLiveData<List<Note>>()
-    val message = MutableLiveData<String>()
-    val isAddNotesClicked = MutableLiveData<Boolean>()
+    private var _notes = MutableLiveData<List<Note>>()
+    private val _isAddNotesClicked = MutableLiveData<Boolean>()
+    val isAddNotesClicked: LiveData<Boolean> = _isAddNotesClicked
+    val _message = MutableLiveData<String>()
+    val message: LiveData<String> = _message
     var isLoading = ObservableBoolean()
-
-    init {
-        getAllNotes()
-    }
+    val note = Note()
 
     fun saveNote() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 if (checkValidation(note)) {
                     repository.insert(note)
-                    message.postValue("Successfully Inserted")
+                    _message.postValue("Successfully Inserted")
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -39,20 +38,20 @@ class NoteViewModel @Inject constructor(private var repository: NoteRepository) 
         }
     }
 
-    private fun getAllNotes() {
+    fun getAllNotes() {
         isLoading.set(true)
         viewModelScope.launch(Dispatchers.IO) {
             val mutableLiveData = mutableListOf<Note>()
             mutableLiveData.addAll(repository.getAllNotes())
-            notes.postValue(mutableLiveData)
+            _notes.postValue(mutableLiveData)
             isLoading.set(false)
         }
     }
 
-    fun getNotes(): MutableLiveData<List<Note>> = notes
+    fun getNotes(): LiveData<List<Note>> = _notes
 
     fun addNotesClicked() {
-        isAddNotesClicked.value = true
+        _isAddNotesClicked.value = true
     }
 
     private fun checkValidation(note: Note): Boolean {
@@ -60,19 +59,19 @@ class NoteViewModel @Inject constructor(private var repository: NoteRepository) 
         var value = true
 
         if (TextUtils.isEmpty(note.title)) {
-            message.postValue("Title is empty...")
+            _message.postValue("Title is empty...")
             value = false
             return value
         }
 
         if (TextUtils.isEmpty(note.description)) {
-            message.postValue("Description is empty...")
+            _message.postValue("Description is empty...")
             value = false
             return value
         }
 
         if (TextUtils.isEmpty(note.priority)) {
-            message.postValue("priority is empty...")
+            _message.postValue("priority is empty...")
             value = false
             return value
         }

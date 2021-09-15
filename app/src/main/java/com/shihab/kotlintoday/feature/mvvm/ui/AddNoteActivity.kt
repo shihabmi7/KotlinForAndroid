@@ -32,6 +32,7 @@ class AddNoteActivity : AppCompatActivity() {
             if (it.isNotEmpty())
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -44,6 +45,7 @@ class AddNoteActivity : AppCompatActivity() {
             binding.viewModel?.saveNote()
         } else if (item.itemId == android.R.id.home) {
             finish()
+            return true
         }
         return super.onOptionsItemSelected(item)
     }

@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.databinding.ActivityNoteBinding
 import com.shihab.kotlintoday.feature.mvvm.adapter.NoteAdapter
@@ -19,17 +20,17 @@ import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class NoteActivity : AppCompatActivity() {
-    val TAG = NoteActivity::class.java.name
-    val viewModel: NoteViewModel by viewModels()
     lateinit var adapter: NoteAdapter
     lateinit var binding: ActivityNoteBinding
-
     lateinit var job: Job
-    var listFromServer: List<Note> = mutableListOf()
     lateinit var noteListFromDB: List<Note>
     lateinit var noteList: List<Note>
+    val TAG = NoteActivity::class.java.name
+    val viewModel: NoteViewModel by viewModels()
+    var listFromServer: List<Note> = mutableListOf()
     val globalScope = CoroutineScope(Dispatchers.Main)
     val ioScope = CoroutineScope(Dispatchers.IO)
+
     val networkJob = ioScope.launch {
 
     }
@@ -54,6 +55,9 @@ class NoteActivity : AppCompatActivity() {
             openAddNoteActivity()
         })
 
+        lifecycleScope.launchWhenCreated {
+            viewModel.getAllNotes()
+        }
         //getNotesCallOnMainThread(binding)
         //getNotesWithoutMVVM()
         //handleACoroutineLifecycle()

@@ -11,7 +11,10 @@ import com.shihab.kotlintoday.utility.LogMe
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
-class NoteRepository @Inject constructor(val context: Context, private val apiInterface: ApiService) {
+class NoteRepository @Inject constructor(
+    val context: Context,
+    private val apiInterface: ApiService
+) {
 
     var noteDao: NoteDao
 
@@ -37,17 +40,12 @@ class NoteRepository @Inject constructor(val context: Context, private val apiIn
                     LogMe.i("NoteRepo", "async-> notesFromDatabase started")
                     val notesFromDatabase = async { noteDao.getAllNotes() }.await()
 
-                    val multipleCoroutine = listOf(
-                        async { apiInterface.getNotes() },
-                        async { noteDao.getAllNotes() }
-                    )
+                    noteList.addAll(notesFromServer + notesFromDatabase)
 
-                    multipleCoroutine.awaitAll()
-
-                    noteList.addAll(notesFromServer)
+                    //noteList.addAll(notesFromServer)
                     LogMe.i("NoteRepo", "Notes From Server Added")
 
-                    noteList.addAll(notesFromDatabase)
+                    //noteList.addAll(notesFromDatabase)
                     LogMe.i("NoteRepo", "Notes From Database Added")
 
                     /* > if we want to work like series or syncronous task
