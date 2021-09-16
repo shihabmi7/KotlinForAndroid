@@ -6,8 +6,11 @@ import com.shihab.kotlintoday.feature.mvvm.model.Note
 @Dao
 interface NoteDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote(note: Note)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllNote(notes: List<Note>)
 
     @Update
     fun updateNote(note: Note)

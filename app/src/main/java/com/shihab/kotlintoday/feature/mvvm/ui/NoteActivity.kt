@@ -3,10 +3,13 @@ package com.shihab.kotlintoday.feature.mvvm.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.databinding.ActivityNoteBinding
 import com.shihab.kotlintoday.feature.mvvm.adapter.NoteAdapter
@@ -17,6 +20,7 @@ import com.shihab.kotlintoday.utility.LogMe
 import com.shihab.kotlintoday.utility.ShowToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+
 
 @AndroidEntryPoint
 class NoteActivity : AppCompatActivity() {
@@ -55,9 +59,28 @@ class NoteActivity : AppCompatActivity() {
             openAddNoteActivity()
         })
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenResumed {
             viewModel.getAllNotes()
         }
+
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                viewModel.delete(adapter.getNote(viewHolder.absoluteAdapterPosition))
+                Toast.makeText(viewHolder.itemView.context, "Note deleted", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }).attachToRecyclerView(binding.recyclerNotes)
         //getNotesCallOnMainThread(binding)
         //getNotesWithoutMVVM()
         //handleACoroutineLifecycle()
