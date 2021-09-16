@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.databinding.ActivityAddNoteBinding
 import com.shihab.kotlintoday.feature.mvvm.viewmodel.NoteViewModel
+import com.shihab.kotlintoday.utility.AppUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +30,7 @@ class AddNoteActivity : AppCompatActivity() {
         binding.viewModel = viewModel
 
         viewModel.message.observe(this, {
+            AppUtils.hideKeyboard(this)
             if (it.isNotEmpty())
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })

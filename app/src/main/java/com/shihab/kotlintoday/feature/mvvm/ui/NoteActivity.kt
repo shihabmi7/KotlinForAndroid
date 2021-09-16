@@ -59,10 +59,6 @@ class NoteActivity : AppCompatActivity() {
             openAddNoteActivity()
         })
 
-        lifecycleScope.launchWhenResumed {
-            viewModel.getAllNotes()
-        }
-
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT
@@ -87,6 +83,12 @@ class NoteActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launchWhenResumed {
+            viewModel.getAllNotes()
+        }
+    }
     private fun getNotesCallOnMainThread() {
         /**  Call Network on MainThread : Crash Expected*/
         try {
