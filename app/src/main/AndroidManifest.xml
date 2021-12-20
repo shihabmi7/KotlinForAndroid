@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".feature.flow.KotlinFlowActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".feature.paging.PagingActivity"></activity>
         <activity android:name=".feature.user_interaction.UserInteractionActivity" />
         <activity android:name=".feature.motion_layout.MotionLayoutActivity" />

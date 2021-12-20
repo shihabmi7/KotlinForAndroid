@@ -14,6 +14,7 @@ import com.shihab.kotlintoday.feature.coordinate_layout.CoordinateLayoutActivity
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
 import com.shihab.kotlintoday.feature.custom_spinner.CustomSpinnerActivity
 import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
+import com.shihab.kotlintoday.feature.flow.KotlinFlowActivity
 import com.shihab.kotlintoday.feature.motion_layout.MotionLayoutActivity
 import com.shihab.kotlintoday.feature.mvvm.ui.NoteActivity
 import com.shihab.kotlintoday.feature.navigation_fragment.DialogFragmentWithNavigationActivity
@@ -55,7 +56,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         WorkManagerActivity::class.java,
         SpanTextActivity::class.java,
         MotionLayoutActivity::class.java,
-        AppleSignInActivity::class.java
+        AppleSignInActivity::class.java,
+        KotlinFlowActivity::class.java
     )
 
     var activites_name = listOf(
@@ -77,6 +79,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Co-ordinate Layout", "Crash Analytics", "Work Manager", "Spannable Text",
         "Motion Layout",
         "Apple Sign In",
+        "Flow"
     )
 
     override fun onButtonClick(position: Int) {
