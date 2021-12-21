@@ -57,7 +57,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         SpanTextActivity::class.java,
         MotionLayoutActivity::class.java,
         AppleSignInActivity::class.java,
-        KotlinFlowActivity::class.java
+        NoteActivity::class.java
     )
 
     var activites_name = listOf(
@@ -83,12 +83,16 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
     )
 
     override fun onButtonClick(position: Int) {
-        KotlinToday.getB2BAnalyticsManager(this).trackEvent(ANALYTICS_KEY, getMapData(activites_name[position]))
+        KotlinToday.getB2BAnalyticsManager(this)
+            .trackEvent(ANALYTICS_KEY, getMapData(activites_name[position]))
         val i = Intent(this, activiites[position])
+        if (activites_name[position] == "Flow") {
+            i.putExtra("isKotlinFlow", true)
+        }
         startActivity(i)
     }
 
-    private fun getMapData(data:String): Map<String, String> {
+    private fun getMapData(data: String): Map<String, String> {
         val map = HashMap<String, String>()
         map[data] = data
         return map

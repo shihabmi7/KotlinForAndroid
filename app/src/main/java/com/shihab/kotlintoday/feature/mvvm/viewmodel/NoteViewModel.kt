@@ -50,6 +50,9 @@ class NoteViewModel @Inject constructor(private val repository: NoteRepository) 
         }
     }
 
+    fun getAllNotesFromFlow() = repository.getNotesFromDBByFlow()
+
+
     fun addNotesClicked() {
         _isAddNotesClicked.value = true
     }

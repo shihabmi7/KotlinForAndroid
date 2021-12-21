@@ -11,6 +11,7 @@ import com.shihab.kotlintoday.utility.LogMe
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -89,6 +90,10 @@ class NoteRepository @Inject constructor(
             noteList.addAll(notesFromDatabase);
         }
         return noteList
+    }
+
+    fun getNotesFromDBByFlow() : Flow<List<Note>> {
+        return noteDao.getAllNotesWithFlow()
     }
 
     suspend fun insert(note: Note) {
