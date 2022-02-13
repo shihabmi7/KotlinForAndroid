@@ -57,10 +57,11 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         SpanTextActivity::class.java,
         MotionLayoutActivity::class.java,
         AppleSignInActivity::class.java,
-        NoteActivity::class.java
+        NoteActivity::class.java,
+        KotlinFlowActivity::class.java
     )
 
-    var activites_name = listOf(
+    private var activites_name = listOf(
         "Activity Switchting",
         "User Interaction",
         "DataTypeWithCalculatorActivity",
@@ -79,7 +80,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Co-ordinate Layout", "Crash Analytics", "Work Manager", "Spannable Text",
         "Motion Layout",
         "Apple Sign In",
-        "Flow"
+        "Flow with MVVM",
+        "Flow Testing"
     )
 
     override fun onButtonClick(position: Int) {

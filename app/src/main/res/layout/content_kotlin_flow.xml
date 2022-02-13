@@ -11,26 +11,92 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
-        <Button
-            android:id="@+id/buttonStateFlow"
+        <TextView
+            android:id="@+id/txtLiveData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="114dp"
-            android:text="State Flow"
+            android:layout_marginTop="48dp"
+            android:text="Android Today"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/buttonLiveData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Live Data"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtLiveData" />
+
+
+        <TextView
+            android:id="@+id/txtState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Android Today"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buttonLiveData" />
+
+        <Button
+            android:id="@+id/buttonStateFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="State Flow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtState" />
+
+
+        <TextView
+            android:id="@+id/txtShared"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="Android Today"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buttonStateFlow" />
+
+
+        <Button
             android:id="@+id/buttonSharedFlow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="16dp"
             android:text="Shared Flow"
             app:layout_constraintEnd_toEndOf="@id/buttonStateFlow"
             app:layout_constraintStart_toStartOf="@+id/buttonStateFlow"
-            app:layout_constraintTop_toBottomOf="@+id/buttonStateFlow" />
+            app:layout_constraintTop_toBottomOf="@+id/txtShared" />
+
+        <TextView
+            android:id="@+id/txtNormalFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="Android Today"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buttonSharedFlow" />
+
+
+        <Button
+            android:id="@+id/buttonNormalFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Normal Flow"
+            app:layout_constraintEnd_toEndOf="@id/buttonStateFlow"
+            app:layout_constraintStart_toStartOf="@+id/buttonStateFlow"
+            app:layout_constraintTop_toBottomOf="@+id/txtNormalFlow" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -20,6 +20,8 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_kotlin_flow" />
+    <include
+        android:id="@+id/main"
+        layout="@layout/content_kotlin_flow" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
