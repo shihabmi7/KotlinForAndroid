@@ -20,6 +20,7 @@ import com.shihab.kotlintoday.utility.LogMe
 import com.shihab.kotlintoday.utility.ShowToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 
 
 @AndroidEntryPoint
@@ -34,6 +35,7 @@ class NoteActivity : AppCompatActivity() {
     var listFromServer: List<Note> = mutableListOf()
     val globalScope = CoroutineScope(Dispatchers.Main)
     val ioScope = CoroutineScope(Dispatchers.IO)
+    var kotlinFlow = false;
 
     val networkJob = ioScope.launch {
 
@@ -51,9 +53,23 @@ class NoteActivity : AppCompatActivity() {
         adapter = NoteAdapter()
         binding.recyclerNotes.adapter = adapter
 
-        viewModel.getNotes().observe(this, {
-            adapter.addNotes(it)
-        })
+        kotlinFlow = intent.getBooleanExtra("isKotlinFlow", false)
+
+        if (kotlinFlow) {
+            title = "Kotlin Flow"
+            lifecycleScope.launchWhenCreated {
+                //data comes from DB only
+                viewModel.getAllNotesFromFlow().collect {
+                    adapter.addNotes(it)
+                }
+            }
+        } else {
+            title = "MVVM"
+            // data comes from both db and network server
+            viewModel.getNotes().observe(this, {
+                adapter.addNotes(it)
+            })
+        }
 
         viewModel.isAddNotesClicked.observe(this, {
             openAddNoteActivity()
@@ -86,9 +102,13 @@ class NoteActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         lifecycleScope.launchWhenResumed {
-            viewModel.getAllNotes()
+            if (!kotlinFlow) {
+                // called when it's not using kotlin flow
+                viewModel.getAllNotes()
+            }
         }
     }
+
     private fun getNotesCallOnMainThread() {
         /**  Call Network on MainThread : Crash Expected*/
         try {

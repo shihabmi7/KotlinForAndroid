@@ -12,10 +12,11 @@
         <entry key="..\:/Android_Studio_Projects/KotlinToday/app/src/main/res/layout/activity_user_interaction.xml" value="0.3380208333333333" />
         <entry key="..\:/Android_Studio_Projects/KotlinToday/app/src/main/res/layout/layout_custom_toast.xml" value="0.3380208333333333" />
         <entry key="..\:/Android_Studio_Projects/KotlinToday/app/src/main/res/menu/menu_add_note.xml" value="0.3380208333333333" />
+        <entry key="app/src/main/res/layout/activity_kotlin_flow.xml" value="0.24537037037037038" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
