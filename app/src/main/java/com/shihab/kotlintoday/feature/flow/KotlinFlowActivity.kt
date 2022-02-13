@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.shihab.kotlintoday.databinding.ActivityKotlinFlowBinding
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 
 class KotlinFlowActivity : AppCompatActivity() {
@@ -45,18 +46,21 @@ class KotlinFlowActivity : AppCompatActivity() {
             binding.main.txtLiveData.text = it
         }
 
-        lifecycleScope.launchWhenStarted {
+
+        lifecycleScope.launchWhenCreated {
             /**   State Flow
             - we can map, filter in flow operator
             - testing capability is good as it's under coroutine
             -  It's a Hot flows that mean it emits though no collector is there
             - triggers again when configuration is changes ex. rotation, language change
+            - should used launchWhen created as it's state holder
              */
             viewModel.stateFlow.collectLatest {
                 binding.main.txtState.text = it
             }
+        }
 
-
+        lifecycleScope.launchWhenStarted {
             /** Shared Flow
              * One time emition
              * Not hold the state
