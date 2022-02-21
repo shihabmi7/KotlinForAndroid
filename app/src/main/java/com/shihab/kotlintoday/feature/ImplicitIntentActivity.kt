@@ -22,8 +22,8 @@ class ImplicitIntentActivity : AppCompatActivity() {
 
         share_button.setOnClickListener {
 
-            var message = editText_share.text.toString()
-            var title = "Implicit intent"
+            val message = editText_share.text.toString()
+            val title = "Implicit intent"
             var intent = Intent()
 
             intent.action = Intent.ACTION_SEND

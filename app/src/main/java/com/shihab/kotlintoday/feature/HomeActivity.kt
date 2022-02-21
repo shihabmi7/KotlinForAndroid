@@ -2,14 +2,17 @@ package com.shihab.kotlintoday.feature
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.feature.analytics.CrashAnalyticsActivity
 import com.shihab.kotlintoday.feature.apple_sign_in.AppleSignInActivity
+import com.shihab.kotlintoday.feature.broadcast.InternetConnectivityActivity
 import com.shihab.kotlintoday.feature.coordinate_layout.CoordinateLayoutActivity
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
 import com.shihab.kotlintoday.feature.custom_spinner.CustomSpinnerActivity
@@ -25,6 +28,7 @@ import com.shihab.kotlintoday.feature.user_interaction.UserInteractionActivity
 import com.shihab.kotlintoday.feature.viewBinding.ViewBindingActivity
 import com.shihab.kotlintoday.feature.workmanager.WorkManagerActivity
 import com.shihab.kotlintoday.utility.AppUtils.ANALYTICS_KEY
+import com.shihab.kotlintoday.utility.ConnectionLiveData
 import com.shihab.kotlintoday.utility.KotlinToday
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
@@ -58,7 +62,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         MotionLayoutActivity::class.java,
         AppleSignInActivity::class.java,
         NoteActivity::class.java,
-        KotlinFlowActivity::class.java
+        KotlinFlowActivity::class.java,
+        InternetConnectivityActivity::class.java
     )
 
     private var activites_name = listOf(
@@ -81,7 +86,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Motion Layout",
         "Apple Sign In",
         "Flow with MVVM",
-        "Flow Testing"
+        "Flow Testing", "Internet Connectivity"
     )
 
     override fun onButtonClick(position: Int) {
@@ -118,6 +123,14 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
             )
 
         recycler_content.setHasFixedSize(true)
+
+        ConnectionLiveData(this).observe(this) {
+            if (it) {
+                Toast.makeText(this, "Internet is Connected", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Internet not Connected!!!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

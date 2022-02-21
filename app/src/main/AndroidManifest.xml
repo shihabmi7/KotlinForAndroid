@@ -15,12 +15,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".feature.broadcast.InternetConnectivityActivity"
+            android:label="@string/internet_connection"
             android:parentActivityName=".feature.HomeActivity"
-            android:label="@string/flow_details"
-            android:name=".feature.flow.KotlinFlowActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".feature.paging.PagingActivity"/>
+        <activity
+            android:name=".feature.flow.KotlinFlowActivity"
+            android:label="@string/flow_details"
+            android:parentActivityName=".feature.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".feature.paging.PagingActivity" />
         <activity android:name=".feature.user_interaction.UserInteractionActivity" />
         <activity android:name=".feature.motion_layout.MotionLayoutActivity" />
         <activity
