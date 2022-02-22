@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.feature.analytics.CrashAnalyticsActivity
 import com.shihab.kotlintoday.feature.apple_sign_in.AppleSignInActivity
+import com.shihab.kotlintoday.feature.broadcast.BroadCastActivity
 import com.shihab.kotlintoday.feature.broadcast.InternetConnectivityActivity
 import com.shihab.kotlintoday.feature.coordinate_layout.CoordinateLayoutActivity
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
@@ -63,7 +64,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         AppleSignInActivity::class.java,
         NoteActivity::class.java,
         KotlinFlowActivity::class.java,
-        InternetConnectivityActivity::class.java
+        InternetConnectivityActivity::class.java,
+        BroadCastActivity::class.java
     )
 
     private var activites_name = listOf(
@@ -86,7 +88,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Motion Layout",
         "Apple Sign In",
         "Flow with MVVM",
-        "Flow Testing", "Internet Connectivity"
+        "Flow Testing", "Internet Connectivity",
+        "Broadcast Activity"
     )
 
     override fun onButtonClick(position: Int) {

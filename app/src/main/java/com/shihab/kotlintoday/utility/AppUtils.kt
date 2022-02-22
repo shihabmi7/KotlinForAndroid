@@ -19,6 +19,7 @@ import java.util.regex.Pattern
 object AppUtils {
 
     const val ANALYTICS_KEY = "KotlinTodayAnalytics"
+    const val EXPLICIT_BROADCAST_ACTION = "com.shihab.kotlintoday.explicit_intent"
 
     fun generateRandomID(): String {
         return UUID.randomUUID().toString()

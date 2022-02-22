@@ -14,12 +14,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <!--        Set the android:exported attribute to “false”
+        in the receiver tag in the manifest restricts the application from receiving broadcasts from other applications.-->
+        <receiver
+            android:name=".feature.broadcast.KotlinTodayReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.shihab.kotlintoday.explicit_intent" />
+            </intent-filter>
+
+        </receiver>
+
+        <activity
+            android:name=".feature.broadcast.BroadCastActivity"
+            android:exported="false" />
         <activity
             android:name=".feature.broadcast.InternetConnectivityActivity"
             android:label="@string/internet_connection"
             android:parentActivityName=".feature.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".feature.flow.KotlinFlowActivity"
             android:label="@string/flow_details"
