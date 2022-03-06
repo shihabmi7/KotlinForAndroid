@@ -15,7 +15,7 @@ class ReceiveParcelableAcitivty : AppCompatActivity() {
         setContentView(bind.root)
 
         intent?.let {
-            var person = intent.extras.getParcelable(PERSON) as Person
+            val person:Person = intent.extras?.getParcelable<Person>(PERSON) as Person
             bind.textViewData.text = " Data Receive: $person"
         }
 

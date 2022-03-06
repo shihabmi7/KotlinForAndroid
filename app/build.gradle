@@ -2,18 +2,19 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-kapt"
-apply plugin: "io.fabric"
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.shihab.kotlintoday"
         minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 5
-        versionName "1.0.5"
+        targetSdkVersion 30
+        versionCode 6
+        versionName "1.0.6"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -70,37 +71,47 @@ android {
     viewBinding {
         enabled = true
     }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
+
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    def lifecycle_version = "2.1.0"
-    def room_version = "2.2.0"
+    def lifecycle_version = "2.2.0"
+    def room_version = "2.3.0"
     def co_rouritines = "1.2.1"
     def multidex_version = "2.0.1"
     def stetho = "1.5.1"
     def play_core = "1.7.3"
-    def retrofit = "2.6.2"
+    def retrofit = "2.9.0"
     def okHttpVersion = "4.4.0"
-    def material = "1.1.0"
-    def analytics = "17.3.0"
-    def crash_analytics = "2.10.1"
+    def material = "1.3.0"
+    def analytics = "19.0.0"
+    def crash_analytics = "18.1.0"
     def work_version = "2.3.4"
     def jUnit = "4.12"
     def espresso = "3.2.0"
     def test_runner = "1.2.0"
     def material_dialog = "3.1.1"
+    def constraint_layout = "2.0.4"
+    def paging = "3.0.0"
+    def hilt_version = '2.37'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
     implementation "com.google.android.material:material:$material"
     implementation "androidx.multidex:multidex:$multidex_version"
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava3:$retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
     implementation 'com.squareup.picasso:picasso:2.71828'
     //implementation("com.squareup.okhttp3:okhttp:4.4.0")
@@ -108,22 +119,23 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
 
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta03'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.2.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
 
+    kapt "org.xerial:sqlite-jdbc:3.34.0"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
     // optional - RxJava support for Room
-    implementation "androidx.room:room-rxjava2:$room_version"
+    implementation "androidx.room:room-rxjava3:$room_version"
 
     // coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$co_rouritines"
@@ -143,16 +155,21 @@ dependencies {
 
     // Add the Firebase Crashlytics dependency.
     implementation "com.google.firebase:firebase-analytics:$analytics"
-    implementation "com.crashlytics.sdk.android:crashlytics:$crash_analytics"
+    implementation "com.google.firebase:firebase-crashlytics:$crash_analytics"
 
     // (Java only)
     implementation "androidx.work:work-runtime:$work_version"
     // Kotlin + coroutines
     implementation "androidx.work:work-runtime-ktx:$work_version"
 
+    implementation "androidx.paging:paging-runtime:$paging"
+
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation "junit:junit:$jUnit"
     androidTestImplementation "androidx.test:runner:$test_runner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
-    androidTestImplementation "androidx.test.ext:junit-ktx:1.1.1"
+    androidTestImplementation "androidx.test.ext:junit-ktx:1.1.2"
 }

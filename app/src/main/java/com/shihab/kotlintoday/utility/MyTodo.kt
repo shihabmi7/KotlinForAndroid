@@ -1,14 +1,16 @@
 package com.shihab.kotlintoday.utility
 
-//todo
-// workmanager : working now
+// todo
+// workmanager : working now : DONE
 // mvvm swipe delete animation, edit notes
-// Dagger with MVVB
-// Pagging
+// Dagger HILT with MVVB : Done
+// Paging 3.0 : DONE
 // type script
 // CICL
 // testing..Unit test
 // mockito.
+// Flow
+// Extend LiveData : https://developer.android.com/topic/libraries/architecture/livedata#extend_livedata
 
 // Recycler
 //https://medium.com/better-programming/android-recyclerview-with-beautiful-animations-5e9b34dbb0fa
@@ -18,8 +20,6 @@ package com.shihab.kotlintoday.utility
 
 // stetho : Done
 // retrofit : Done
-
-
 
 /*fun showPriceCheckDialog(oldPrice: Int, newPrice: Int?) {
     val ft = fragmentManager?.beginTransaction()!!

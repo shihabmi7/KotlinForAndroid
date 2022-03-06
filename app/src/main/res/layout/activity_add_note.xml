@@ -16,7 +16,6 @@
         android:layout_height="match_parent"
         tools:context=".feature.mvvm.ui.AddNoteActivity">
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/il_title"
             android:layout_width="0dp"
@@ -34,7 +33,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/il_description"
             android:layout_width="match_parent"
@@ -51,7 +49,6 @@
                 android:text="@={viewModel.note.description}" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/il_priority"

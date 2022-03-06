@@ -14,8 +14,42 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".feature.spannable_text.SpanTextActivity"
-            android:parentActivityName=".feature.HomeActivity"/>
+
+        <!--        Set the android:exported attribute to “false”
+        in the receiver tag in the manifest restricts the application from receiving broadcasts from other applications.-->
+        <receiver
+            android:name=".feature.broadcast.KotlinTodayReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.shihab.kotlintoday.explicit_intent" />
+            </intent-filter>
+
+        </receiver>
+
+        <activity
+            android:name=".feature.broadcast.BroadCastActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.broadcast.InternetConnectivityActivity"
+            android:label="@string/internet_connection"
+            android:parentActivityName=".feature.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".feature.flow.KotlinFlowActivity"
+            android:label="@string/flow_details"
+            android:parentActivityName=".feature.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".feature.paging.PagingActivity" />
+        <activity android:name=".feature.user_interaction.UserInteractionActivity" />
+        <activity android:name=".feature.motion_layout.MotionLayoutActivity" />
+        <activity
+            android:name=".feature.apple_sign_in.AppleSignInActivity"
+            android:label="@string/title_activity_apple_sign_in"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".feature.spannable_text.SpanTextActivity"
+            android:parentActivityName=".feature.HomeActivity" />
         <activity
             android:name=".feature.custom_spinner.CustomSpinnerActivity"
             android:parentActivityName=".feature.HomeActivity"
@@ -26,7 +60,7 @@
             android:parentActivityName=".feature.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.crashanalytics.CrashAnalyticsActivity"
+            android:name=".feature.analytics.CrashAnalyticsActivity"
             android:label="@string/title_activity_crash_analytics"
             android:parentActivityName=".feature.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -97,7 +131,7 @@
         <activity
             android:name=".feature.NextActivity"
             android:label="@string/title_activity_next"
-            android:parentActivityName=".feature.HomeActivity"
+            android:parentActivityName=".feature.FirstActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".feature.ConditionActivity"

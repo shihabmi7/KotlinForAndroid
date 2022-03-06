@@ -23,7 +23,7 @@ class MoodAdapter(context: Context, professionList: List<ReqDocsItem>) : ArrayAd
         val view = recycledView
                 ?: LayoutInflater.from(context).inflate(R.layout.item_spinner_profession, parent, false)
 
-        view.tv_mood.text = currentItem.name
+        view.tv_mood.text = currentItem!!.name
         return view
     }
 }

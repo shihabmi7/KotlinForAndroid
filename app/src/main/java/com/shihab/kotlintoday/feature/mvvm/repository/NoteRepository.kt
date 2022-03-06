@@ -5,12 +5,20 @@ import android.os.AsyncTask
 import com.shihab.kotlintoday.feature.mvvm.dao.NoteDao
 import com.shihab.kotlintoday.feature.mvvm.db.NoteDatabase
 import com.shihab.kotlintoday.feature.mvvm.model.Note
-import com.shihab.kotlintoday.rest.RetrofitClient
+import com.shihab.kotlintoday.rest.ApiService
 import com.shihab.kotlintoday.utility.Connectivity
 import com.shihab.kotlintoday.utility.LogMe
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class NoteRepository(val context: Context) {
+class NoteRepository @Inject constructor(
+    val context: Context,
+    private val apiInterface: ApiService
+) {
 
     var noteDao: NoteDao
 
@@ -21,7 +29,7 @@ class NoteRepository(val context: Context) {
 
     suspend fun getAllNotes(): List<Note> {
 
-        var noteList = mutableListOf<Note>()
+        val noteList = mutableListOf<Note>()
 
         /** This try catch can handle Network issues inside coroutine*/
         try {
@@ -31,23 +39,20 @@ class NoteRepository(val context: Context) {
 
                     LogMe.i("NoteRepo", "async-> notesFromServer started")
                     val notesFromServer =
-                        async { RetrofitClient.getAPIInterface().getNotes() }.await()
+                        async { apiInterface.getNotes() }.await()
+
+                    withContext(Dispatchers.IO){
+                        noteDao.insertAllNote(notesFromServer)
+                    }
 
                     LogMe.i("NoteRepo", "async-> notesFromDatabase started")
                     val notesFromDatabase = async { noteDao.getAllNotes() }.await()
 
-                    val multipleCoroutine = listOf(
-                        async { RetrofitClient.getAPIInterface().getNotes() },
-                        async { noteDao.getAllNotes() }
-                    )
-
-                    multipleCoroutine.awaitAll()
-
-                    noteList.addAll(notesFromServer)
-                    LogMe.i("NoteRepo", "Notes From Server Added")
-
+                    //noteList.addAll(notesFromServer + notesFromDatabase)
                     noteList.addAll(notesFromDatabase)
-                    LogMe.i("NoteRepo", "Notes From Database Added")
+
+                    //noteList.addAll(notesFromServer)
+                    LogMe.i("NoteRepo", "Notes From Server + Database Added")
 
                     /* > if we want to work like series or syncronous task
                     LogMe.i("NoteRepo", "syncronous -> notes From Database started")
@@ -74,56 +79,42 @@ class NoteRepository(val context: Context) {
             e.printStackTrace()
         }
 
-
         return noteList
+    }
+
+    suspend fun getNotesFromDB(): List<Note> {
+        val noteList = mutableListOf<Note>()
+        coroutineScope {
+            val notesFromDatabase =
+                withContext(Dispatchers.Default) { noteDao.getAllNotes() }
+            noteList.addAll(notesFromDatabase);
+        }
+        return noteList
+    }
+
+    fun getNotesFromDBByFlow() : Flow<List<Note>> {
+        return noteDao.getAllNotesWithFlow()
     }
 
     suspend fun insert(note: Note) {
         noteDao.insertNote(note)
     }
 
-    fun update(note: Note) {
-        UpdateNoteAsync(noteDao).execute(note)
-    }
-
-    fun delete(note: Note) {
-        DeleteNoteAsync(noteDao).execute(note)
-    }
-
-    fun deleteAllNotes() {
-        DeleteAllNoteAsync(noteDao).execute()
-    }
-
-    class InsertNoteAsync(val noteDao: NoteDao) : AsyncTask<Note?, Void, Void>() {
-
-        override fun doInBackground(vararg params: Note?): Void? {
-            LogMe.i("note", "" + params[0]!!)
-            //noteDao.insertNote(params[0]!!)
-            return null
+    suspend fun update(note: Note) {
+        coroutineScope {
+            noteDao.updateNote(note)
         }
     }
 
-    class UpdateNoteAsync(val noteDao: NoteDao) : AsyncTask<Note?, Void, Void>() {
-
-        override fun doInBackground(vararg params: Note?): Void? {
-            noteDao.updateNote(params[0]!!)
-            return null
+    suspend fun delete(note: Note) {
+        coroutineScope {
+            noteDao.delete(note)
         }
     }
 
-    class DeleteNoteAsync(val noteDao: NoteDao) : AsyncTask<Note?, Void, Void>() {
-
-        override fun doInBackground(vararg params: Note?): Void? {
-            noteDao.delete(params[0]!!)
-            return null
-        }
-    }
-
-    class DeleteAllNoteAsync(val noteDao: NoteDao) : AsyncTask<Void, Void, Void>() {
-
-        override fun doInBackground(vararg params: Void?): Void? {
+    suspend fun deleteAllNotes() {
+        coroutineScope {
             noteDao.deleteAllNotes()
-            return null
         }
     }
 }

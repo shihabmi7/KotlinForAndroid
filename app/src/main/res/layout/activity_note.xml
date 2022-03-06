@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
-            android:onClick="@{()-> viewModel.openAddNoteActivity()}"
+            android:onClick="@{()-> viewModel.addNotesClicked()}"
             android:src="@drawable/ic_add_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
