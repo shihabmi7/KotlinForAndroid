@@ -3,8 +3,12 @@ package com.shihab.kotlintoday.feature
 import com.shihab.kotlintoday.feature.iface.IPersonInfo
 import com.shihab.kotlintoday.feature.iface.ISessionProvider
 
-open class Person(val _firstnName: String = "shihab", val secondName: String = "uddin") : IPersonInfo,ISessionProvider{
+// use open keyword when other class want to inherit this class
+open class Person( val _firstnName: String = "shihab",  val secondName: String = "uddin") :
+    IPersonInfo, ISessionProvider {
 
+    private lateinit var age : Integer
+    private lateinit var petName : String
 
     /**  we can define value here
     //
@@ -16,16 +20,13 @@ open class Person(val _firstnName: String = "shihab", val secondName: String = "
         set(value) {
             field = " My nick name is $value"
         }
-        get() {
-            return field
-        }
 
     init {
         /** Acts as constructor */
         println("init 1 $_firstnName $secondName")
     }
 
-       constructor() : this("Shihab", "Uddin") {
+    constructor() : this("Shihab", "Uddin") {
 
         /** if constructor is not defined this secondary constructor called.*/
         println("secondary constructor $_firstnName $secondName")

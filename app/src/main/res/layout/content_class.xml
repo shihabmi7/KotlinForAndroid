@@ -8,14 +8,45 @@
     tools:context=".feature.ClassActivity"
     tools:showIn="@layout/activity_class">
 
-
     <TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:text="Sample Text" />
+
+    <Button
+        android:id="@+id/buttonLazy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="289dp"
+        android:text="Lazy Test"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCompanion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview" />
+
+    <Button
+        android:id="@+id/buttonCompanion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Companion"
+        app:layout_constraintBottom_toTopOf="@+id/buttonsSetterGetterTest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonsSetterGetterTest" />
+
+    <Button
+        android:id="@+id/buttonsSetterGetterTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Setter Getter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCompanion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
