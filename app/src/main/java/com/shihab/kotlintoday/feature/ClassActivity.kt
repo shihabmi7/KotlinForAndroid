@@ -24,10 +24,10 @@ class ClassActivity : AppCompatActivity() {
     private val petName: String by lazy { " My Pet Name is Tom" }
     private lateinit var classOwnerName: String
     lateinit var message: String
-
-     private val myFirstPetName: String
+    lateinit var person: Person
+    private val myFirstPetName: String
         get() {
-            return  "My first pet name is Bingo"
+            return "My first pet name is Bingo"
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,25 +41,7 @@ class ClassActivity : AppCompatActivity() {
 
         }
 
-        /**  Person class has interface implementation*/
-        val person = Person()
-
-        // it called setter everytime
-        person.nickname = " tube light"
-
-        //textview.text = person._firstnName + person.secondName +person.nickname
-
-        // textview.text = person. fullName()
-        textview.text = person.giveFullName(person)
-
-
-        val personOne = Person()
-
-        if (person === personOne) {
-            Log.d("Person ", "Person is equal")
-        } else {
-            Log.d("Person ", "Person is not equal")
-        }
+        textview.text = "Your name is "
 
         buttonLazy.setOnClickListener {
             Snackbar.make(it, petName, Snackbar.LENGTH_LONG)
@@ -77,6 +59,39 @@ class ClassActivity : AppCompatActivity() {
             Snackbar.make(it, myFirstPetName, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
+        buttonScope.setOnClickListener {
+            checkScopeFunction()
+        }
+
     }
 
+    private fun checkScopeFunction() {
+        person = Person()
+
+        person.let {
+            it.firstName = "Shihab"
+            it.secondName = "Uddin"
+            message = it.fullName()
+            Log.d("Let: ", it.fullName())
+        }
+
+        person = person.apply {
+            this.firstName = "Kotlin"
+            this.secondName = "is Boss"
+            this.nickname = "Just Raw"
+            message += "\n" + this.fullName();
+            Log.d("Apply: ", this.fullName())
+        }
+
+        person = person.also {
+            it.firstName = "Android "
+            it.secondName = "is Also Boss"
+            it.nickname = "Just Raw"
+            message += "\n" + it.fullName() + " " + it.nickname
+            Log.d("Also: ", it.fullName() + it.nickname)
+        }
+
+        textview.text = message
+    }
 }

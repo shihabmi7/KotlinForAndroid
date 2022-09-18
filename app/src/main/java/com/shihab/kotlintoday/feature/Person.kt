@@ -4,11 +4,11 @@ import com.shihab.kotlintoday.feature.iface.IPersonInfo
 import com.shihab.kotlintoday.feature.iface.ISessionProvider
 
 // use open keyword when other class want to inherit this class
-open class Person( val _firstnName: String = "shihab",  val secondName: String = "uddin") :
+open class Person(var firstName: String?, var secondName: String?) :
     IPersonInfo, ISessionProvider {
 
-    private lateinit var age : Integer
-    private lateinit var petName : String
+    private lateinit var age: Integer
+    private lateinit var petName: String
 
     /**  we can define value here
     //
@@ -23,27 +23,25 @@ open class Person( val _firstnName: String = "shihab",  val secondName: String =
 
     init {
         /** Acts as constructor */
-        println("init 1 $_firstnName $secondName")
+        println("init 1 $firstName $secondName")
     }
 
-    constructor() : this("Shihab", "Uddin") {
+    constructor() : this(null, null) {
 
         /** if constructor is not defined this secondary constructor called.*/
-        println("secondary constructor $_firstnName $secondName")
+        println("secondary constructor $firstName $secondName")
 
     }
 
     init {
         /** as many init / constructor you may called*/
-        println("init 2 $_firstnName $secondName")
+        println("init 2 $firstName $secondName")
     }
 
 
     internal fun fullName(): String {
 
-        val nicknames = nickname ?: " no nickname"
-
-        return _firstnName + secondName + nicknames
+        return "$firstName $secondName"
     }
 
     override val providerInfo: String
