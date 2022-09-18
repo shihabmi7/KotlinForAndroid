@@ -1,7 +1,6 @@
 package com.shihab.kotlintoday.feature
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.shihab.kotlintoday.R
@@ -25,6 +24,8 @@ class ClassActivity : AppCompatActivity() {
     private lateinit var classOwnerName: String
     lateinit var message: String
     lateinit var person: Person
+    lateinit var adam: Person
+    lateinit var ibrahim: Person
     private val myFirstPetName: String
         get() {
             return "My first pet name is Bingo"
@@ -68,28 +69,36 @@ class ClassActivity : AppCompatActivity() {
 
     private fun checkScopeFunction() {
         person = Person()
+        message = ""
+
+        adam = person.apply {
+            firstName = "Adam Apply on"
+            secondName = "Hawa"
+            message += "\n" + this.fullName();
+        }
+
+        ibrahim = person.also {
+            it.firstName = "Ibrahim Also"
+            it.secondName = "Ismail"
+            message += "\n" + it.fullName()
+        }
 
         person.let {
-            it.firstName = "Shihab"
-            it.secondName = "Uddin"
-            message = it.fullName()
-            Log.d("Let: ", it.fullName())
+            it.firstName = "let Shihab is"
+            it.secondName = "human"
+            message += "\n" + it.fullName()
         }
 
-        person = person.apply {
-            this.firstName = "Kotlin"
-            this.secondName = "is Boss"
-            this.nickname = "Just Raw"
-            message += "\n" + this.fullName();
-            Log.d("Apply: ", this.fullName())
+        person.run {
+            firstName = "Android "
+            secondName = "is run so Fast"
+            message += "\n" + fullName() + " " + nickname
         }
 
-        person = person.also {
-            it.firstName = "Android "
-            it.secondName = "is Also Boss"
-            it.nickname = "Just Raw"
-            message += "\n" + it.fullName() + " " + it.nickname
-            Log.d("Also: ", it.fullName() + it.nickname)
+        with(person) {
+            firstName = "All is an Example "
+            secondName = "with scope!"
+            message += "\n" + fullName()
         }
 
         textview.text = message
