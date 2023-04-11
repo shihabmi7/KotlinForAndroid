@@ -53,4 +53,6 @@
     <string name="sign_in_with_apple">Sign in with Apple</string>
     <string name="loading">Loading</string>
     <string name="click_here_to_start_animation">Click Here to start animation!</string>
+    <string name="flow_details">Flow Details</string>
+    <string name="internet_connection">Internet Connectivity</string>
 </resources>

@@ -10,8 +10,7 @@ import com.shihab.kotlintoday.feature.mvvm.model.Note
 import kotlinx.android.synthetic.main.item_note.view.*
 import java.util.*
 
-class NoteAdapter() : Adapter<NoteAdapter.NoteHolder>() {
-
+class NoteAdapter : Adapter<NoteAdapter.NoteHolder>() {
 
     private val notes: MutableList<Note> = ArrayList()
 
@@ -30,8 +29,13 @@ class NoteAdapter() : Adapter<NoteAdapter.NoteHolder>() {
     override fun getItemCount() = notes.size
 
     fun addNotes(list: List<Note>) {
+        notes.clear()
         notes.addAll(list)
         notifyDataSetChanged()
+    }
+
+    fun getNote(position: Int): Note {
+        return notes[position]
     }
 
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {

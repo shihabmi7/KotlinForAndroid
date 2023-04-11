@@ -2,18 +2,23 @@ package com.shihab.kotlintoday.feature
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.feature.analytics.CrashAnalyticsActivity
 import com.shihab.kotlintoday.feature.apple_sign_in.AppleSignInActivity
+import com.shihab.kotlintoday.feature.broadcast.BroadCastActivity
+import com.shihab.kotlintoday.feature.broadcast.InternetConnectivityActivity
 import com.shihab.kotlintoday.feature.coordinate_layout.CoordinateLayoutActivity
 import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
 import com.shihab.kotlintoday.feature.custom_spinner.CustomSpinnerActivity
 import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
+import com.shihab.kotlintoday.feature.flow.KotlinFlowActivity
 import com.shihab.kotlintoday.feature.motion_layout.MotionLayoutActivity
 import com.shihab.kotlintoday.feature.mvvm.ui.NoteActivity
 import com.shihab.kotlintoday.feature.navigation_fragment.DialogFragmentWithNavigationActivity
@@ -24,6 +29,7 @@ import com.shihab.kotlintoday.feature.user_interaction.UserInteractionActivity
 import com.shihab.kotlintoday.feature.viewBinding.ViewBindingActivity
 import com.shihab.kotlintoday.feature.workmanager.WorkManagerActivity
 import com.shihab.kotlintoday.utility.AppUtils.ANALYTICS_KEY
+import com.shihab.kotlintoday.utility.ConnectionLiveData
 import com.shihab.kotlintoday.utility.KotlinToday
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
@@ -55,10 +61,14 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         WorkManagerActivity::class.java,
         SpanTextActivity::class.java,
         MotionLayoutActivity::class.java,
-        AppleSignInActivity::class.java
+        AppleSignInActivity::class.java,
+        NoteActivity::class.java,
+        KotlinFlowActivity::class.java,
+        InternetConnectivityActivity::class.java,
+        BroadCastActivity::class.java
     )
 
-    var activites_name = listOf(
+    private var activites_name = listOf(
         "Activity Switchting",
         "User Interaction",
         "DataTypeWithCalculatorActivity",
@@ -77,15 +87,22 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Co-ordinate Layout", "Crash Analytics", "Work Manager", "Spannable Text",
         "Motion Layout",
         "Apple Sign In",
+        "Flow with MVVM",
+        "Flow Testing", "Internet Connectivity",
+        "Broadcast Activity"
     )
 
     override fun onButtonClick(position: Int) {
-        KotlinToday.getB2BAnalyticsManager(this).trackEvent(ANALYTICS_KEY, getMapData(activites_name[position]))
+        KotlinToday.getB2BAnalyticsManager(this)
+            .trackEvent(ANALYTICS_KEY, getMapData(activites_name[position]))
         val i = Intent(this, activiites[position])
+        if (activites_name[position] == "Flow") {
+            i.putExtra("isKotlinFlow", true)
+        }
         startActivity(i)
     }
 
-    private fun getMapData(data:String): Map<String, String> {
+    private fun getMapData(data: String): Map<String, String> {
         val map = HashMap<String, String>()
         map[data] = data
         return map
@@ -109,6 +126,14 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
             )
 
         recycler_content.setHasFixedSize(true)
+
+        ConnectionLiveData(this).observe(this) {
+            if (it) {
+                Toast.makeText(this, "Internet is Connected", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Internet not Connected!!!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

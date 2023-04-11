@@ -3,9 +3,13 @@ package com.shihab.kotlintoday.feature.mvvm.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.databinding.ActivityNoteBinding
 import com.shihab.kotlintoday.feature.mvvm.adapter.NoteAdapter
@@ -16,20 +20,23 @@ import com.shihab.kotlintoday.utility.LogMe
 import com.shihab.kotlintoday.utility.ShowToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
+
 
 @AndroidEntryPoint
 class NoteActivity : AppCompatActivity() {
-    val TAG = NoteActivity::class.java.name
-    val viewModel: NoteViewModel by viewModels()
     lateinit var adapter: NoteAdapter
     lateinit var binding: ActivityNoteBinding
-
     lateinit var job: Job
-    var listFromServer: List<Note> = mutableListOf()
     lateinit var noteListFromDB: List<Note>
     lateinit var noteList: List<Note>
+    val TAG = NoteActivity::class.java.name
+    val viewModel: NoteViewModel by viewModels()
+    var listFromServer: List<Note> = mutableListOf()
     val globalScope = CoroutineScope(Dispatchers.Main)
     val ioScope = CoroutineScope(Dispatchers.IO)
+    var kotlinFlow = false;
+
     val networkJob = ioScope.launch {
 
     }
@@ -46,18 +53,60 @@ class NoteActivity : AppCompatActivity() {
         adapter = NoteAdapter()
         binding.recyclerNotes.adapter = adapter
 
-        viewModel.getNotes().observe(this, {
-            adapter.addNotes(it)
-        })
+        kotlinFlow = intent.getBooleanExtra("isKotlinFlow", false)
+
+        if (kotlinFlow) {
+            title = "Kotlin Flow"
+            lifecycleScope.launchWhenCreated {
+                //data comes from DB only
+                viewModel.getAllNotesFromFlow().collect {
+                    adapter.addNotes(it)
+                }
+            }
+        } else {
+            title = "MVVM"
+            // data comes from both db and network server
+            viewModel.getNotes().observe(this, {
+                adapter.addNotes(it)
+            })
+        }
 
         viewModel.isAddNotesClicked.observe(this, {
             openAddNoteActivity()
         })
 
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                viewModel.delete(adapter.getNote(viewHolder.absoluteAdapterPosition))
+                Toast.makeText(viewHolder.itemView.context, "Note deleted", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }).attachToRecyclerView(binding.recyclerNotes)
         //getNotesCallOnMainThread(binding)
         //getNotesWithoutMVVM()
         //handleACoroutineLifecycle()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launchWhenResumed {
+            if (!kotlinFlow) {
+                // called when it's not using kotlin flow
+                viewModel.getAllNotes()
+            }
+        }
     }
 
     private fun getNotesCallOnMainThread() {
