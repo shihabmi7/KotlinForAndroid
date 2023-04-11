@@ -1,5 +1,6 @@
 package com.shihab.kotlintoday.feature.mvvm.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.shihab.kotlintoday.feature.mvvm.model.Note
 import kotlinx.coroutines.flow.Flow
@@ -28,4 +29,6 @@ interface NoteDao {
     @Query("SELECT * FROM note_table ORDER BY priority desc")
     fun getAllNotesWithFlow(): Flow<List<Note>>
 
+    @Query("SELECT * FROM note_table ORDER BY priority desc")
+    fun getAllNotesWithLiveData(): LiveData<List<Note>>
 }
