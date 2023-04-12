@@ -18,5 +18,7 @@
 /captures
 .externalNativeBuild
 .cxx
-certificates/
+certificates/firebase-app-distribution-key.json
+certificates/kotlintoday.jks
+certificates/playstore-app-distribution-key.json
 fastlane/.env.secret
