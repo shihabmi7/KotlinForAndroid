@@ -21,22 +21,6 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
-### increment_version_code_in_project_gradle
-
-```sh
-[bundle exec] fastlane increment_version_code_in_project_gradle
-```
-
-Responsible for fetching version code from play console and incrementing version code.
-
-### build
-
-```sh
-[bundle exec] fastlane build
-```
-
-Build the .aab file
-
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
