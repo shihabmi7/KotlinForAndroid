@@ -14,7 +14,8 @@
     </dist:module>
 
     <application>
-        <activity android:name="com.shihab.feature_two.FeatureTwoActivity">
+        <activity android:name="com.shihab.feature_two.FeatureTwoActivity"
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity" />

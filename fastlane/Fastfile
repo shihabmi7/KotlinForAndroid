@@ -1,0 +1,99 @@
+fastlane_require "dotenv"
+
+PACKAGE_NAME = "com.shihab.kotlintoday"
+FIREBASE_APP_ID = "1:958068448777:android:a48b5eb599d4be871d22d8"
+KEYSTORE_PATH = nil
+FIREBASE_KEY_PATH = nil
+PLAYSTORE_KEY_PATH = nil
+BUNDLE_FILE_PATH = nil
+UPDATED_VERSION_CODE = nil
+
+before_all do
+  Dotenv.overload ".env.secret"
+  KEYSTORE_PATH = Dir.pwd + "/../certificates/kotlintoday.jks"
+  FIREBASE_KEY_PATH = Dir.pwd + "/../certificates/firebase-app-distribution-key.json"
+  PLAYSTORE_KEY_PATH = Dir.pwd + "/../certificates/playstore-app-distribution-key.json"
+  BUNDLE_FILE_PATH = Dir.pwd + "/../app/outputs/bundle/release/app-release.aab"
+end
+
+lane :build_and_distribute do
+  increment_version_code_in_project_gradle()
+#   run_unit_tests()
+  build()
+  distribute_to_firebase()
+  distribute_playstore()
+end
+
+desc "Responsible for fetching version code from play console and incrementing version code."
+lane :increment_version_code_in_project_gradle do
+  version_code_from_play_store_strings = google_play_track_version_codes(
+    package_name: PACKAGE_NAME,   # PACKAGE_NAME is a global variable defined earlier
+    track: "production",            # this can be alpha, beta etc.
+    json_key: PLAYSTORE_KEY_PATH,
+  )
+  version_code_from_play_store = version_code_from_play_store_strings[0].to_i
+  incremented_version_code = version_code_from_play_store + 1
+  increment_version_code(
+    gradle_file_path: Dir.pwd + "/../app/build.gradle",
+    version_code: incremented_version_code.to_i
+  )
+end
+
+desc "Run unit tests."
+private_lane :run_unit_tests do
+  gradle(
+    task: "test"
+  )
+end
+
+desc "Build the .aab file"
+lane :build do
+  gradle(
+    task: "bundle",
+    build_type: "Release",
+    properties: {
+      "android.injected.signing.store.file" => KEYSTORE_PATH,
+      "android.injected.signing.store.password" => ENV['KEYSTORE_PASSWORD'],
+      "android.injected.signing.key.alias" => ENV['KEYSTORE_ALIAS'],
+      "android.injected.signing.key.password" => ENV['KEYSTORE_PASSWORD']
+    }
+  )
+end
+
+desc "Responsible for uploading .aab to Firebase app distribution."
+private_lane :distribute_to_firebase do
+  firebase_app_distribution(
+    app: FIREBASE_APP_ID,
+    release_notes: "Uploaded from CI/CD",
+    android_artifact_type: "AAB",
+    android_artifact_path: BUNDLE_FILE_PATH,
+    service_credentials_file: FIREBASE_KEY_PATH,
+    groups: "tester-team"
+  )
+end
+
+desc "Responsible for uploading aab to playstore"
+private_lane :distribute_playstore do
+  upload_to_play_store(
+    track: production,
+    aab: BUNDLE_FILE_PATH,
+    json_key: PLAYSTORE_KEY_PATH,
+    package_name: PACKAGE_NAME
+  )
+end
+
+# desc "After successful execution of all task, this block is called"
+# after_all do
+#   git_add(path: "*")
+#   git_commit(
+#     path: "*",
+#     message: "#" + UPDATED_VERSION_CODE + " released"
+#   )
+#
+#   push_to_git_remote(
+#     local_branch: buildConfigs.key(options[:buildConfig]),
+#     remote: "origin",
+#     remote_branch: buildConfigs.key(options[:buildConfig]),
+#     tags: true,
+#   )
+# end

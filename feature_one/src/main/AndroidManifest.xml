@@ -14,7 +14,8 @@
     </dist:module>
 
     <application>
-        <activity android:name="com.shihab.feature_one.FeatureOneHome">
+        <activity android:name="com.shihab.feature_one.FeatureOneHome"
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity" />
