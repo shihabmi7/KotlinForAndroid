@@ -18,5 +18,5 @@
 /captures
 .externalNativeBuild
 .cxx
-/certificates/*
-/fastlane/.env.secret
+certificates/*
+fastlane/.env.secret
