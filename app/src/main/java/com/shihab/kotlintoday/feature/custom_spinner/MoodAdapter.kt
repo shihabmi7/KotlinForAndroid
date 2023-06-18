@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.shihab.kotlintoday.R
-import kotlinx.android.synthetic.main.item_spinner_profession.view.*
+import com.shihab.kotlintoday.databinding.ItemSpinnerProfessionBinding
+
 
 class MoodAdapter(context: Context, professionList: List<ReqDocsItem>) : ArrayAdapter<ReqDocsItem>(context, 0, professionList) {
 
@@ -20,10 +21,13 @@ class MoodAdapter(context: Context, professionList: List<ReqDocsItem>) : ArrayAd
 
     private fun createView(position: Int, recycledView: View?, parent: ViewGroup): View {
         val currentItem = getItem(position)
-        val view = recycledView
-                ?: LayoutInflater.from(context).inflate(R.layout.item_spinner_profession, parent, false)
+//        val view = recycledView
+//                ?: LayoutInflater.from(context).inflate(R.layout.item_spinner_profession, parent, false)
+//
+//
+        val view = ItemSpinnerProfessionBinding.inflate(LayoutInflater.from(parent.context))
 
-        view.tv_mood.text = currentItem!!.name
-        return view
+        view.tvMood.text = currentItem!!.name
+        return view.root
     }
 }

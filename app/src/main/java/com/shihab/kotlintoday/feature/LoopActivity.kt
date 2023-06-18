@@ -5,21 +5,23 @@ import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.shihab.kotlintoday.R
-import kotlinx.android.synthetic.main.activity_loop.*
-import kotlinx.android.synthetic.main.content_loop.*
+import com.shihab.kotlintoday.databinding.ActivityLoopBinding
+
 
 class LoopActivity : AppCompatActivity() {
 
+    lateinit var binding: ActivityLoopBinding
     var country = listOf<String>("Afganistan", "Bangladesh", "China", "Denmark")
     var items = listOf<Int>(2, 8, 20, 30)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_loop)
-        setSupportActionBar(toolbar)
+        binding = ActivityLoopBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
 
-        btn_loop.setOnClickListener {
+        binding.content. btnLoop.setOnClickListener {
 
             var valueOfText = ""
             for (index in items.indices) {
@@ -45,7 +47,7 @@ class LoopActivity : AppCompatActivity() {
 
             }
 
-            tx_result_loop.text = valueOfText
+            binding.content.   txResultLoop.text = valueOfText
         }
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)

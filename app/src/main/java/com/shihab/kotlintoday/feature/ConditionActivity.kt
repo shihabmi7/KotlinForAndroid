@@ -2,17 +2,16 @@ package com.shihab.kotlintoday.feature
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.shihab.kotlintoday.R
-import kotlinx.android.synthetic.main.activity_condition.*
+import com.shihab.kotlintoday.databinding.ActivityConditionBinding
 
 class ConditionActivity : AppCompatActivity() {
 
+    lateinit var binding: ActivityConditionBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_condition)
-        setSupportActionBar(toolbar)
-
-
+        binding = ActivityConditionBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
     }
 
     fun checkCondition(age: Int): String {

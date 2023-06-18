@@ -4,18 +4,21 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.shihab.kotlintoday.R
-import kotlinx.android.synthetic.main.activity_class.*
-import kotlinx.android.synthetic.main.content_class.*
+import com.shihab.kotlintoday.databinding.ActivityClassBinding
+import com.shihab.kotlintoday.databinding.ActivityViewBindingBinding
+
 
 open class ClassActivity : AppCompatActivity() {
 
 
+    lateinit  var binding: ActivityClassBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_class)
-        setSupportActionBar(toolbar)
+        binding = ActivityClassBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
-        fab.setOnClickListener { view ->
+        binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
@@ -31,7 +34,7 @@ open class ClassActivity : AppCompatActivity() {
         //textview.text = person._firstnName + person.secondName +person.nickname
 
         // textview.text = person. fullName()
-        textview.text = person.giveFullName(person)
+        binding.contentClass.textview.text = person.giveFullName(person)
 
 
     }

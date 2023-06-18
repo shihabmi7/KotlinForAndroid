@@ -5,8 +5,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.shihab.kotlintoday.databinding.ActivityKotlinFlowBinding
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 
 class KotlinFlowActivity : AppCompatActivity() {

@@ -8,8 +8,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.shihab.kotlintoday.R
+import com.shihab.kotlintoday.databinding.FragmentCrashAnalyticsBinding
 import com.shihab.kotlintoday.utility.LogMe
-import kotlinx.android.synthetic.main.fragment_crash_analytics.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -17,23 +17,26 @@ import kotlinx.android.synthetic.main.fragment_crash_analytics.*
 class CrashFragment : Fragment(R.layout.fragment_crash_analytics) {
 
     private var mNavController: NavController? = null
+    private var binding: FragmentCrashAnalyticsBinding? = null
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             activity?.finish()
         }
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentCrashAnalyticsBinding.inflate(layoutInflater)
 
         mNavController = Navigation.findNavController(view)
-        activity?.onBackPressedDispatcher?.addCallback(this, onBackPressedCallback)
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, onBackPressedCallback)
 
-        button_crash_one.setOnClickListener {
+        binding!!. buttonCrashOne.setOnClickListener {
             FirebaseCrashlytics.getInstance().log("A Force Error Occured")
         }
 
-        button_crash_two.setOnClickListener {
+        binding!!. buttonCrashTwo.setOnClickListener {
             var value = null
             try {
                 LogMe.e("crash:", value)
@@ -42,7 +45,7 @@ class CrashFragment : Fragment(R.layout.fragment_crash_analytics) {
             }
         }
 
-        button_crash_three.setOnClickListener {
+        binding!!.buttonCrashThree.setOnClickListener {
 
         }
     }

@@ -6,18 +6,20 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.utility.LogMe
-import kotlinx.android.synthetic.main.activity_crash_analytics.*
+import com.shihab.kotlintoday.databinding.ActivityCrashAnalyticsBinding
 
 class CrashAnalyticsActivity : AppCompatActivity() {
-
+lateinit var binding: ActivityCrashAnalyticsBinding
     var tag = "CrashAnalytics"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityCrashAnalyticsBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_crash_analytics)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        fab.setOnClickListener { view ->
+        binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }

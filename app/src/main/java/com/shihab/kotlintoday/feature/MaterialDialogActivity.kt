@@ -6,17 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.snackbar.Snackbar
 import com.shihab.kotlintoday.R
-import kotlinx.android.synthetic.main.activity_material_dialog.*
-import kotlinx.android.synthetic.main.content_material_dialog.*
+import  com.shihab.kotlintoday.databinding.ActivityMaterialDialogBinding
 
 class MaterialDialogActivity : AppCompatActivity() {
 
+    lateinit var binding: ActivityMaterialDialogBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_material_dialog)
-        setSupportActionBar(toolbar)
+        binding = ActivityMaterialDialogBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
-        fab.setOnClickListener { view ->
+        binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
@@ -28,30 +29,30 @@ class MaterialDialogActivity : AppCompatActivity() {
     private fun setupDemo() {
 
 
-        success_toast.setOnClickListener {
+        binding.content.successToast.setOnClickListener {
 
             displayToast("success_toast")
 
         }
 
-        error_toast.setOnClickListener {
+        binding.content.errorToast.setOnClickListener {
 
             displayToast("error tost")
         }
 
-        success_dialog.setOnClickListener {
+        binding.content.successDialog.setOnClickListener {
 
             displaySuccessfulDialog("successful")
 
 
         }
 
-        error_dialog.setOnClickListener {
+        binding.content.errorDialog.setOnClickListener {
 
             displayErrorfulDialog("Error")
         }
 
-        are_you_sure.setOnClickListener {
+        binding.content. areYouSure.setOnClickListener {
 
             val areYouSureCallBack = object : AreYouSureCallBack{
                 override fun proceed() {

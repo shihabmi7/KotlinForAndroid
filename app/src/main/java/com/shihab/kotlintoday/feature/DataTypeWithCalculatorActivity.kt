@@ -6,11 +6,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.utility.AppUtils
-import kotlinx.android.synthetic.main.activity_data_type.*
-import kotlinx.android.synthetic.main.content_data_type.*
+import com.shihab.kotlintoday.databinding.ActivityDataTypeBinding
 
 class DataTypeWithCalculatorActivity : AppCompatActivity() {
 
+    lateinit var binding: ActivityDataTypeBinding
     var age = 30
     val year: Int = 2000 // It can change ()
 
@@ -20,45 +20,46 @@ class DataTypeWithCalculatorActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_data_type)
-        setSupportActionBar(toolbar)
+        binding = ActivityDataTypeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        button_show.setOnClickListener {
-            edit_odd_even.setText("")
+        binding.content.buttonShow.setOnClickListener {
+            binding.content.editOddEven.setText("")
             Toast.makeText(
                 applicationContext,
-                greetings + " " + edit_name.text.toString(),
+                greetings + " " + binding.content.editName.text.toString(),
                 Toast.LENGTH_LONG
             ).show()
 
 
         }
 
-        button_check_condition.setOnClickListener {
+        binding.content.buttonCheckCondition.setOnClickListener {
 
-            var value = edit_odd_even.text.toString().toInt()
+            var value = binding.content.editOddEven.text.toString().toInt()
 
             if (value % 2 == 0) {
 
-                edit_odd_even.setText("")
+                binding.content.editOddEven.setText("")
                 Toast.makeText(applicationContext, evenNumber, Toast.LENGTH_LONG).show()
 
             } else {
-                edit_odd_even.setText("")
+                binding.content.editOddEven.setText("")
                 Toast.makeText(applicationContext, oddNumber, Toast.LENGTH_LONG).show()
             }
 
         }
 
-        button_add.setOnClickListener {
+        binding.content.buttonAdd.setOnClickListener {
 
-            if (!edit_first_number.text.isEmpty()) {
-                tx_result.setText(
+            if (!binding.content. editFirstNumber.text.isEmpty()) {
+                binding.content.  txResult.setText(
                     add(
-                        edit_first_number.text.toString().toInt(),
-                        edit_second_number.text.toString().toInt()
+                        binding.content. editFirstNumber.text.toString().toInt(),
+                        binding.content. editSecondNumber.text.toString().toInt()
                     ).toString()
                 )
             } else {
@@ -71,36 +72,36 @@ class DataTypeWithCalculatorActivity : AppCompatActivity() {
         }
 
 
-        button_subtract.setOnClickListener {
+        binding.content. buttonSubtract.setOnClickListener {
 
-            tx_result.setText(
+            binding.content .txResult.setText(
                 substract(
-                    edit_first_number.text.toString().toInt(),
-                    edit_second_number.text.toString().toInt()
+                    binding.content. editFirstNumber.text.toString().toInt(),
+                    binding.content. editSecondNumber.text.toString().toInt()
                 ).toString()
             )
             AppUtils.hideKeyboard(this)
 
         }
 
-        button_multiply.setOnClickListener {
+        binding.content .buttonMultiply.setOnClickListener {
 
-            tx_result.setText(
+            binding.content .txResult.setText(
                 multiple(
-                    edit_first_number.text.toString().toInt(),
-                    edit_second_number.text.toString().toInt()
+                    binding.content. editFirstNumber.text.toString().toInt(),
+                    binding.content. editSecondNumber.text.toString().toInt()
                 ).toString()
             )
             AppUtils.hideKeyboard(this)
 
         }
 
-        button_divide.setOnClickListener {
+        binding.content. buttonDivide.setOnClickListener {
 
-            tx_result.setText(
+            binding.content .txResult.setText(
                 divide(
-                    edit_first_number.text.toString().toFloat(),
-                    edit_second_number.text.toString().toFloat()
+                    binding.content. editFirstNumber.text.toString().toFloat(),
+                    binding.content. editSecondNumber.text.toString().toFloat()
                 ).toString()
             )
 
@@ -108,11 +109,11 @@ class DataTypeWithCalculatorActivity : AppCompatActivity() {
 
         }
 
-        button_clear.setOnClickListener {
+        binding.content.buttonClear.setOnClickListener {
 
-            edit_first_number.setText("")
-            edit_second_number.setText("")
-            tx_result.setText("")
+            binding.content. editFirstNumber.setText("")
+            binding.content. editSecondNumber.setText("")
+            binding.content. txResult.setText("")
 
 
         }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.adapter.PostAdapter
+import com.shihab.kotlintoday.databinding.ActivityRecyclerViewWithRetrofitRxBinding
 import com.shihab.kotlintoday.model.Post
 import com.shihab.kotlintoday.rest.ApiService
 import com.shihab.kotlintoday.rest.RetrofitClient
@@ -15,23 +16,21 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-import kotlinx.android.synthetic.main.activity_recycler_view_with_retrofit_rx.*
-import kotlinx.android.synthetic.main.content_recycler_view_with_retrofit_rx.*
-
 class RecyclerViewWithRetromfitRx : AppCompatActivity() {
 
-    internal lateinit var myApi: ApiService
+    internal lateinit var binding: ActivityRecyclerViewWithRetrofitRxBinding
     private lateinit var compositeDisposable: CompositeDisposable
 
     var TAG: String = "RecyclerWithRetrofitRx"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recycler_view_with_retrofit_rx)
-        setSupportActionBar(toolbar)
+        binding = ActivityRecyclerViewWithRetrofitRxBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
-        recycler_retro_data.layoutManager = LinearLayoutManager(this)
-        recycler_retro_data.setHasFixedSize(true)
+       binding.content. recyclerRetroData.layoutManager = LinearLayoutManager(this)
+        binding.content.  recyclerRetroData.setHasFixedSize(true)
 
         compositeDisposable = CompositeDisposable()
         fetchData()
@@ -40,8 +39,8 @@ class RecyclerViewWithRetromfitRx : AppCompatActivity() {
     }
 
     private fun displayPost(post: List<Post>?) {
-        recycler_retro_data.setDivider(R.drawable.recycler_view_divider)
-        recycler_retro_data.adapter = PostAdapter(this, post!!)
+        binding.content. recyclerRetroData.setDivider(R.drawable.recycler_view_divider)
+        binding.content. recyclerRetroData.adapter = PostAdapter(this, post!!)
         showSuccessMessage(this, "Success")
 
     }

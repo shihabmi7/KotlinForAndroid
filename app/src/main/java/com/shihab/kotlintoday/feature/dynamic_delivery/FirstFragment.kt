@@ -2,6 +2,7 @@ package com.shihab.kotlintoday.feature.dynamic_delivery
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -10,8 +11,9 @@ import com.google.android.play.core.splitinstall.model.SplitInstallErrorCode
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import com.shihab.kotlintoday.BuildConfig
 import com.shihab.kotlintoday.R
+import com.shihab.kotlintoday.databinding.FragmentFirstBinding
+import com.shihab.kotlintoday.databinding.ItemNoteBinding
 import com.shihab.kotlintoday.utility.LogMe
-import kotlinx.android.synthetic.main.fragment_first.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -26,14 +28,16 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
     var splitInstallManager: SplitInstallManager? = null
     var listener: SplitInstallStateUpdatedListener? = null
 
+    lateinit var binding: FragmentFirstBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        button_first.setOnClickListener {
+        binding = FragmentFirstBinding.inflate(LayoutInflater.from(view.context))
+        binding.buttonFirst.setOnClickListener {
             loadModule(moduleNameOne)
         }
 
-        button_second.setOnClickListener {
+        binding.buttonSecond.setOnClickListener {
             loadModule(moduleNameTwo)
         }
     }

@@ -4,15 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.shihab.kotlintoday.R
-import kotlinx.android.synthetic.main.activity_implicit_intent.*
-import kotlinx.android.synthetic.main.content_implicit_intent.*
+import com.shihab.kotlintoday.databinding.ActivityImplicitIntentBinding
 
 class ImplicitIntentActivity : AppCompatActivity() {
-
+lateinit var binding: ActivityImplicitIntentBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_implicit_intent)
-        setSupportActionBar(toolbar)
+
+        binding = ActivityImplicitIntentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         /*fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -20,9 +21,9 @@ class ImplicitIntentActivity : AppCompatActivity() {
         }*/
 
 
-        share_button.setOnClickListener {
+        binding.content.shareButton .setOnClickListener {
 
-            val message = editText_share.text.toString()
+            val message = binding.content.editTextShare.text.toString()
             val title = "Implicit intent"
             var intent = Intent()
 

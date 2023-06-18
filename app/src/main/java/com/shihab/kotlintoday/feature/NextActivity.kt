@@ -6,18 +6,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.shihab.kotlintoday.R
-import kotlinx.android.synthetic.main.activity_next.*
+import com.shihab.kotlintoday.databinding.ActivityNextBinding
+
 
 class NextActivity : AppCompatActivity() {
+    lateinit var  binding: ActivityNextBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_next)
-        setSupportActionBar(toolbar)
+
+        binding = ActivityNextBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         val value = getStringFromIntentOrShowError("key")
 
-        fab.setOnClickListener { view ->
+        binding.fab.setOnClickListener { view ->
             Snackbar.make(view, value, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }

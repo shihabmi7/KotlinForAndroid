@@ -5,17 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.work.*
 import com.shihab.kotlintoday.R
+import com.shihab.kotlintoday.databinding.ActivityDialogFragmentAcivityBinding
+import com.shihab.kotlintoday.databinding.ActivityWorkManagerBinding
 import com.shihab.kotlintoday.feature.workmanager.work.MyWorker
 import com.shihab.kotlintoday.utility.LogMe
-import kotlinx.android.synthetic.main.activity_work_manager.*
-import kotlinx.android.synthetic.main.content_work_manager.*
 
 class WorkManagerActivity : AppCompatActivity() {
 
+    lateinit var binding: ActivityWorkManagerBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_work_manager)
-        setSupportActionBar(toolbar)
+        binding=ActivityWorkManagerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -26,7 +28,7 @@ class WorkManagerActivity : AppCompatActivity() {
             OneTimeWorkRequestBuilder<MyWorker>().setConstraints(constraints).setInputData(data)
                 .build()
 
-        bt_performTask.setOnClickListener {
+        binding.content.btPerformTask.setOnClickListener {
             WorkManager.getInstance(this).enqueue(request)
         }
 
@@ -38,10 +40,10 @@ class WorkManagerActivity : AppCompatActivity() {
                         MyWorker.KEY_OUTPUT_DATA
                     )
                     myResult?.let {
-                        tvStatus.append("\n" + it)
+                        binding.content.tvStatus.append("\n" + it)
                     }
                 }
-                tvStatus.append("\n" + info.state.name)
+                binding.content.tvStatus.append("\n" + info.state.name)
                 LogMe.i("Work_Info", info.state.name)
             })
     }

@@ -6,23 +6,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.shihab.kotlintoday.R
+import com.shihab.kotlintoday.databinding.ItemNoteBinding
 import com.shihab.kotlintoday.feature.mvvm.model.Note
-import kotlinx.android.synthetic.main.item_note.view.*
+
 import java.util.*
 
 class NoteAdapter : Adapter<NoteAdapter.NoteHolder>() {
 
     private val notes: MutableList<Note> = ArrayList()
 
-    class NoteHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
-        var title = itemview.text_view_title
-        var details = itemview.text_view_description
-        var priority = itemview.text_view_priority
+    class NoteHolder(val itemview: ItemNoteBinding) : RecyclerView.ViewHolder(itemview.root) {
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder {
-        val itemview =
+       /* val itemview =
             LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false)
+     */
+        val itemview =
+            ItemNoteBinding.inflate(LayoutInflater.from(parent.context))
+
         return NoteHolder(itemview)
     }
 
@@ -40,8 +43,8 @@ class NoteAdapter : Adapter<NoteAdapter.NoteHolder>() {
 
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
         val note = notes[position]
-        holder.title.text = note.title
-        holder.details.text = note.description
-        holder.priority.text = note.priority.toString()
+        holder.itemview.textViewTitle.text = note.title
+        holder.itemview.textViewDescription.text = note.description
+        holder.itemview.textViewPriority.text = note.priority.toString()
     }
 }

@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.databinding.ActivitySpanTextBinding
-import kotlinx.android.synthetic.main.activity_span_text.*
 
 class SpanTextActivity : AppCompatActivity() {
 
@@ -21,7 +20,7 @@ class SpanTextActivity : AppCompatActivity() {
 
         val string = SpannableString("Incorrect correct")
         string.setSpan(StrikethroughSpan(), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        tv_span.text = string
+        binding. tvSpan.text = string
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

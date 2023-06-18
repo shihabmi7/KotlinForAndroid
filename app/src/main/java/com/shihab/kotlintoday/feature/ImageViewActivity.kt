@@ -8,7 +8,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.databinding.ActivityImagviewBinding
 import com.shihab.kotlintoday.model.loadImage
-import kotlinx.android.synthetic.main.activity_imagview.*
 
 class ImageViewActivity : AppCompatActivity() {
 
@@ -18,10 +17,10 @@ class ImageViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bind = DataBindingUtil.setContentView(this, R.layout.activity_imagview)
         //setContentView(R.layout.activity_imagview)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(bind.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        fab.setOnClickListener { view ->
+        bind.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }

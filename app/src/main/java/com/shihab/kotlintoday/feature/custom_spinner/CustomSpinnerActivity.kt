@@ -6,15 +6,17 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.shihab.kotlintoday.R
-import kotlinx.android.synthetic.main.activity_custom_spinner.*
+import com.shihab.kotlintoday.databinding.ActivityCustomSpinnerBinding
 
 class CustomSpinnerActivity : AppCompatActivity() {
+    lateinit var binding: ActivityCustomSpinnerBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_custom_spinner)
+        binding=ActivityCustomSpinnerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        spinner.adapter = MoodAdapter(
+        binding.spinner.adapter = MoodAdapter(
             this,
             listOf(
                 ReqDocsItem("Angry"),
@@ -24,7 +26,7 @@ class CustomSpinnerActivity : AppCompatActivity() {
             )
         )
 
-        spinner.onItemSelectedListener = object :
+        binding. spinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(

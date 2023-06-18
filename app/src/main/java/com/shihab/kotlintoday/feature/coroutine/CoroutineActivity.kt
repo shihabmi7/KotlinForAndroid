@@ -2,9 +2,9 @@ package com.shihab.kotlintoday.feature.coroutine
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.shihab.kotlintoday.R
-import kotlinx.android.synthetic.main.activity_coroutine.*
-import kotlinx.android.synthetic.main.content_coroutine.*
+
+import com.shihab.kotlintoday.databinding.ActivityCoroutineBinding
+
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -21,16 +21,18 @@ class CoroutineActivity : AppCompatActivity() {
 
     val TIMEOUT = 1900L
 
+    lateinit var binding: ActivityCoroutineBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coroutine)
-        setSupportActionBar(toolbar)
+        binding =ActivityCoroutineBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
 
-        button.setOnClickListener {
+        binding.content.button.setOnClickListener {
 
             // IO = local db , network ;   Main= interacting with UI ;  default = heavy operation
             CoroutineScope(IO).launch {
@@ -41,13 +43,13 @@ class CoroutineActivity : AppCompatActivity() {
 
         }
 
-        button_async.setOnClickListener {
+        binding.content.buttonAsync.setOnClickListener {
 
             fakeAPIRequestWithAsync()
         }
 
 
-        button_time_out.setOnClickListener {
+        binding.content.buttonTimeOut.setOnClickListener {
 
             CoroutineScope(IO).launch {
 
@@ -83,7 +85,7 @@ class CoroutineActivity : AppCompatActivity() {
     fun setTimeoutTextview(message: String){
 
         CoroutineScope(Main).launch{
-            textView_timeout.setText(message)
+            binding.content.textViewTimeout.text = message
         }
     }
     private fun fakeAPIRequestWithAsync() {
@@ -126,14 +128,14 @@ class CoroutineActivity : AppCompatActivity() {
 
     fun setNewText(message: String) {
 
-        val newText = textView.text.toString() + "\n$message"
-        textView.text = newText
+        val newText = binding.content.textView.text.toString() + "\n$message"
+        binding.content.textView.text = newText
     }
 
     fun setAsyncText(message: String) {
 
-        val newText = textView_asysnc.text.toString() + "\n$message"
-        textView_asysnc.text = newText
+        val newText = binding.content.textViewAsysnc.text.toString() + "\n$message"
+        binding.content.textViewAsysnc.text = newText
     }
 
     fun setTextOnMainThread(message: String) {

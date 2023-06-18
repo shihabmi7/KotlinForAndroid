@@ -4,17 +4,19 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import com.shihab.kotlintoday.R
+import com.shihab.kotlintoday.databinding.ActivityCoordinateLayoutBinding
 
-import kotlinx.android.synthetic.main.activity_coordinate_layout.*
 
 class CoordinateLayoutActivity : AppCompatActivity() {
 
+    lateinit var binding: ActivityCoordinateLayoutBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coordinate_layout)
-        setSupportActionBar(toolbar)
+        binding = ActivityCoordinateLayoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
-        fab.setOnClickListener { view ->
+        binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }

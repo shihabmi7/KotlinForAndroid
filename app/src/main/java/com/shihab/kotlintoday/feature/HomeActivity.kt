@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shihab.kotlintoday.R
+import com.shihab.kotlintoday.databinding.ActivityHomeBinding
 import com.shihab.kotlintoday.feature.analytics.CrashAnalyticsActivity
 import com.shihab.kotlintoday.feature.apple_sign_in.AppleSignInActivity
 import com.shihab.kotlintoday.feature.broadcast.BroadCastActivity
@@ -31,11 +32,10 @@ import com.shihab.kotlintoday.feature.workmanager.WorkManagerActivity
 import com.shihab.kotlintoday.utility.AppUtils.ANALYTICS_KEY
 import com.shihab.kotlintoday.utility.ConnectionLiveData
 import com.shihab.kotlintoday.utility.KotlinToday
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.content_home.*
 
 class HomeActivity : AppCompatActivity(), View.OnClickListener,
     ActivityNameAdapter.OnButtonClickListener {
+
 
     var activiites = listOf(
         FirstActivity::class.java,
@@ -91,6 +91,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Flow Testing", "Internet Connectivity",
         "Broadcast Activity"
     )
+    lateinit var binding: ActivityHomeBinding
 
     override fun onButtonClick(position: Int) {
         KotlinToday.getB2BAnalyticsManager(this)
@@ -114,18 +115,19 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
-        setSupportActionBar(toolbar)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
-        recycler_content.layoutManager = LinearLayoutManager(this)
-        recycler_content.adapter =
+        binding.contentHome.recyclerContent.layoutManager = LinearLayoutManager(this)
+        binding.contentHome.recyclerContent.adapter =
             ActivityNameAdapter(
                 applicationContext,
                 activites_name,
                 this
             )
 
-        recycler_content.setHasFixedSize(true)
+        binding.contentHome.recyclerContent.setHasFixedSize(true)
 
         ConnectionLiveData(this).observe(this) {
             if (it) {
