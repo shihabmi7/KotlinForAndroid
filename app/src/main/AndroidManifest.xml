@@ -4,6 +4,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:name=".utility.KotlinToday"
         android:allowBackup="true"
@@ -14,8 +19,18 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <!--        Set the android:exported attribute to “false”
-        in the receiver tag in the manifest restricts the application from receiving broadcasts from other applications.-->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="" />
+
+        <activity
+            android:name=".feature.map.GoogleMapActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false" />
+        <!--
+                Set the android:exported attribute to “false”
+        in the receiver tag in the manifest restricts the application from receiving broadcasts from other applications.
+        -->
         <receiver
             android:name=".feature.broadcast.KotlinTodayReceiver"
             android:enabled="true"
@@ -23,7 +38,6 @@
             <intent-filter>
                 <action android:name="com.shihab.kotlintoday.explicit_intent" />
             </intent-filter>
-
         </receiver>
 
         <activity
@@ -143,8 +157,8 @@
             android:parentActivityName=".feature.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:exported="true"
             android:name=".feature.HomeActivity"
+            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

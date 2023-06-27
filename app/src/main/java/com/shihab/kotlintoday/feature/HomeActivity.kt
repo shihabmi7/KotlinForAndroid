@@ -2,7 +2,6 @@ package com.shihab.kotlintoday.feature
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -20,6 +19,7 @@ import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
 import com.shihab.kotlintoday.feature.custom_spinner.CustomSpinnerActivity
 import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
 import com.shihab.kotlintoday.feature.flow.KotlinFlowActivity
+import com.shihab.kotlintoday.feature.map.GoogleMapActivity
 import com.shihab.kotlintoday.feature.motion_layout.MotionLayoutActivity
 import com.shihab.kotlintoday.feature.mvvm.ui.NoteActivity
 import com.shihab.kotlintoday.feature.navigation_fragment.DialogFragmentWithNavigationActivity
@@ -65,7 +65,9 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         NoteActivity::class.java,
         KotlinFlowActivity::class.java,
         InternetConnectivityActivity::class.java,
-        BroadCastActivity::class.java
+        BroadCastActivity::class.java,
+        GoogleMapActivity::class.java,
+
     )
 
     private var activites_name = listOf(
@@ -89,7 +91,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Apple Sign In",
         "Flow with MVVM",
         "Flow Testing", "Internet Connectivity",
-        "Broadcast Activity"
+        "Broadcast",
+        "Google Map"
     )
     lateinit var binding: ActivityHomeBinding
 

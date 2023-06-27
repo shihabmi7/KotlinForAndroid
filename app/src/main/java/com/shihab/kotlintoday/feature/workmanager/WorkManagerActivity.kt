@@ -2,10 +2,7 @@ package com.shihab.kotlintoday.feature.workmanager
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.work.*
-import com.shihab.kotlintoday.R
-import com.shihab.kotlintoday.databinding.ActivityDialogFragmentAcivityBinding
 import com.shihab.kotlintoday.databinding.ActivityWorkManagerBinding
 import com.shihab.kotlintoday.feature.workmanager.work.MyWorker
 import com.shihab.kotlintoday.utility.LogMe
@@ -15,7 +12,7 @@ class WorkManagerActivity : AppCompatActivity() {
     lateinit var binding: ActivityWorkManagerBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivityWorkManagerBinding.inflate(layoutInflater)
+        binding = ActivityWorkManagerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
@@ -33,7 +30,7 @@ class WorkManagerActivity : AppCompatActivity() {
         }
 
         WorkManager.getInstance(this).getWorkInfoByIdLiveData(request.id)
-            .observe(this, Observer { info ->
+            .observe(this, { info ->
 
                 if (info != null && info.state.isFinished) {
                     val myResult = info.outputData.getString(
