@@ -189,4 +189,7 @@ dependencies {
 
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0"
+
+    // Location Services
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
 }
