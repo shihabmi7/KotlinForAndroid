@@ -161,8 +161,8 @@ dependencies {
     implementation 'io.michaelrocks:libphonenumber-android:8.12.44'
 
     // Add the Firebase Crashlytics dependency.
-    implementation "com.google.firebase:firebase-analytics:$analytics"
-    implementation "com.google.firebase:firebase-crashlytics:$crash_analytics"
+//    implementation "com.google.firebase:firebase-analytics:$analytics"
+//    implementation "com.google.firebase:firebase-crashlytics:$crash_analytics"
 
     // (Java only)
     implementation "androidx.work:work-runtime:$work_version"
@@ -192,4 +192,9 @@ dependencies {
 
     // Location Services
     implementation 'com.google.android.gms:play-services-location:20.0.0'
+
+    implementation platform('com.google.firebase:firebase-bom:29.2.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-crashlytics'
 }
