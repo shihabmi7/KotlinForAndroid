@@ -19,6 +19,7 @@ import com.shihab.kotlintoday.feature.coroutine.CoroutineActivity
 import com.shihab.kotlintoday.feature.custom_spinner.CustomSpinnerActivity
 import com.shihab.kotlintoday.feature.dynamic_delivery.DynamicDeliveryActivity
 import com.shihab.kotlintoday.feature.flow.KotlinFlowActivity
+import com.shihab.kotlintoday.feature.map.ForegroundLocationUpdatesActivity
 import com.shihab.kotlintoday.feature.map.GoogleMapActivity
 import com.shihab.kotlintoday.feature.motion_layout.MotionLayoutActivity
 import com.shihab.kotlintoday.feature.mvvm.ui.NoteActivity
@@ -38,6 +39,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
 
 
     var activiites = listOf(
+        ForegroundLocationUpdatesActivity::class.java,
         FirstActivity::class.java,
         UserInteractionActivity::class.java,
         DataTypeWithCalculatorActivity::class.java,
@@ -71,6 +73,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
     )
 
     private var activites_name = listOf(
+        "Foreground Location Updates",
         "Activity Switchting",
         "User Interaction",
         "DataTypeWithCalculatorActivity",

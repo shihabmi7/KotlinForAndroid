@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.launch
 
-class DefaultLocationClient (val context:Context, val client: FusedLocationProviderClient ): LocationClient{
+class DefaultLocationClient (val context:Context, private val client: FusedLocationProviderClient ): LocationClient{
 
     @SuppressLint("MissingPermission")
     override fun getLocationUpdates(interval: Long): Flow<Location> {
