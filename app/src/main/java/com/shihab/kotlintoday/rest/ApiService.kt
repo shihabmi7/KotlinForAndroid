@@ -1,5 +1,6 @@
 package com.shihab.kotlintoday.rest
 
+import com.example.example.DirectionAPIResponse
 import com.shihab.kotlintoday.feature.mvvm.model.Note
 import com.shihab.kotlintoday.feature.paging.RickAndMortyList
 import com.shihab.kotlintoday.model.Post
@@ -28,4 +29,8 @@ interface ApiService {
 
     @GET("https://rickandmortyapi.com/api/character")
     suspend fun getDataFromAPI(@Query("page") query: Int): RickAndMortyList
+
+    @GET
+    fun getGoogleDirection(@Url url: String): Call<DirectionAPIResponse>
+
 }
