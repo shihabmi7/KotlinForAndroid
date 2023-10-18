@@ -95,7 +95,7 @@ dependencies {
     def material = "1.3.0"
     def analytics = "19.0.0"
     def crash_analytics = "18.1.0"
-    def work_version = "2.3.4"
+    def work_version = "2.7.1"
     def jUnit = "4.12"
     def espresso = "3.4.0"
     def test_runner = "1.4.0"
