@@ -5,26 +5,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.model.loadImage
 
-class RecyclerViewAdapter(): PagingDataAdapter<CharacterData, RecyclerViewAdapter.MyViewHolder>(DiffUtilCallBack()) {
+class RecyclerViewAdapter() :
+    PagingDataAdapter<CharacterData, RecyclerViewAdapter.MyViewHolder>(DiffUtilCallBack()) {
 
-    override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         holder.bind(getItem(position)!!)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewAdapter.MyViewHolder {
-        val inflater = LayoutInflater.from(parent.context).inflate(R.layout.item_paging, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val inflater =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_paging, parent, false)
 
         return MyViewHolder(inflater)
     }
 
-    class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val imageView: ImageView = view.findViewById(R.id.imageView)
         val tvName: TextView = view.findViewById(R.id.tvName)
@@ -36,10 +39,20 @@ class RecyclerViewAdapter(): PagingDataAdapter<CharacterData, RecyclerViewAdapte
 
             imageView.loadImage(data.image!!)
 
+            tvName.setOnClickListener {
+
+                Toast.makeText(it.context, "" + data.name, Toast.LENGTH_LONG).show();
+            }
+
+            imageView.setOnClickListener {
+
+                Toast.makeText(it.context, "Image clicked ", Toast.LENGTH_LONG).show();
+            }
+
         }
     }
 
-    class DiffUtilCallBack: DiffUtil.ItemCallback<CharacterData>() {
+    class DiffUtilCallBack : DiffUtil.ItemCallback<CharacterData>() {
         override fun areItemsTheSame(oldItem: CharacterData, newItem: CharacterData): Boolean {
             return oldItem.name == newItem.name
         }
