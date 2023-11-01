@@ -17,7 +17,7 @@ class RecyclerViewAdapter() :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        holder.bind(getItem(position)!!)
+        holder.bind(getItem(position)!!, position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -27,13 +27,13 @@ class RecyclerViewAdapter() :
         return MyViewHolder(inflater)
     }
 
-    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class MyViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
 
         val imageView: ImageView = view.findViewById(R.id.imageView)
         val tvName: TextView = view.findViewById(R.id.tvName)
         val tvDesc: TextView = view.findViewById(R.id.tvDesc)
 
-        fun bind(data: CharacterData) {
+        fun bind(data: CharacterData, position: Int) {
             tvName.text = data.name
             tvDesc.text = data.species
 
@@ -41,12 +41,21 @@ class RecyclerViewAdapter() :
 
             tvName.setOnClickListener {
 
-                Toast.makeText(it.context, "" + data.name, Toast.LENGTH_LONG).show();
+                Toast.makeText(it.context, "Name: " + data.name, Toast.LENGTH_LONG).show();
             }
 
             imageView.setOnClickListener {
 
-                Toast.makeText(it.context, "Image clicked ", Toast.LENGTH_LONG).show();
+                Toast.makeText(it.context, "Image clicked : position $position", Toast.LENGTH_LONG)
+                    .show();
+            }
+
+
+
+            view.setOnClickListener {
+                Toast.makeText(it.context, "Row clicked : Position is $position", Toast.LENGTH_LONG)
+                    .show();
+
             }
 
         }
