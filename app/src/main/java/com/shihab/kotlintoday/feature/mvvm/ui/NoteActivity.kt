@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.databinding.ActivityNoteBinding
 import com.shihab.kotlintoday.feature.mvvm.adapter.NoteAdapter
-import com.shihab.kotlintoday.feature.mvvm.model.Note
-import com.shihab.kotlintoday.feature.mvvm.viewmodel.NoteViewModel
+import com.shihab.notes.data.model.Note
+import com.shihab.notes.data.viewmodel.NoteViewModel
 import com.shihab.kotlintoday.rest.RetrofitClient
 import com.shihab.kotlintoday.utility.LogMe
 import com.shihab.kotlintoday.utility.ShowToast

@@ -1,8 +1,8 @@
 package com.shihab.kotlintoday.rest
 
-import com.shihab.kotlintoday.feature.mvvm.model.Note
 import com.shihab.kotlintoday.feature.paging.RickAndMortyList
 import com.shihab.kotlintoday.model.Post
+import com.shihab.notes.data.model.Note
 import io.reactivex.rxjava3.core.Observable
 import okhttp3.ResponseBody
 import retrofit2.Call

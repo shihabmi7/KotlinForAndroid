@@ -32,6 +32,7 @@ import com.shihab.kotlintoday.feature.workmanager.WorkManagerActivity
 import com.shihab.kotlintoday.utility.AppUtils.ANALYTICS_KEY
 import com.shihab.kotlintoday.utility.ConnectionLiveData
 import com.shihab.kotlintoday.utility.KotlinToday
+import com.shihab.notes.compose.NoteComposeActivity
 
 class HomeActivity : AppCompatActivity(), View.OnClickListener,
     ActivityNameAdapter.OnButtonClickListener {
@@ -48,6 +49,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         ImplicitIntentActivity::class.java,
         MaterialDialogActivity::class.java,
         NoteActivity::class.java,
+        NoteComposeActivity::class.java,
         CoroutineActivity::class.java,
         ImageViewActivity::class.java,
         PagingActivity::class.java,
@@ -81,6 +83,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Implicit Intent",
         "Material Dialog",
         "MVVM",
+        "Notes (Compose)",
         "Co-routine",
         "Imageview Extension Function",
         "Paging 3.0 Example",

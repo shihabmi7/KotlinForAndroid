@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.shihab.kotlintoday.feature.mvvm.viewmodel.NoteViewModel" />
+            type="com.shihab.notes.data.viewmodel.NoteViewModel" />
 
     </data>
 

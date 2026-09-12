@@ -1,5 +1,7 @@
 //include ':FeatureThree'
 //include ':feature_two'
 include ':app'
+include ':notes_data'
+include ':notes_compose'
 rootProject.name='KotlinToday'
 //include ':feature_one'

@@ -11,7 +11,7 @@ android {
     buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.shihab.kotlintoday"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 33
         versionCode 6
         versionName "1.0.6"
@@ -83,9 +83,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(":notes_data")
+    implementation project(":notes_compose")
 
     def lifecycle_version = "2.4.0"
-    def room_version = "2.4.2"
     def co_rouritines = "1.2.1"
     def multidex_version = "2.0.1"
     def stetho = "1.5.1"
@@ -132,15 +133,6 @@ dependencies {
 
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
-
-    kapt "org.xerial:sqlite-jdbc:3.34.0"
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-
-    // optional - RxJava support for Room
-    implementation "androidx.room:room-rxjava3:$room_version"
 
     // coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$co_rouritines"

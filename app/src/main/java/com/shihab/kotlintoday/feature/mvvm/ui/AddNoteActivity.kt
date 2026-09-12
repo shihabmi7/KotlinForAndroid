@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.databinding.ActivityAddNoteBinding
-import com.shihab.kotlintoday.feature.mvvm.viewmodel.NoteViewModel
+import com.shihab.notes.data.viewmodel.NoteViewModel
 import com.shihab.kotlintoday.utility.AppUtils
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,7 +37,7 @@ class AddNoteActivity : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_add_note, menu)
         return true
     }

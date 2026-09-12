@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.shihab.kotlintoday.R
 import com.shihab.kotlintoday.databinding.ItemNoteBinding
-import com.shihab.kotlintoday.feature.mvvm.model.Note
+import com.shihab.notes.data.model.Note
 
 import java.util.*
 
