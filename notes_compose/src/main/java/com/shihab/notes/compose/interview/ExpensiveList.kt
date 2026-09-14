@@ -66,6 +66,9 @@ fun ExpensiveList(modifier: Modifier = Modifier) {
     val counters = remember { mutableStateMapOf<String, Int>() }
 
     LazyColumn(modifier = modifier) {
+        // `item` in `key = { item -> ... }` and `item` in the trailing content lambda are two
+        // separate lambda params (key selector vs item content) — Compose calls each once per
+        // element of `items`, and for a given row both refer to the same String, e.g. "Item 0".
         items(
             items = items,
             key = { item -> item }
