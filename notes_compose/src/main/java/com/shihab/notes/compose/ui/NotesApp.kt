@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -16,8 +17,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.shihab.notes.compose.interview.ExpensiveList
 import com.shihab.notes.data.model.Note
 import com.shihab.notes.data.viewmodel.NoteViewModel
+
+// A third destination (the interview demo screen) showed up, so the old
+// single-Boolean (`showAddNote`) switch became a 3-way enum instead of
+// pulling in Navigation-Compose — still no back stack/deep-link needs, so a
+// NavHost would still be boilerplate for this case.
+private enum class Screen { NotesList, AddNote, ExpensiveListDemo }
 
 // Root composable, set via setContent { NotesApp() } in NoteComposeActivity.
 // `hiltViewModel()` as a default param scopes the ViewModel to the nearest
@@ -25,25 +33,23 @@ import com.shihab.notes.data.viewmodel.NoteViewModel
 // legacy `by viewModels()` call in the XML/View version of this screen —
 // both UIs end up sharing the NoteViewModel *class*, but each gets its own
 // instance per Activity, backed by the same Room DB underneath.
-//
-// Navigation between the two screens is a single Boolean instead of
-// Navigation-Compose: with only two destinations and no back stack/deep-link
-// needs, a NavHost would be pure boilerplate. Worth swapping in if a third
-// screen shows up.
 @Composable
 fun NotesApp(viewModel: NoteViewModel = hiltViewModel()) {
-    var showAddNote by remember { mutableStateOf(false) }
+    var screen by remember { mutableStateOf(Screen.NotesList) }
 
     MaterialTheme {
-        if (showAddNote) {
-            AddNoteScreen(
+        when (screen) {
+            Screen.AddNote -> AddNoteScreen(
                 viewModel = viewModel,
-                onDone = { showAddNote = false }
+                onDone = { screen = Screen.NotesList }
             )
-        } else {
-            NotesListScreen(
+            Screen.ExpensiveListDemo -> ExpensiveListDemoScreen(
+                onBack = { screen = Screen.NotesList }
+            )
+            Screen.NotesList -> NotesListScreen(
                 viewModel = viewModel,
-                onAddNoteClick = { showAddNote = true }
+                onAddNoteClick = { screen = Screen.AddNote },
+                onOpenExpensiveListDemo = { screen = Screen.ExpensiveListDemo }
             )
         }
     }
@@ -52,7 +58,11 @@ fun NotesApp(viewModel: NoteViewModel = hiltViewModel()) {
 // Stateful: owns the ViewModel wiring. Kept thin so NotesListContent (the
 // actual UI) can be previewed and tested without a ViewModel or Hilt.
 @Composable
-private fun NotesListScreen(viewModel: NoteViewModel, onAddNoteClick: () -> Unit) {
+private fun NotesListScreen(
+    viewModel: NoteViewModel,
+    onAddNoteClick: () -> Unit,
+    onOpenExpensiveListDemo: () -> Unit
+) {
     // LaunchedEffect(Unit) runs once per composition (not on every
     // recomposition), which is the Compose equivalent of the legacy
     // screen's onResume() -> viewModel.getAllNotes() call.
@@ -66,7 +76,8 @@ private fun NotesListScreen(viewModel: NoteViewModel, onAddNoteClick: () -> Unit
     NotesListContent(
         notes = notes,
         onAddNoteClick = onAddNoteClick,
-        onDelete = { viewModel.delete(it) }
+        onDelete = { viewModel.delete(it) },
+        onOpenExpensiveListDemo = onOpenExpensiveListDemo
     )
 }
 
@@ -74,14 +85,27 @@ private fun NotesListScreen(viewModel: NoteViewModel, onAddNoteClick: () -> Unit
 // `internal` (not `private`) so NotesAppUiTest and the @Preview functions
 // below can call it directly with fake data — no Hilt or Room needed to
 // exercise this UI in isolation.
+//
+// `onOpenExpensiveListDemo` defaults to a no-op so the existing tests/previews
+// (which only care about the notes list itself) don't need to pass it.
 @Composable
 internal fun NotesListContent(
     notes: List<Note>,
     onAddNoteClick: () -> Unit,
-    onDelete: (Note) -> Unit
+    onDelete: (Note) -> Unit,
+    onOpenExpensiveListDemo: () -> Unit = {}
 ) {
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Notes (Compose)") }) },
+        topBar = {
+            TopAppBar(
+                title = { Text("Notes (Compose)") },
+                actions = {
+                    IconButton(onClick = onOpenExpensiveListDemo) {
+                        Icon(Icons.Filled.PlayArrow, contentDescription = "Open ExpensiveList interview demo")
+                    }
+                }
+            )
+        },
         floatingActionButton = {
             FloatingActionButton(onClick = onAddNoteClick) {
                 Icon(Icons.Filled.Add, contentDescription = "Add note")
@@ -249,6 +273,27 @@ internal fun AddNoteContent(
                 Text("Save")
             }
         }
+    }
+}
+
+// Thin wrapper so the interview-demo composable (which has no ViewModel/nav
+// dependency of its own — see ExpensiveList.kt) gets a back affordance when
+// launched from within this app's navigation.
+@Composable
+private fun ExpensiveListDemoScreen(onBack: () -> Unit) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("ExpensiveList demo") },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                }
+            )
+        }
+    ) { padding ->
+        ExpensiveList(modifier = Modifier.padding(padding))
     }
 }
 
