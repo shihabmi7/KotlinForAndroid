@@ -21,8 +21,12 @@ class NoteViewModel @Inject constructor(private val repository: NoteRepository) 
     private val _notes = MutableLiveData<List<Note>>()
     private val _isAddNotesClicked = MutableLiveData<Boolean>()
     val isAddNotesClicked: LiveData<Boolean> = _isAddNotesClicked
-    private val _showMessage = MutableLiveData<String>()
-    val message: LiveData<String> = _showMessage
+    private val _showMessage = MutableLiveData<String?>()
+    val message: LiveData<String?> = _showMessage
+
+    fun clearMessage() {
+        _showMessage.value = null
+    }
     var isLoading = ObservableBoolean()
     val note = Note()
 
