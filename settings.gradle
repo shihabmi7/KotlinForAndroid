@@ -3,5 +3,6 @@
 include ':app'
 include ':notes_data'
 include ':notes_compose'
+include ':playground'
 rootProject.name='KotlinToday'
 //include ':feature_one'
