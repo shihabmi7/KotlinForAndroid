@@ -31,7 +31,7 @@ class AddNoteActivity : AppCompatActivity() {
 
         viewModel.message.observe(this, {
             AppUtils.hideKeyboard(this)
-            if (it.isNotEmpty())
+            if (!it.isNullOrEmpty())
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
 

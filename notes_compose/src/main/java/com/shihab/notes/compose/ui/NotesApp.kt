@@ -157,9 +157,15 @@ private fun AddNoteScreen(viewModel: NoteViewModel, onDone: () -> Unit) {
     // exposed by the ViewModel instead of a raw String.
     LaunchedEffect(message) {
         when (message) {
-            "Successfully Inserted" -> onDone()
+            "Successfully Inserted" -> {
+                viewModel.clearMessage()
+                onDone()
+            }
             null -> Unit
-            else -> errorMessage = message
+            else -> {
+                errorMessage = message
+                viewModel.clearMessage()
+            }
         }
     }
 
