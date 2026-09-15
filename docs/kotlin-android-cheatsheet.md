@@ -329,16 +329,93 @@ fun describe(task: Any) {
 
 > **TL;DR:** A function that takes another function as a parameter or returns one — the mechanism behind every collection operator (`map`, `filter`) and behind concise callback APIs like `setOnClickListener { }`.
 
+### What "higher-order" actually means
+
+A **normal** function takes data (`Int`, `String`, `Task`) as parameters. A **higher-order** function takes a *function* as a parameter, or *returns* a function. Kotlin lets you treat functions as values — you can store them in a variable, pass them around, and call them later, just like an `Int` or a `String`.
+
+### Reading a function type
+
+Before writing one, it helps to be able to read the type itself:
+
+```kotlin
+(Task) -> Boolean
+// │       │
+// │       └─ what it returns: a Boolean
+// └───────── what it takes in: one Task parameter
+```
+
+So `predicate: (Task) -> Boolean` means: *"`predicate` is a parameter that itself is a function — one that takes a `Task` and returns a `Boolean`."*
+
+### Step 1 — declaring a higher-order function
+
 ```kotlin
 // Higher-order function: `predicate` is itself a function parameter
 fun List<Task>.filterBy(predicate: (Task) -> Boolean): List<Task> = this.filter(predicate)
-
-val overdueTasks = allTasks.filterBy { it.dueDate != null && it.dueDate < today }
 ```
+
+### Step 2 — three ways to actually call it
+
+```kotlin
+// Option A — trailing lambda syntax (idiomatic, used almost everywhere in Kotlin/Android)
+val overdueTasks = allTasks.filterBy { it.dueDate != null && it.dueDate < today }
+
+// Option B — same thing, written with explicit parentheses (less common, but equivalent)
+val overdueTasks2 = allTasks.filterBy({ task -> task.dueDate != null && task.dueDate < today })
+
+// Option C — passing an existing named function instead of a lambda, via ::
+fun isOverdueTask(task: Task): Boolean = task.dueDate != null && task.dueDate < today
+val overdueTasks3 = allTasks.filterBy(::isOverdueTask)
+```
+
+**Why Option A is what you'll see everywhere:** Kotlin has a special rule — *if a function's last parameter is a function type, and you're calling it with a lambda, you can move that lambda outside the parentheses.* If it's the *only* parameter, you can drop the parentheses entirely. That's exactly what turns `setOnClickListener({ ... })` into the much more familiar `setOnClickListener { ... }`.
+
+```kotlin
+// This is why Android callback APIs read the way they do:
+button.setOnClickListener { view ->
+    // `view` here is the single parameter Android's listener function type provides
+    showToast("Clicked!")
+}
+
+// it's really calling a function that looks conceptually like this:
+fun setOnClickListener(listener: (View) -> Unit) { /* ... */ }
+```
+
+### `it` — the implicit single parameter
+
+When a lambda has exactly **one** parameter and you don't name it, Kotlin lets you refer to it as `it` instead of writing `task -> task.dueDate`:
+
+```kotlin
+allTasks.filterBy { it.dueDate != null }   // `it` = the single Task parameter, implicitly
+allTasks.filterBy { task -> task.dueDate != null }  // identical — just named explicitly
+```
+
+Use an explicit name instead of `it` once you have **nested** lambdas — `it` referring to the *innermost* one gets confusing fast:
+
+```kotlin
+allTasks.groupBy { it.isCompleted }.mapValues { entry -> entry.value.filter { task -> task.dueDate != null } }
+// naming `entry` and `task` explicitly here avoids three competing meanings of `it`
+```
+
+### The other half: a function that *returns* a function
+
+Higher-order also covers functions that **hand back** a function, instead of (or in addition to) taking one in:
+
+```kotlin
+// Returns a function — specifically, a Task -> Boolean, pre-configured with a cutoff date
+fun overdueCheckerFor(cutoffDate: String): (Task) -> Boolean {
+    return { task -> task.dueDate != null && task.dueDate < cutoffDate }
+}
+
+val isOverdueToday = overdueCheckerFor(today)   // `isOverdueToday` is itself now a function
+val overdue = allTasks.filter(isOverdueToday)   // use it directly wherever a (Task) -> Boolean is expected
+```
+This pattern — a function that builds and returns a customized function — is how you create reusable, parameterized predicates/validators without duplicating the filtering logic each time.
 
 | | Java (pre-8) | Java 8+ | Kotlin |
 |---|---|---|---|
 | Passing behavior as a parameter | Anonymous inner class, several lines of boilerplate | Lambda expression, but requires a declared functional interface | Lambda with trailing-lambda syntax and implicit `it` — no functional interface declaration needed |
+
+**Likely follow-up:** "Where does this show up in real Android code, besides `filter`/`map`?" — almost everywhere a callback exists: `setOnClickListener { }`, Compose's `Button(onClick = { })`, Retrofit/coroutine callbacks, `LaunchedEffect { }`, `Modifier.clickable { }` — any API that takes "a block of code to run later" is a higher-order function under the hood.
 
 ---
 
@@ -427,6 +504,32 @@ Android's own `by viewModels()` (`private val viewModel: TaskViewModel by viewMo
 | `@JvmOverloads` | Generates the overloaded method signatures Java needs, from a single Kotlin function with default parameters |
 | `@JvmField` | Exposes a Kotlin property as a plain public field, skipping the auto-generated getter/setter, for simpler Java access |
 | `@Throws` | Declares a checked exception for Java callers — Kotlin itself has **no checked exceptions**, so without this annotation Java code calling into Kotlin won't know it needs a `try/catch` |
+
+### How to actually use `@JvmField`
+
+Without it, every Kotlin `val`/`var` property compiles down to a **private field plus a public getter/setter** — that's just how Kotlin properties work under the hood. `@JvmField` tells the compiler to skip that and expose the field itself, directly.
+
+```kotlin
+// Without @JvmField
+class Task(val title: String)
+```
+```java
+// Java caller MUST go through the generated getter — direct field access isn't available
+String title = task.getTitle();
+```
+
+```kotlin
+// With @JvmField — put it directly on the property
+class Task(@JvmField val title: String)
+```
+```java
+// Java caller can now access it as a plain field, no getter call needed
+String title = task.title;
+```
+
+**Where you'd actually reach for this:** mainly when writing Kotlin that a large, existing Java codebase needs to consume with minimal friction — e.g. a shared library module, or gradually migrating a Java project where some Java code still expects plain field access instead of getter calls.
+
+**A constraint worth knowing:** `@JvmField` only works on a property with a plain backing field and **no custom `get()`/`set()` logic** — if your property does anything beyond storing a value (validation, computed logic, etc.), the compiler will reject the annotation, since there's no way to represent custom logic as a bare field.
 
 **Likely follow-up:** "Does Kotlin have checked exceptions?" — no. All exceptions in Kotlin are unchecked, a deliberate design choice (checked exceptions are widely considered one of Java's more debated features, often leading to empty `catch` blocks just to satisfy the compiler). This is also why calling Java code that throws checked exceptions from Kotlin doesn't force you to handle them.
 

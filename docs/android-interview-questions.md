@@ -410,6 +410,20 @@ class ItemsAdapter : ListAdapter<Item, ItemsAdapter.ItemViewHolder>(DiffCallback
 - Avoid heavy work (DB calls, calculations) inside `onBindViewHolder()`.
 - Avoid nesting a RecyclerView inside another — use `ConcatAdapter` instead.
 
+### Q: How is RecyclerView actually more efficient than the older ListView?
+
+Both are technically capable of recycling off-screen views — the real difference is that **RecyclerView enforces the efficient pattern by design, while ListView only recycles efficiently if the developer does it right manually.**
+
+| | `ListView` | `RecyclerView` |
+|---|---|---|
+| View recycling | Recycling is *possible* via `convertView` in `getView()`, but it's **optional** — easy to forget, and a huge number of real ListView implementations call `findViewById()` on every single `getView()` call because the ViewHolder pattern wasn't enforced | The **`ViewHolder` pattern is mandatory**, built into the framework itself — `onCreateViewHolder()`/`onBindViewHolder()` structurally forces you to find views once and reuse them, not per bind |
+| Layout direction | Vertical list only | Pluggable via `LayoutManager` — `LinearLayoutManager` (vertical or horizontal), `GridLayoutManager`, `StaggeredGridLayoutManager`, or a custom one |
+| Item animations | Manual — no built-in support | Built-in `ItemAnimator`, plus automatic add/remove/move animations when paired with `DiffUtil` |
+| Partial/targeted updates | Effectively just `notifyDataSetChanged()` — re-binds every visible row regardless of what actually changed | `DiffUtil`/`ListAdapter` compute the minimal diff and fire targeted calls (`notifyItemInserted()`, etc.), so only the rows that actually changed get rebound |
+| Decoupling | Adapter and layout logic are more tangled together | Adapter, `LayoutManager`, and `ItemAnimator` are separate, swappable pieces |
+
+**The one-sentence version for an interview:** ListView *can* be made efficient by manually implementing the ViewHolder pattern yourself inside `getView()`, but nothing forces you to — RecyclerView bakes that requirement into its architecture, and adds pluggable layouts, built-in animations, and `DiffUtil`-driven partial updates on top, which is why it replaced ListView as the standard.
+
 ---
 
 ## 7. Kotlin & Coroutines
