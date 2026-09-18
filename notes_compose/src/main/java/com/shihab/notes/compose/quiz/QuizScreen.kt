@@ -22,28 +22,58 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.StateFlow
 
+private object QuizDestinations {
+    const val QUIZ = "quiz"
+    const val REVIEW = "review"
+}
+
 /**
- * Stateful entry point: collects the ViewModel and decides which phase to show.
- * The ViewModel is the single source of truth, so rotation is handled for free.
+ * Stateful entry point: collects the ViewModel and drives a NavHost with two
+ * routes. The ViewModel's `phase` is still the single source of truth (it's
+ * what survives rotation) — this LaunchedEffect just keeps the NavController's
+ * back stack in sync with it.
+ *
+ * Honest caveat: quiz -> review only ever moves forward, so a plain
+ * `when (state.phase)` switch (see NotesApp.kt's Screen enum for that pattern)
+ * would genuinely be simpler for this app. NavHost earns its keep here for one
+ * real reason: `popUpTo(QUIZ) { inclusive = true }` removes the quiz route
+ * from the back stack entirely, so pressing system back from the review screen
+ * exits the app instead of re-entering a finished quiz's last question.
  */
 @Composable
 fun QuizRoute(viewModel: QuizViewModel = viewModel()) {
     val state by viewModel.uiState.observeAsStateCompat()
+    val navController = rememberNavController()
 
-    when (state.phase) {
-        QuizPhase.InProgress -> QuizInProgressScreen(
-            state = state,
-            onSelectAnswer = viewModel::selectAnswer,
-            onNext = viewModel::goToNext,
-            onTimeUp = viewModel::onTimeUp
-        )
-        QuizPhase.Review -> ReviewScreen(
-            state = state,
-            onSubmit = { score -> viewModel.submit(score) }
-        )
+    LaunchedEffect(state.phase) {
+        if (state.phase == QuizPhase.Review) {
+            navController.navigate(QuizDestinations.REVIEW) {
+                popUpTo(QuizDestinations.QUIZ) { inclusive = true }
+            }
+        }
+    }
+
+    NavHost(navController = navController, startDestination = QuizDestinations.QUIZ) {
+        composable(QuizDestinations.QUIZ) {
+            QuizInProgressScreen(
+                state = state,
+                onSelectAnswer = viewModel::selectAnswer,
+                onNext = viewModel::goToNext,
+                onTimeUp = viewModel::onTimeUp
+            )
+        }
+        composable(QuizDestinations.REVIEW) {
+            ReviewScreen(
+                state = state,
+                onSubmit = { score -> viewModel.submit(score) }
+            )
+        }
     }
 }
 
