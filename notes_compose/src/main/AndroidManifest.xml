@@ -6,6 +6,10 @@
             android:name=".NoteComposeActivity"
             android:exported="false"
             android:theme="@style/Theme.NotesCompose" />
+        <activity
+            android:name=".quiz.QuizActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NotesCompose" />
     </application>
 
 </manifest>

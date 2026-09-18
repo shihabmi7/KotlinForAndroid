@@ -33,6 +33,7 @@ import com.shihab.kotlintoday.utility.AppUtils.ANALYTICS_KEY
 import com.shihab.kotlintoday.utility.ConnectionLiveData
 import com.shihab.kotlintoday.utility.KotlinToday
 import com.shihab.notes.compose.NoteComposeActivity
+import com.shihab.notes.compose.quiz.QuizActivity
 
 class HomeActivity : AppCompatActivity(), View.OnClickListener,
     ActivityNameAdapter.OnButtonClickListener {
@@ -69,6 +70,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         InternetConnectivityActivity::class.java,
         BroadCastActivity::class.java,
         GoogleMapActivity::class.java,
+        QuizActivity::class.java,
 
     )
 
@@ -95,7 +97,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         "Flow with MVVM",
         "Flow Testing", "Internet Connectivity",
         "Broadcast",
-        "Google Map"
+        "Google Map",
+        "Timed Quiz (Compose + Coroutines)"
     )
     lateinit var binding: ActivityHomeBinding
 

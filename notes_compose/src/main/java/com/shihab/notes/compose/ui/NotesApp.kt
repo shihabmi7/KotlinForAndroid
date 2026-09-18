@@ -3,7 +3,7 @@ package com.shihab.notes.compose.ui
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
+ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
@@ -20,6 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.shihab.notes.compose.interview.ExpensiveList
 import com.shihab.notes.data.model.Note
 import com.shihab.notes.data.viewmodel.NoteViewModel
+import kotlin.collections.emptyList
 
 // A third destination (the interview demo screen) showed up, so the old
 // single-Boolean (`showAddNote`) switch became a 3-way enum instead of
@@ -36,6 +37,7 @@ private enum class Screen { NotesList, AddNote, ExpensiveListDemo }
 @Composable
 fun NotesApp(viewModel: NoteViewModel = hiltViewModel()) {
     var screen by remember { mutableStateOf(Screen.NotesList) }
+    var count by remember { mutableStateOf(0) }
 
     MaterialTheme {
         when (screen) {
