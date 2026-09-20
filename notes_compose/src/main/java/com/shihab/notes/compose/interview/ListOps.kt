@@ -48,7 +48,9 @@ fun MyListItem(item: String, counter: Int, onIncrement: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(16.dp),
+
+        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
     ) {
         Text(text = item, modifier = Modifier.weight(1f).padding(end = 8.dp))
         Button(onClick = onIncrement) {
